@@ -1,1 +1,239 @@
-{}
+{
+    "extensionName": {
+        "message": "Menú intelixente OSM"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "Axuda aos colaboradores de OpenStreetMap a cambiar facilmente entre diferentes mapas e ferramentas de análise da comunidade."
+    },
+    "extensionStoreDescription": {
+        "message": "Ao premer o botón do menú, esta extensión <strong>detectará</strong> parámetros de OpenStreetMap na páxina actual e <strong>xerará</strong> unha lista de mapas e ferramentas relacionados con eses parámetros.\n\nEntre os parámetros recoñecidos figuran:\n<ul>\n<li>Coordenadas do mapa (zoom, latitude e lonxitude)</li>\n<li>Elementos OSM (ID de nodo, ID de vía, ID de relación e ID de conxunto de cambios)</li>\n<li>Nomes de usuario e ID de trazas GPS</li>\n</ul>\nSe non tes claro que sitio web será recoñecido, proba a visitar https://www.openstreetmap.org/ antes de premer no menú.\n\n<em>O logotipo de OpenStreetMap é unha marca comercial da OpenStreetMap Foundation e úsase co seu permiso. Este proxecto non conta co aval da OpenStreetMap Foundation nin está vinculado a ela.</em>"
+    },
+    "loading": {
+        "message": "Cargando…\nSe a carga non remata, recarga a páxina e téntao de novo."
+    },
+    "newOptionDetected_notice": {
+        "message": "Queres engadir este sitio web ao menú?"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Engadir ligazón"
+    },
+    "newOptionDetected_added": {
+        "message": "Engadido como $PAGE_TITLE$",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "configurationLink": {
+        "message": "Configuración"
+    },
+    "config_editButton": {
+        "message": "Editar"
+    },
+    "config_saveButton": {
+        "message": "Gardar"
+    },
+    "config_deleteButton": {
+        "message": "Eliminar"
+    },
+    "config_linkDeleted": {
+        "message": "Ligazón $LINK_NAME$ eliminada. Fai clic aquí para desfacer a acción.",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_pattern_formTitle": {
+        "message": "Creación de opcións avanzadas (experimental)"
+    },
+    "config_pattern_name": {
+        "message": "Nome"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "Modelo de URL"
+    },
+    "config_pattern_createOption": {
+        "message": "Crear opción"
+    },
+    "error_noAccess": {
+        "message": "ERRO: Non se puido atopar nin acceder á páxina actual.\nSe a páxina aínda está a cargar, téntao de novo.\nSe isto é inesperado, comunícao en $EXTENSION_SITE$.",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_incompatibleWebsite": {
+        "message": "Non se atoparon parámetros de mapa nin de OpenStreetMap.\nSe isto é inesperado, podes comunicalo en $EXTENSION_SITE$.",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noInformationExtracted": {
+        "message": "Recoñeceuse o sitio web, pero non se atoparon parámetros.\nSe se trata dun mapa, tenta movelo un pouco para inicializar os seus parámetros.\nSe parece un erro, comunícao en $EXTENSION_SITE$.",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "Ningunha das ligazóns habilitadas é compatible cos parámetros atopados nesta páxina."
+    },
+    "button_showEnabledLinks": {
+        "message": "Mostrar as ligazóns habilitadas que usan parámetros adicionais"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "Mostrar o resto das ligazóns habilitadas que usan parámetros adicionais"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "site_bingmaps": {
+        "message": "Bing Maps"
+    },
+    "site_googlemaps": {
+        "message": "Google Maps"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_historicmap": {
+        "message": "Historical Objects"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D demo)"
+    },
+    "site_hotmap": {
+        "message": "Humanitarian OSM Team Map"
+    },
+    "site_openstreetcam": {
+        "message": "KartaView"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_level0": {
+        "message": "Level0 Editor"
+    },
+    "site_ideditor": {
+        "message": "iD Editor"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM History Viewer"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu)"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_overpassapi": {
+        "message": "Augmented OSM Change Viewer"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM Relation Analyzer"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM Route Manager"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osminspector": {
+        "message": "OSM Inspector"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_keepright": {
+        "message": "keep right!"
+    },
+    "site_howdidyoucontribute": {
+        "message": "How did you contribute to OSM?"
+    },
+    "site_osmwiki": {
+        "message": "OpenStreetMap wiki"
+    },
+    "site_osmchangeviz": {
+        "message": "Changeset by Comparison (Neis)"
+    },
+    "site_osmchangetiles": {
+        "message": "Latest OSM Edits (Neis)"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_missingmaps": {
+        "message": "Missing Maps"
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
+    },
+    "site_stravaglobal": {
+        "message": "Strava Global Heatmap"
+    }
+}
