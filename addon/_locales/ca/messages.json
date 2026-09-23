@@ -1,6 +1,6 @@
 {
     "extensionName": {
-        "message": "OSM Smart Menu"
+        "message": "Menú Intel·ligent OSM"
     },
     "loading": {
         "message": "S’està carregant…\nSi no para de carregar, recarregueu la pàgina i torneu-ho a provar.",
@@ -138,13 +138,13 @@
         "message": "uMap"
     },
     "site_osmhistoryviewer": {
-        "message": "Visualitzador d'historial de l'OSM"
+        "message": "OSM History Viewer"
     },
     "site_pewuosmhistory": {
-        "message": "Visualitzador d'historial de l'OSM (PeWu)"
+        "message": "OSM History Viewer (PeWu)"
     },
     "site_osmroutemanager": {
-        "message": "Gestor de rutes d'OSM"
+        "message": "OSM Route Manager"
     },
     "site_osmose": {
         "message": "Osmose"
@@ -165,7 +165,7 @@
         "message": "OpenSeaMap"
     },
     "site_mapcompare": {
-        "message": "Compara el mapa"
+        "message": "Map Compare"
     },
     "extensionDescription": {
         "message": "Ajuda els contribuïdors d’OpenStreetMap a canviar fàcilment entre diferents mapes i eines d’anàlisi de la comunitat."
@@ -198,5 +198,62 @@
     },
     "site_osmchangeviz": {
         "message": "Conjunt de canvis per comparació (Neis)"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_f4map": {
+        "message": "F4 Map (demostració 3D)"
+    },
+    "site_hotmap": {
+        "message": "Mapa HOT"
+    },
+    "site_openstreetcam": {
+        "message": "KartaView"
+    },
+    "site_level0": {
+        "message": "Editor Level0"
+    },
+    "site_ideditor": {
+        "message": "Editor iD"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_overpassapi": {
+        "message": "Achavi"
+    },
+    "site_osminspector": {
+        "message": "OSM Inspector"
+    },
+    "site_keepright": {
+        "message": "keep right!"
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_missingmaps": {
+        "message": "Missing Maps"
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
+    },
+    "site_stravaglobal": {
+        "message": "Mapa de calor global de Strava"
     }
 }
