@@ -155,25 +155,25 @@
         "message": "Inspector de OSM"
     },
     "site_missingmaps": {
-        "message": "Mapas faltantes"
+        "message": "Missing Maps"
     },
     "site_historicmap": {
         "message": "Objetos históricos"
     },
     "site_openinframap": {
-        "message": "Abrir mapa de infraestructura "
+        "message": "Open Infrastructure Map "
     },
     "site_openptmap": {
-        "message": "Abrir mapa de transporte público"
+        "message": "Open Public Transport Map"
     },
     "site_opnvkarte": {
         "message": "ÖPNVKarte"
     },
     "site_stamen": {
-        "message": "Mapas de estambre"
+        "message": "Stamen Maps"
     },
     "site_f4map": {
-        "message": "Mapa F4 (demostración 3D)"
+        "message": "F4 Map (demostración 3D)"
     },
     "site_hotmap": {
         "message": "Mapa del Equipo Humanitario OSM"
@@ -185,16 +185,16 @@
         "message": "uMap"
     },
     "site_osmdeephistory": {
-        "message": "Historia profunda de OSM"
+        "message": "OSM Deep History"
     },
     "site_osmlanevisualizer": {
-        "message": "Visualizador de carril OSM"
+        "message": "OSM Lane Visualizer"
     },
     "site_osmhistoryviewer": {
-        "message": "Visor de historial de OSM"
+        "message": "OSM History Viewer"
     },
     "site_openstreetcam": {
-        "message": "Vista de Karta"
+        "message": "KartaView"
     },
     "site_stravaglobal": {
         "message": "Mapa de calor global de Strava"
@@ -203,28 +203,28 @@
         "message": "Editor iD"
     },
     "site_pewuosmhistory": {
-        "message": "Visor de historial de OSM (PeWu)"
+        "message": "OSM History Viewer (PeWu)"
     },
     "site_whodidit": {
         "message": "WHODIDIT (Zverik)"
     },
     "site_overpassapi": {
-        "message": "Visor de cambios de OSM aumentado"
+        "message": "Achavi"
     },
     "site_osmrelationanalyzer": {
         "message": "Analizador de relaciones OSM"
     },
     "site_osmroutemanager": {
-        "message": "Administrador de rutas OSM"
+        "message": "OSM Route Manager"
     },
     "site_osmose": {
-        "message": "Ósmosis"
+        "message": "Osmose"
     },
     "site_mapcompare": {
-        "message": "Comparar mapa"
+        "message": "Map Compare"
     },
     "site_keepright": {
-        "message": "¡Manténgase a la derecha!"
+        "message": "keep right!"
     },
     "site_howdidyoucontribute": {
         "message": "¿Cómo contribuiste a OSM?"
@@ -233,22 +233,22 @@
         "message": "Conjunto de cambios por comparación (Neis)"
     },
     "site_osmbuildings": {
-        "message": "Edificios OSM"
+        "message": "OSM Buildings"
     },
     "site_indoorequal": {
-        "message": "interior ="
+        "message": "indoor="
     },
     "site_osmchangetiles": {
         "message": "Últimas ediciones OSM (Neis)"
     },
     "site_openstreetbrowser": {
-        "message": "Navegador OpenStreet"
+        "message": "OpenStreetBrowser"
     },
     "site_level0": {
-        "message": "Editor Nivel 0"
+        "message": "Editor Level0"
     },
     "site_deepdiff": {
-        "message": "Diferencia profunda"
+        "message": "Deep Diff"
     },
     "site_openlevelup": {
         "message": "OpenLevelUp!"
