@@ -46,7 +46,7 @@
         }
     },
     "extensionDescription": {
-        "message": "Lihtne tarvik, mis võimaldab OpenStreetMap'i kaasautoritel mugavasti vahetada erinevaid kaardivaateid ja kogukonna poolt loodud anaalüüsitarvikuid."
+        "message": "Open the place you’re looking at in other maps: OpenStreetMap, Google Maps, Bing, satellite imagery, street photos and OSM editors."
     },
     "newOptionDetected_notice": {
         "message": "Kas sa soovid lisada selle veebisaidi menüüsse?",
