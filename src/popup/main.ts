@@ -26,6 +26,7 @@ const eventualSitesOrError: EventualSitesOrError = getSitesOrError().catch((e) =
   logUnexpectedError(e);
   throw e; // shown as an error by the popup
 });
+document.title = browser.i18n.getMessage("extensionName");
 mount(App, {
   target: document.body,
   props: { eventualSitesOrError },

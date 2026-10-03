@@ -537,5 +537,14 @@
     },
     "config_sourceCode": {
         "message": "Código-fonte"
+    },
+    "description_wikimap": {
+        "message": "Fotos do Wikimedia Commons por perto"
+    },
+    "site_wikimedia": {
+        "message": "Wikipedia e Wikidata"
+    },
+    "description_wikimedia": {
+        "message": "Lê coordenadas de artigos e itens"
     }
 }
