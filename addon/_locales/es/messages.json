@@ -155,9 +155,105 @@
         "message": "Inspector de OSM"
     },
     "site_missingmaps": {
-        "message": "Mapas faltantes"
+        "message": "Missing Maps"
     },
     "site_historicmap": {
         "message": "Objetos históricos"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_f4map": {
+        "message": "F4 Map (demostración 3D)"
+    },
+    "site_hotmap": {
+        "message": "Mapa del Equipo Humanitario OSM"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM History Viewer"
+    },
+    "site_openstreetcam": {
+        "message": "KartaView"
+    },
+    "site_stravaglobal": {
+        "message": "Mapa de calor global de Strava"
+    },
+    "site_ideditor": {
+        "message": "Editor iD"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu)"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_overpassapi": {
+        "message": "Achavi"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "Analizador de relaciones OSM"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM Route Manager"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_keepright": {
+        "message": "keep right!"
+    },
+    "site_howdidyoucontribute": {
+        "message": "¿Cómo contribuiste a OSM?"
+    },
+    "site_osmchangeviz": {
+        "message": "Conjunto de cambios por comparación (Neis)"
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_osmchangetiles": {
+        "message": "Últimas ediciones OSM (Neis)"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_level0": {
+        "message": "Editor Level0"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
     }
 }
