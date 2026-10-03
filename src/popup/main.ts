@@ -11,6 +11,7 @@ export type EventualSitesOrError = Promise<
   | {
       config: SiteConfiguration[];
       currentSiteId: string | undefined;
+      sourceHost: string;
       sitesList: SiteLink[];
       extractedParameters: Partial<Record<OsmAttribute, string>>;
       customUserOption?: CustomUserOption;
@@ -59,6 +60,7 @@ async function getSitesOrError(): EventualSitesOrError {
   return {
     config,
     currentSiteId: currentSite.siteId,
+    sourceHost: new URL(currentTab.url).hostname,
     sitesList,
     customUserOption,
     extractedParameters: currentSite.attributes,

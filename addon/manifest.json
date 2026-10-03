@@ -8,7 +8,7 @@
 
   "author": "João Guilherme Packer, Erick de Oliveira Leal",
   "homepage_url": "https://github.com/erickdeoliveiraleal/osm-smart-menu",
-  "version": "0.22.0",
+  "version": "0.23.0",
 
   "browser_specific_settings": {
     "gecko": {

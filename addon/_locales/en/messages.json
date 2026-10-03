@@ -318,5 +318,268 @@
     },
     "config_import_failed": {
         "message": "The settings could not be saved."
+    },
+    "category_edit": {
+        "message": "Edit"
+    },
+    "category_general": {
+        "message": "General maps"
+    },
+    "category_thematic": {
+        "message": "Thematic maps"
+    },
+    "category_imagery": {
+        "message": "Imagery and street photos"
+    },
+    "category_history": {
+        "message": "History and changes"
+    },
+    "category_quality": {
+        "message": "Data quality"
+    },
+    "category_tools": {
+        "message": "Other tools"
+    },
+    "category_custom": {
+        "message": "Your links"
+    },
+    "description_openstreetmap": {
+        "message": "The main OpenStreetMap website"
+    },
+    "description_rapideditor": {
+        "message": "Editor with AI-assisted suggestions"
+    },
+    "description_ideditor": {
+        "message": "The default OpenStreetMap editor"
+    },
+    "description_level0": {
+        "message": "Text-based editor for OSM data"
+    },
+    "description_opencyclemap": {
+        "message": "Cycling map with cycle routes"
+    },
+    "description_cyclosm": {
+        "message": "Detailed map for cyclists"
+    },
+    "description_hotmap": {
+        "message": "Humanitarian map style"
+    },
+    "description_openseamap": {
+        "message": "Nautical chart"
+    },
+    "description_opensnowmap": {
+        "message": "Ski slopes and winter sports"
+    },
+    "description_sentinelhub": {
+        "message": "Recent Sentinel-2 satellite imagery"
+    },
+    "description_mapcompare": {
+        "message": "Compare several maps side by side"
+    },
+    "description_openstreetbrowser": {
+        "message": "Browse points of interest by theme"
+    },
+    "description_osmcha": {
+        "message": "Review recent changesets"
+    },
+    "description_pewuosmhistory": {
+        "message": "Version history of an element"
+    },
+    "description_osmchangesetmap": {
+        "message": "Changeset viewer on a map"
+    },
+    "description_osmdeephistory": {
+        "message": "Detailed history of an element"
+    },
+    "description_deepdiff": {
+        "message": "Compare versions of an element"
+    },
+    "description_osmhistoryviewer": {
+        "message": "Changeset and element history"
+    },
+    "description_overpassapi": {
+        "message": "Changeset diff viewer (Achavi)"
+    },
+    "description_howdidyoucontribute": {
+        "message": "Statistics of a mapper"
+    },
+    "description_whodidit": {
+        "message": "Who edited this area recently"
+    },
+    "description_osmchangeviz": {
+        "message": "Animated changeset visualization"
+    },
+    "description_openptmap": {
+        "message": "Public transport map"
+    },
+    "description_opnvkarte": {
+        "message": "Public transport map (ÖPNVKarte)"
+    },
+    "description_stamen": {
+        "message": "Artistic map styles"
+    },
+    "description_f4map": {
+        "message": "Interactive 3D map"
+    },
+    "description_osmbuildings": {
+        "message": "3D buildings"
+    },
+    "description_openlevelup": {
+        "message": "Indoor map by floor"
+    },
+    "description_indoorequal": {
+        "message": "Indoor map by floor"
+    },
+    "description_umap": {
+        "message": "Create your own map"
+    },
+    "description_openstreetcam": {
+        "message": "Street-level photos (KartaView)"
+    },
+    "description_mapillary": {
+        "message": "Street-level photos"
+    },
+    "description_panoramax": {
+        "message": "Free and open street-level photos"
+    },
+    "description_esriwayback": {
+        "message": "Historical satellite imagery"
+    },
+    "description_opentopomap": {
+        "message": "Topographic map"
+    },
+    "description_historicmap": {
+        "message": "Historic objects and sites"
+    },
+    "description_openrailwaymap": {
+        "message": "Railway infrastructure"
+    },
+    "description_openinframap": {
+        "message": "Power, telecom, oil and gas"
+    },
+    "description_americana": {
+        "message": "Map style with US highway shields"
+    },
+    "description_cartesgouvfr": {
+        "message": "Official French maps (ex-Géoportail)"
+    },
+    "description_bingmaps": {
+        "message": "Microsoft maps and aerial imagery"
+    },
+    "description_googlemaps": {
+        "message": "Google maps and satellite"
+    },
+    "description_waze": {
+        "message": "Live traffic map"
+    },
+    "description_stravaglobal": {
+        "message": "Where people run and cycle"
+    },
+    "description_osmrelationanalyzer": {
+        "message": "Check a relation for gaps"
+    },
+    "description_osmroutemanager": {
+        "message": "Inspect route relations"
+    },
+    "description_osmose": {
+        "message": "Data errors in this area"
+    },
+    "description_osmosebyuser": {
+        "message": "Data errors by mapper"
+    },
+    "description_osminspector": {
+        "message": "Data quality views by Geofabrik"
+    },
+    "description_osmchangetiles": {
+        "message": "Where the map changed recently"
+    },
+    "description_missingmaps": {
+        "message": "Missing Maps contributions"
+    },
+    "description_osmlanevisualizer": {
+        "message": "Visualize road lanes"
+    },
+    "description_waymarkedtrailsHiking": {
+        "message": "Hiking routes"
+    },
+    "description_waymarkedtrailsCycling": {
+        "message": "Cycling routes"
+    },
+    "description_waymarkedtrailsMtb": {
+        "message": "Mountain bike routes"
+    },
+    "description_waymarkedtrailsSkating": {
+        "message": "Inline skating routes"
+    },
+    "description_waymarkedtrailsRiding": {
+        "message": "Horse riding routes"
+    },
+    "description_waymarkedtrailsSlopes": {
+        "message": "Ski slopes and trails"
+    },
+    "popup_detectedOn": {
+        "message": "Detected on $HOST$",
+        "placeholders": {
+            "HOST": {
+                "content": "$1"
+            }
+        }
+    },
+    "popup_searchPlaceholder": {
+        "message": "Search tools"
+    },
+    "popup_noSearchResults": {
+        "message": "No tools match your search."
+    },
+    "popup_settings": {
+        "message": "Settings"
+    },
+    "attribute_user": {
+        "message": "User $NAME$",
+        "placeholders": {
+            "NAME": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_changeset": {
+        "message": "Changeset $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_node": {
+        "message": "Node $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_way": {
+        "message": "Way $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_relation": {
+        "message": "Relation $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_tag": {
+        "message": "Tag $TAG$",
+        "placeholders": {
+            "TAG": {
+                "content": "$1"
+            }
+        }
     }
 }

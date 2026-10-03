@@ -51,7 +51,6 @@
   import { getRelevantSites } from "../sites-manipulation-helper";
   import type { SiteLink } from "../sites-manipulation-helper";
   import type { SiteConfiguration } from "../../storage/config-handler";
-  import LinkList from "./LinkList.svelte";
   import type { OsmAttribute } from "../../sites-configuration";
 
   interface Props {
@@ -59,16 +58,19 @@
     currentSiteId?: string | undefined;
     currentlyShownLinks?: SiteLink[];
     extractedParameters?: Partial<Record<OsmAttribute, string>>;
+    // receives the links when the button is clicked, so they're shown together with the others
+    onshow: (links: SiteLink[]) => void;
   }
 
   let {
     config,
     currentSiteId = undefined,
     currentlyShownLinks = [],
-    extractedParameters = {}
+    extractedParameters = {},
+    onshow
   }: Props = $props();
 
-  let enabledLinks: SiteLink[] | undefined = $state();
+  let shown = $state(false);
 
   const restOfEnabledLinks: Set<string> = $derived(new Set(
     config
@@ -80,30 +82,39 @@
 </script>
 
 <style>
-  button {
-    margin: 5px auto;
-    display: block;
-    max-width: 250px; /* Firefox adjustment */
-    text-align: center;
+  hr {
+    margin: 4px 0 0;
+    border: none;
+    border-top: 1px solid var(--border);
   }
-  div#fix-button-margin {
-    /* button is centralized with `auto`, but needs some "min-margin" in some cases */
-    padding: 0 5px;
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: var(--hover);
+    color: var(--text);
   }
 </style>
 
-{#if restOfEnabledLinks.size > 0}
+{#if restOfEnabledLinks.size > 0 && !shown}
   {#if currentlyShownLinks.length > 0}
     <hr />
   {/if}
-  {#if enabledLinks}
-    <LinkList siteLinks={enabledLinks} />
-  {:else}
-    <div id="fix-button-margin">
-      <button
-        onclick={() => (enabledLinks = getEnabledLinks(config, currentSiteId, extractedParameters, restOfEnabledLinks))}>
-        {browser.i18n.getMessage(currentlyShownLinks.length === 0 ? 'button_showEnabledLinks' : 'button_showOtherEnabledLinks')}
-      </button>
-    </div>
-  {/if}
+  <button
+    type="button"
+    onclick={() => {
+      shown = true;
+      onshow(getEnabledLinks(config, currentSiteId, extractedParameters, restOfEnabledLinks));
+    }}>
+    {browser.i18n.getMessage(currentlyShownLinks.length === 0 ? 'button_showEnabledLinks' : 'button_showOtherEnabledLinks')}
+    ({restOfEnabledLinks.size})
+  </button>
 {/if}

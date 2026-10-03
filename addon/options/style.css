@@ -1,3 +1,20 @@
+:root {
+  color-scheme: light dark;
+  --text-secondary: #5f5e5a;
+  --hover: #f1efe8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-secondary: #b4b2a9;
+    --hover: #3a3944;
+  }
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
 
 /* drag-and-drop style https://github.com/bevacqua/dragula/blob/b0e5c4fc1017e1e33e2013ec8e47d43a46164c86/dist/dragula.css */
 .gu-mirror {

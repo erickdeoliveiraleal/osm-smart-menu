@@ -1,5 +1,9 @@
+export const siteCategories = ["edit", "general", "thematic", "imagery", "history", "quality", "tools"] as const;
+export type SiteCategory = typeof siteCategories[number];
+
 export type DefaultSiteConfiguration = {
   link: string;
+  category: SiteCategory;
   domainRegexp?: RegExp,
   paramOpts: ParamOpt[];
   extractors?: Extractors;
@@ -35,6 +39,7 @@ const urlPattern1: ParamOpt = { ordered: "/", unordered: { zoom: "zoom", lat: "l
 export const Sites: Record<string, DefaultSiteConfiguration> = {
   openstreetmap: {
     link: "www.openstreetmap.org",
+    category: "general",
     //icon: "www.openstreetmap.org/favicon.ico", // TODO: I will need to pre-download this because otherwise I need additional security permissions in the CSP
     paramOpts: [ // TODO: should I add {domain} at the start? it may be useful for sites that add something in a subdomain
       { ordered: "/node/{nodeId}#map={zoom}/{lat}/{lon}" },
@@ -68,6 +73,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   rapideditor: {
     link: "rapideditor.org",
+    category: "edit",
     paramOpts: [
       { ordered: "/edit#map={zoom}/{lat}/{lon}" },   // set params
       { ordered: "/edit#id=n{nodeId}" },             // set params
@@ -82,6 +88,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   ideditor: {
     link: "www.openstreetmap.org/edit",
+    category: "edit",
     paramOpts: [
       { ordered: "?editor=id#map={zoom}/{lat}/{lon}" },
       { ordered: "?editor=id&way={wayId}" },
@@ -97,6 +104,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   opencyclemap: {
     link: "www.opencyclemap.org",
+    category: "thematic",
     paramOpts: [urlPattern1],
     maxZoom: 18,
     extractors: {
@@ -106,6 +114,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   cyclosm: {
     link: "www.cyclosm.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}/cyclosm" },
       { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
@@ -114,6 +123,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   hotmap: {
     link: "map.hotosm.org",
+    category: "thematic",
     httpOnly: true,
     paramOpts: [
       { ordered: "/#{zoom}/{lat}/{lon}" },
@@ -123,6 +133,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   openseamap: {
     link: "map.openseamap.org",
+    category: "thematic",
     paramOpts: [urlPattern1],
     maxZoom: 18,
     extractors: {
@@ -132,6 +143,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   opensnowmap: {
     link: "www.opensnowmap.org",
+    category: "thematic",
     paramOpts: [urlPattern1],
     maxZoom: 18,
     extractors: {
@@ -141,6 +153,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   sentinelhub: { // Sentinel Hub's EO Browser became the Copernicus Browser; id kept to preserve user settings
     link: "browser.dataspace.copernicus.eu",
+    category: "imagery",
     domainRegexp: /(^|\.)dataspace\.copernicus\.eu$/, // also matches the older dataspace.copernicus.eu/browser/
     paramOpts: [
       { ordered: "/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
@@ -158,6 +171,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   mapcompare: {
     link: "mc.bbbike.org",
+    category: "tools",
     paramOpts: [
       { ordered: "/mc/", unordered: urlPattern1.unordered },
     ],
@@ -168,6 +182,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   openstreetbrowser: {
     link: "openstreetbrowser.org",
+    category: "thematic",
     maxZoom: 20,
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}" },
@@ -177,6 +192,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmcha: {
     link: 'osmcha.org',
+    category: "history",
     paramOpts: [
       { ordered: "/changesets/{changesetId}" },
       { ordered: "/?filters=%7B%22users%22:[%7B%22label%22:%22{userName}%22,%22value%22:%22{userName}%22%7D]%7D" },
@@ -185,6 +201,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   pewuosmhistory: {
     link: 'pewu.github.io',
+    category: "history",
     paramOpts: [
       { ordered: '/osm-history/#/node/{nodeId}' },
       { ordered: '/osm-history/#/way/{wayId}' },
@@ -194,6 +211,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmchangesetmap: {
     link: 'osmlab.github.io/changeset-map',
+    category: "history",
     paramOpts: [
       { ordered: '/#{changesetId}' },
     ],
@@ -201,6 +219,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmdeephistory: {
     link: "osmlab.github.io/osm-deep-history",
+    category: "history",
     paramOpts: [
       { ordered: "/#/node/{nodeId}" },
       { ordered: "/#/way/{wayId}" },
@@ -210,6 +229,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   deepdiff: {
     link: "osm.mapki.com",
+    category: "history",
     httpOnly: true,
     paramOpts: [
       { ordered: "/history/node.php", unordered: { nodeId: "id" } },
@@ -220,6 +240,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmhistoryviewer: {
     link: "osmhv.openstreetmap.de",
+    category: "history",
     paramOpts: [
       { ordered: "/changeset.jsp", unordered: { changesetId: "id" } },
       { ordered: "/blame.jsp", unordered: { relationId: "id" } }
@@ -231,6 +252,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   overpassapi: {
     link: "overpass-api.de/achavi",
+    category: "history",
     paramOpts: [
       { ordered: "/", unordered: { changesetId: "changeset", zoom: "zoom", lat: "lat", lon: "lon" } },
       { ordered: "/", unordered: { changesetId: "changeset" } }
@@ -243,6 +265,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   howdidyoucontribute: {
     link: "hdyc.neis-one.org",
+    category: "history",
     paramOpts: [
       { ordered: "/?{userName}" }
     ],
@@ -253,6 +276,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   whodidit: {
     link: "simon04.dev.openstreetmap.org",
+    category: "history",
     paramOpts: [
       { ordered: "/whodidit/", unordered: { zoom: "zoom", lat: "lat", lon: "lon" } },
     ],
@@ -260,6 +284,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmchangeviz: {
     link: "resultmaps.neis-one.org",
+    category: "history",
     paramOpts: [
       { ordered: "/osm-change-viz?c={changesetId}" },
       { ordered: "/osm-change-viz.php?c={changesetId}" },
@@ -268,6 +293,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   openptmap: {
     link: "www.openptmap.org",
+    category: "thematic",
     httpOnly: true,
     paramOpts: [urlPattern1],
     maxZoom: 17,
@@ -278,6 +304,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   opnvkarte: {
     link: "xn--pnvkarte-m4a.de",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#{lon};{lat};{zoom}" },
       urlPattern1,
@@ -289,6 +316,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   stamen: { // Note: no permalink, so if an user enters into the site by a link without parameters and doesn't move around at least once, then we don't have access to current coordinates
     link: "maps.stamen.com",
+    category: "thematic",
     httpOnly: true,
     paramOpts: [
       { ordered: "/#toner/{zoom}/{lat}/{lon}" }, // Did not find a generic URL (without choosing theme). This theme was chosen because it seems to have the highest zoom capacity
@@ -300,6 +328,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   f4map: {
     link: "demo.f4map.com",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#lat={lat}&lon={lon}&zoom={zoom}" } //there are other attributes that can be added if another website with 3D rendering shows up: &camera.theta=57.319&camera.phi=-2.005
     ]
@@ -307,6 +336,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmbuildings: {
     link: "osmbuildings.org",
+    category: "thematic",
     paramOpts: [
       urlPattern1, //TODO: &tilt=45&rotation=168
     ],
@@ -315,6 +345,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   openlevelup: {
     link: "openlevelup.net",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#{zoom}/{lat}/{lon}" },
       { ordered: "/old/", unordered: { "zoom": "z", "lat": "lat", "lon": "lon" } },
@@ -324,6 +355,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   indoorequal: {
     link: "indoorequal.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}" },
       { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
@@ -333,6 +365,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   umap: {
     link: "umap.openstreetmap.fr",
+    category: "tools",
     paramOpts: [
       { ordered: "/map/new/#{zoom}/{lat}/{lon}" },
       { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
@@ -356,6 +389,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   openstreetcam: {
     link: 'kartaview.org',
+    category: "imagery",
     paramOpts: [
       { ordered: '/map/@{lat},{lon},{zoom}z' },
       { ordered: '@{lat},{lon},{zoom}z' }, // input-only
@@ -365,6 +399,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   mapillary: {
     link: "www.mapillary.com",
+    category: "imagery",
     paramOpts: [
       { ordered: "/app", unordered: { zoom: "z", lat: "lat", lon: "lng" } }
     ],
@@ -373,6 +408,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   panoramax: {
     link: "api.panoramax.xyz",
+    category: "imagery",
     paramOpts: [
       { ordered: "/#focus=map&map={zoom}/{lat}/{lon}" },
       { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
@@ -382,6 +418,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   esriwayback: {
     link: "livingatlas.arcgis.com",
+    category: "imagery",
     paramOpts: [
       { ordered: "/wayback/#mapCenter={lon},{lat},{zoom}" },
       { ordered: "mapCenter={lon}%2C{lat}%2C{zoom}" }, // input-only
@@ -390,6 +427,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   opentopomap: {
     link: "www.opentopomap.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}" },
       { ordered: "/#marker={zoom}/{lat}/{lon}" },
@@ -399,6 +437,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   historicmap: {
     link: "gk.historic.place/historische_objekte",
+    category: "thematic",
     paramOpts: [urlPattern1],
     maxZoom: 19,
     extractors: {
@@ -408,6 +447,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   openrailwaymap: {
     link: "www.openrailwaymap.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/", unordered: { lat: "lat", lon: "lon", zoom: "zoom" } },
     ],
@@ -415,6 +455,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   openinframap: {
     link: 'openinframap.org',
+    category: "thematic",
     paramOpts: [
       { ordered: '/#{zoom}/{lat}/{lon}' },
       { ordered: '#{zoom}/{lat}/{lon}' }, // input-only
@@ -424,6 +465,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   americana: {
     link: 'americanamap.org',
+    category: "thematic",
     paramOpts: [
       { ordered: '/#map={zoom}/{lat}/{lon}' },
       { ordered: 'map={zoom}/{lat}/{lon}' }, // input-only
@@ -433,6 +475,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   cartesgouvfr: { // successor of the French Geoportail; it removes the parameters from the URL after loading
     link: "cartes.gouv.fr",
+    category: "general",
     paramOpts: [
       { ordered: "/explorer-les-cartes/?c={lon},{lat}&z={zoom}" },
       { ordered: "c={lon}%2C{lat}&z={zoom}" }, // input-only
@@ -441,6 +484,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   bingmaps: {
     link: "www.bing.com",
+    category: "general",
     paramOpts: [
       { ordered: "/maps?cp={lat}~{lon}&lvl={zoom}" },
       { ordered: "cp={lat}~{lon}&lvl={zoom}" }, // input-only
@@ -472,6 +516,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   googlemaps: {
     link: "www.google.com", //redirected from maps.google.com
+    category: "general",
     domainRegexp: /\.google\.(com?|cat|xxx|(com?\.)?[a-z]{2})$/,
     paramOpts: [
       { ordered: "/maps/@{lat},{lon},{zoom}z" },
@@ -483,6 +528,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   waze: {
     link: "www.waze.com",
+    category: "general",
     paramOpts: [
       { ordered: "/livemap/directions?latlng={lat}%2C{lon}" },
       { ordered: "/en/livemap/directions?latlng={lat}%2C{lon}" },
@@ -513,6 +559,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   stravaglobal: {
     link: "www.strava.com",
+    category: "thematic",
     paramOpts: [
       { ordered: "/heatmap#{zoom}/{lon}/{lat}/hot/all" },
       { ordered: "#{zoom}/{lon}/{lat}" }, // input-only
@@ -522,6 +569,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   level0: {
     link: "level0.osmz.ru",
+    category: "edit",
     httpOnly: true,
     paramOpts: [
       { ordered: "/?url=n{nodeId}" },
@@ -535,6 +583,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmrelationanalyzer: {
     link: "ra.osmsurround.org",
+    category: "quality",
     httpOnly: true,
     paramOpts: [
       { ordered: "/analyzeRelation", unordered: { relationId: "relationId" } }
@@ -546,6 +595,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmroutemanager: {
     link: "osmrm.openstreetmap.de",
+    category: "quality",
     paramOpts: [
       { ordered: "/relation.jsp", unordered: { relationId: "id" } }
     ],
@@ -557,6 +607,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmose: { // Note: has support for languages
     link: "osmose.openstreetmap.fr/map",
+    category: "quality",
     paramOpts: [
       { ordered: "/#zoom={zoom}&lat={lat}&lon={lon}" },
       { ordered: "zoom={zoom}&lat={lat}&lon={lon}" }, // input-only
@@ -569,6 +620,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osminspector: {
     link: "tools.geofabrik.de/osmi",
+    category: "quality",
     paramOpts: [urlPattern1],
     maxZoom: 18,
     extractors: {
@@ -578,6 +630,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmchangetiles: {
     link: "resultmaps.neis-one.org",
+    category: "history",
     paramOpts: [
       { ordered: "/osm-change-tiles#{zoom}/{lat}/{lon}" },
       { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
@@ -586,6 +639,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   missingmaps: {
     link: "www.missingmaps.org",
+    category: "history",
     paramOpts: [
       { ordered: "/users/#/{userName}" },
       { ordered: "/users/#/{userName}/badges" },
@@ -594,6 +648,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmlanevisualizer: {
     link: "osm.mueschelsoft.de/lanes",
+    category: "quality",
     paramOpts: [
       { ordered: "/", unordered: { "relationId": "relid" } },
       { ordered: "/", unordered: { "wayId": "wayid" } },
@@ -604,6 +659,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   waymarkedtrailsHiking: {
     link: "hiking.waymarkedtrails.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
     ],
@@ -611,6 +667,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   waymarkedtrailsCycling: {
     link: "cycling.waymarkedtrails.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
     ],
@@ -618,6 +675,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   waymarkedtrailsMtb: {
     link: "mtb.waymarkedtrails.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
     ],
@@ -625,6 +683,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   waymarkedtrailsSkating: {
     link: "skating.waymarkedtrails.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
     ],
@@ -632,6 +691,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   waymarkedtrailsRiding: {
     link: "riding.waymarkedtrails.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
     ],
@@ -639,6 +699,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   waymarkedtrailsSlopes: {
     link: "slopes.waymarkedtrails.org",
+    category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
     ],
@@ -646,6 +707,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
 
   osmosebyuser: {
     link: "osmose.openstreetmap.fr",
+    category: "quality",
     paramOpts: [
       { ordered: "/en/byuser/{userName}" },
     ],

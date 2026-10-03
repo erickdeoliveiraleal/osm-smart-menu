@@ -1,6 +1,59 @@
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --text: #1f1f1e;
+  --text-secondary: #5f5e5a;
+  --border: #e3e1da;
+  --hover: #f1efe8;
+  --accent: #185fa5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #2b2a33;
+    --text: #fbfbfe;
+    --text-secondary: #b4b2a9;
+    --border: #45444c;
+    --hover: #3a3944;
+    --accent: #85b7eb;
+  }
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  font-size: 15px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14px;
   overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  width: 340px;
+}
+
+a {
+  color: var(--accent);
+}
+
+/* colors of the category badges */
+.category-edit { --badge-bg: #eeedfe; --badge-fg: #3c3489; }
+.category-general { --badge-bg: #e6f1fb; --badge-fg: #0c447c; }
+.category-thematic { --badge-bg: #eaf3de; --badge-fg: #27500a; }
+.category-imagery { --badge-bg: #e1f5ee; --badge-fg: #085041; }
+.category-history { --badge-bg: #faece7; --badge-fg: #712b13; }
+.category-quality { --badge-bg: #faeeda; --badge-fg: #633806; }
+.category-tools { --badge-bg: #f1efe8; --badge-fg: #444441; }
+.category-custom { --badge-bg: #fbeaf0; --badge-fg: #72243e; }
+
+@media (prefers-color-scheme: dark) {
+  .category-edit { --badge-bg: #3c3489; --badge-fg: #cecbf6; }
+  .category-general { --badge-bg: #0c447c; --badge-fg: #b5d4f4; }
+  .category-thematic { --badge-bg: #27500a; --badge-fg: #c0dd97; }
+  .category-imagery { --badge-bg: #085041; --badge-fg: #9fe1cb; }
+  .category-history { --badge-bg: #712b13; --badge-fg: #f5c4b3; }
+  .category-quality { --badge-bg: #633806; --badge-fg: #fac775; }
+  .category-tools { --badge-bg: #444441; --badge-fg: #d3d1c7; }
+  .category-custom { --badge-bg: #72243e; --badge-fg: #f4c0d1; }
 }

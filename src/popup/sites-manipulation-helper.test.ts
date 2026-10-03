@@ -7,6 +7,7 @@ const aDefaultSiteConfig: SiteConfiguration = {
   isEnabled: true,
   defaultConfiguration: {
     link: 'example.com',
+    category: 'tools',
     paramOpts: [{ ordered: "/#map={zoom}/{lat}/{lon}" }],
   }
 };

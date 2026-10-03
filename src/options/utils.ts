@@ -1,4 +1,7 @@
+import browser from "webextension-polyfill";
 import { setOrderedSiteIds } from "../storage/config-handler";
+import type { SiteConfiguration } from "../storage/config-handler";
+import { normalize } from "../text";
 import dragula from "dragula";
 
 export const dragHandleClass = "drag-handle";
@@ -20,4 +23,23 @@ export function setupDragAndDrop(d: Document): HTMLElement {
   }
 
   return div;
+}
+
+export function getSiteTitle(siteConfig: SiteConfiguration): string {
+  return (
+    siteConfig.customName ||
+    browser.i18n.getMessage(`site_${siteConfig.id}`) ||
+    "???"
+  );
+}
+
+export function getSiteDetails(siteConfig: SiteConfiguration): string {
+  const category = browser.i18n.getMessage(`category_${siteConfig.defaultConfiguration?.category ?? "custom"}`);
+  const description = siteConfig.defaultConfiguration ? browser.i18n.getMessage(`description_${siteConfig.id}`) : siteConfig.customPattern?.url;
+  return description ? `${category} · ${description}` : category;
+}
+
+export function matchesQuery(siteConfig: SiteConfiguration, query: string): boolean {
+  const q = normalize(query.trim());
+  return !q || normalize(`${getSiteTitle(siteConfig)} ${getSiteDetails(siteConfig)}`).includes(q);
 }
