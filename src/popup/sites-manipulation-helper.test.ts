@@ -38,6 +38,11 @@ describe(findSiteCandidates.name, () => {
     };
     expect(findSiteCandidates([siteConfigWithAdjustment], 'http://example.com/map?zoom=1&lat=2&lon=3')).toEqual([]);
   });
+  test('finds the Copernicus Browser on both of its domains', () => {
+    const copernicus: SiteConfiguration = { id: 'sentinelhub', isEnabled: true, defaultConfiguration: Sites['sentinelhub'] };
+    expect(findSiteCandidates([copernicus], 'https://browser.dataspace.copernicus.eu/?zoom=7&lat=51&lng=11')).toEqual(['sentinelhub']);
+    expect(findSiteCandidates([copernicus], 'https://dataspace.copernicus.eu/browser/?zoom=7&lat=51&lng=11')).toEqual(['sentinelhub']);
+  });
   test('get user url template that that includes domain', () => {
     const configUrlPat: SiteConfiguration = {
       id: 'url-pat',
@@ -161,6 +166,8 @@ describe(pickWinningCandidate.name, () => {
     { id: 'americana', url: 'https://americanamap.org/#map=13/-15.7939/-47.8828', zoom: '14' },
     { id: 'cyclosm', url: 'https://www.cyclosm.org/#map=14/-15.7939/-47.8828/cyclosm', zoom: '14' },
     { id: 'panoramax', url: 'https://api.panoramax.xyz/pt-BR/index#focus=map&map=16/-15.7939/-47.8828', zoom: '17' },
+    { id: 'sentinelhub', url: 'https://browser.dataspace.copernicus.eu/?zoom=14&lat=-15.7939&lng=-47.8828&themeId=DEFAULT-THEME&datasetId=S2_L2A_CDAS&cloudCoverage=30', zoom: '14' },
+    { id: 'sentinelhub', url: 'https://dataspace.copernicus.eu/browser/?zoom=14&lat=-15.7939&lng=-47.8828&datasetId=S2_L2A_CDAS', zoom: '14' },
   ];
   coordinateSitesTests.forEach(({ id, url, zoom }) => {
     test(`recognize coordinates from '${id}'`, () => {
@@ -236,6 +243,14 @@ describe(getRelevantSites.name, () => {
     { id: 'osmchangesetmap', attributes: { changesetId: '83729' }, url: 'https://osmlab.github.io/changeset-map/#83729' },
     { id: 'osmosebyuser', attributes: { userName: 'someone' }, url: 'https://osmose.openstreetmap.fr/en/byuser/someone' },
   ];
+  test('builds link to the Copernicus Browser with the last 90 days of imagery', () => {
+    jest.useFakeTimers({ now: new Date('2026-10-03T12:00:00Z') });
+    const config: SiteConfiguration = { id: 'sentinelhub', isEnabled: true, defaultConfiguration: Sites['sentinelhub'] };
+    const url = 'https://browser.dataspace.copernicus.eu/?lat=6&lng=7&zoom=5&datasetId=S2_L2A_CDAS&layerId=1_TRUE_COLOR' +
+      '&dateMode=MOSAIC&mosaickingOrder=leastCC&fromTime=2026-07-05T00%3A00%3A00.000Z&toTime=2026-10-03T23%3A59%3A59.999Z';
+    expect(getRelevantSites([config], '', zll567_attributes)).toEqual([{ id: 'sentinelhub', url }]);
+    jest.useRealTimers();
+  });
   siteLinksTests.forEach(({ id, attributes, url }) => {
     test(`builds link to '${id}'`, () => {
       const config: SiteConfiguration = { id, isEnabled: true, defaultConfiguration: Sites[id] };

@@ -10,6 +10,8 @@ export type DefaultSiteConfiguration = {
   maxZoom?: number;
   // how much should be added to make this link's zoom level equivalent to OpenStreetMap's zoom level ?
   zoomAdjustment?: number;
+  // query parameters that can't be fixed in `paramOpts` because they're computed when the link is built (e.g. dates relative to today)
+  getDynamicQueryParameters?: (now: Date) => Record<string, string>;
 }
 
 export type ParamOpt = {
@@ -137,12 +139,21 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
-  sentinelhub: {
-    link: "apps.sentinel-hub.com",
+  sentinelhub: { // Sentinel Hub's EO Browser became the Copernicus Browser; id kept to preserve user settings
+    link: "browser.dataspace.copernicus.eu",
+    domainRegexp: /(^|\.)dataspace\.copernicus\.eu$/, // also matches the older dataspace.copernicus.eu/browser/
     paramOpts: [
-      { ordered: "/sentinel-playground/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
-      { ordered: "/eo-browser/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
+      { ordered: "/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
     ],
+    // without a time range only the base map is shown; the site accepts at most 180 days
+    getDynamicQueryParameters: (now: Date) => ({
+      datasetId: "S2_L2A_CDAS",
+      layerId: "1_TRUE_COLOR",
+      dateMode: "MOSAIC",
+      mosaickingOrder: "leastCC",
+      fromTime: new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10) + "T00:00:00.000Z",
+      toTime: now.toISOString().slice(0, 10) + "T23:59:59.999Z",
+    }),
   },
 
   mapcompare: {
