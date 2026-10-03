@@ -297,5 +297,26 @@
     },
     "site_cartesgouvfr": {
         "message": "cartes.gouv.fr"
+    },
+    "site_esriwayback": {
+        "message": "Esri World Imagery Wayback"
+    },
+    "config_backup_title": {
+        "message": "Back up settings"
+    },
+    "config_export_button": {
+        "message": "Export to file"
+    },
+    "config_import_button": {
+        "message": "Import from file"
+    },
+    "config_import_confirm": {
+        "message": "Importing replaces all your current links, their order and custom links. Continue?"
+    },
+    "config_import_invalidFile": {
+        "message": "This file is not a valid OSM Smart Menu settings file."
+    },
+    "config_import_failed": {
+        "message": "The settings could not be saved."
     }
 }

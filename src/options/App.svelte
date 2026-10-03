@@ -1,6 +1,7 @@
 <script lang="ts">
   import UrlTemplateForm from "./components/UrlTemplateForm.svelte";
   import ConfigurableLine from "./components/ConfigurableLine.svelte";
+  import SettingsBackup from "./components/SettingsBackup.svelte";
   import type { SiteConfiguration } from "../storage/config-handler";
 
   interface Props {
@@ -18,3 +19,4 @@
   {/each}
 </div>
 <UrlTemplateForm />
+<SettingsBackup />
