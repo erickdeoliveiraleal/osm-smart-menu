@@ -86,3 +86,4 @@ Chrome Web Store: 1280×800. Rendered images in [docs/store](store/) (`node docs
 2. Popup on a user page (OSMCha, How did you contribute, Osmose by user)
 3. Search filtering the list (e.g. "satellite")
 4. Options page with categories, descriptions and the settings backup
+5. Popup on Google Maps: jump to OpenStreetMap, editors and imagery
