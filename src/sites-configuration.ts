@@ -64,6 +64,20 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     }
   },
 
+  rapideditor: {
+    link: "rapideditor.org",
+    paramOpts: [
+      { ordered: "/edit#map={zoom}/{lat}/{lon}" },   // set params
+      { ordered: "/edit#id=n{nodeId}" },             // set params
+      { ordered: "/edit#id=w{wayId}" },              // set params
+      { ordered: "/edit#id=r{relationId}" },         // set params
+      { ordered: "map={zoom}/{lat}/{lon}" },         // gather params
+      { ordered: "id=n{nodeId}" },                   // gather params
+      { ordered: "id=w{wayId}" },                    // gather params
+      { ordered: "id=r{relationId}" }                // gather params
+    ],
+  },
+
   ideditor: {
     link: "www.openstreetmap.org/edit",
     paramOpts: [
@@ -86,6 +100,14 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     extractors: {
       getPermalink: getPermalinkBySelector("a#permalink")
     },
+  },
+
+  cyclosm: {
+    link: "www.cyclosm.org",
+    paramOpts: [
+      { ordered: "/#map={zoom}/{lat}/{lon}/cyclosm" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
+    ],
   },
 
   hotmap: {
@@ -157,6 +179,13 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: '/osm-history/#/way/{wayId}' },
       { ordered: '/osm-history/#/relation/{relationId}' },
     ]
+  },
+
+  osmchangesetmap: {
+    link: 'osmlab.github.io/changeset-map',
+    paramOpts: [
+      { ordered: '/#{changesetId}' },
+    ],
   },
 
   osmdeephistory: {
@@ -324,6 +353,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     zoomAdjustment: +1,
   },
 
+  panoramax: {
+    link: "api.panoramax.xyz",
+    paramOpts: [
+      { ordered: "/#focus=map&map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
   opentopomap: {
     link: "www.opentopomap.org",
     paramOpts: [
@@ -347,6 +385,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     paramOpts: [
       { ordered: '/#{zoom}/{lat}/{lon}' },
       { ordered: '#{zoom}/{lat}/{lon}' }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
+  americana: {
+    link: 'americanamap.org',
+    paramOpts: [
+      { ordered: '/#map={zoom}/{lat}/{lon}' },
+      { ordered: 'map={zoom}/{lat}/{lon}' }, // input-only
     ],
     zoomAdjustment: +1,
   },
@@ -512,6 +559,55 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
     httpOnly: true, // mini-map won't load in HTTPS
     disabledByDefault: true, // doesn't work for most relations
+  },
+
+  waymarkedtrailsHiking: {
+    link: "hiking.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsCycling: {
+    link: "cycling.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsMtb: {
+    link: "mtb.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsSkating: {
+    link: "skating.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsRiding: {
+    link: "riding.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsSlopes: {
+    link: "slopes.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  osmosebyuser: {
+    link: "osmose.openstreetmap.fr",
+    paramOpts: [
+      { ordered: "/en/byuser/{userName}" },
+    ],
   },
 };
 

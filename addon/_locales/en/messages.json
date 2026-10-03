@@ -151,6 +151,9 @@
     "site_openinframap": {
         "message": "Open Infrastructure Map "
     },
+    "site_americana": {
+        "message": "OSM Americana"
+    },
     "site_openptmap": {
         "message": "Open Public Transport Map"
     },
@@ -175,11 +178,17 @@
     "site_level0": {
         "message": "Level0 Editor"
     },
+    "site_rapideditor": {
+        "message": "Rapid Editor"
+    },
     "site_ideditor": {
         "message": "iD Editor"
     },
     "site_umap": {
         "message": "uMap"
+    },
+    "site_osmchangesetmap": {
+        "message": "OSM Changeset Viewer on a GL Map"
     },
     "site_osmdeephistory": {
         "message": "OSM Deep History"
@@ -255,5 +264,32 @@
     },
     "site_stravaglobal": {
       "message": "Strava Global Heatmap"
+    },
+    "site_waymarkedtrailsHiking": {
+        "message": "Waymarked Trails: Hiking"
+    },
+    "site_waymarkedtrailsCycling": {
+        "message": "Waymarked Trails: Cycling"
+    },
+    "site_waymarkedtrailsMtb": {
+        "message": "Waymarked Trails: MTB"
+    },
+    "site_waymarkedtrailsSkating": {
+        "message": "Waymarked Trails: Inline Skating"
+    },
+    "site_waymarkedtrailsRiding": {
+        "message": "Waymarked Trails: Horse Riding"
+    },
+    "site_waymarkedtrailsSlopes": {
+        "message": "Waymarked Trails: Winter Sport Slopes"
+    },
+    "site_osmosebyuser": {
+        "message": "Osmose errors by user"
+    },
+    "site_cyclosm": {
+        "message": "CyclOSM"
+    },
+    "site_panoramax": {
+        "message": "Panoramax"
     }
 }
