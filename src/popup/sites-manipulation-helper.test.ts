@@ -1,6 +1,6 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
 import { SiteConfiguration } from "../storage/config-handler";
-import { Sites, OsmAttribute } from "../sites-configuration";
+import { Sites, OsmAttribute, zoomFromGoogleMeters } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {
   id: 'test1',
@@ -342,4 +342,34 @@ describe(getRelevantSites.name, () => {
       expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
     });
   });
+});
+
+describe(zoomFromGoogleMeters.name, () => {
+  // values written by Google Maps (satellite view) for a known zoom, measured in a real browser
+  test.each([
+    [3665, 0, 768, 15],
+    [3527, -15.7939, 768, 15],
+    [112849, -15.7939, 768, 10],
+    [441, -15.7939, 768, 18],
+    [1823, 60.17, 768, 15],
+    [2386, 0, 500, 15],
+  ])('%sm at latitude %s with a %spx window is zoom %s', (meters, lat, height, zoom) => {
+    expect(zoomFromGoogleMeters(meters, lat, height)).toBe(zoom);
+  });
+  test('rejects invalid values', () => {
+    expect(zoomFromGoogleMeters(0, 0, 768)).toBeUndefined();
+    expect(zoomFromGoogleMeters(100, 0, 0)).toBeUndefined();
+  });
+});
+
+test('goes from the Google Maps satellite view straight to Bing with the right zoom', () => {
+  const google: SiteConfiguration = { id: 'googlemaps', isEnabled: true, defaultConfiguration: Sites['googlemaps'] };
+  const bing: SiteConfiguration = { id: 'bingmaps', isEnabled: true, defaultConfiguration: Sites['bingmaps'] };
+  const url = 'https://www.google.com/maps/@-15.7939,-47.8828,3527m/data=!3m1!1e3?entry=ttu';
+  // the zoom comes from the content script, which knows the window height
+  const { attributes } = pickWinningCandidate([google], [{ siteId: 'googlemaps', additionalAttributes: { zoom: '15' } }], url)!;
+  expect(attributes).toEqual({ lat: '-15.7939', lon: '-47.8828', zoom: '15' });
+  expect(getRelevantSites([bing], 'googlemaps', attributes)).toEqual([
+    { id: 'bingmaps', url: expect.stringContaining('cp=-15.7939~-47.8828&lvl=15') },
+  ]);
 });

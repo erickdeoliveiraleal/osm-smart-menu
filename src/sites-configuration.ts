@@ -522,8 +522,17 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/maps/@{lat},{lon},{zoom}z" },
       { ordered: "@{lat},{lon},{zoom}z" }, // input-only
       { ordered: "/maps/search/{lat},{lon}" },
-      { ordered: "@{lat},{lon}," }, // input-only; recognize pattern @-8.5275,119.7458151,642m ignoring unknown zoom
-    ]
+      { ordered: "@{lat},{lon}," }, // input-only; recognize pattern @-8.5275,119.7458151,642m (zoom comes from the extractor below)
+    ],
+    extractors: {
+      // the satellite view puts the visible height in meters in the URL instead of a zoom level
+      getAttributesFromPage: (window: Window) => {
+        const match = window.location.href.match(/@(-?[0-9.]+),(-?[0-9.]+),([0-9.]+)m(?![a-z])/);
+        if (!match) return {};
+        const zoom = zoomFromGoogleMeters(Number(match[3]), Number(match[1]), window.innerHeight);
+        return zoom === undefined ? {} : { zoom: zoom.toString() };
+      },
+    },
   },
 
   waze: {
@@ -713,6 +722,16 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 };
+
+/**
+ * Google Maps writes "@lat,lon,{meters}m" for the satellite view: the ground distance covered by the window height.
+ * meters = 156543.03 (meters per pixel at zoom 0 on the equator) × cos(latitude) × window height ÷ 2^zoom
+ */
+export function zoomFromGoogleMeters(meters: number, lat: number, windowHeight: number): number | undefined {
+  if (!(meters > 0) || !(windowHeight > 0) || !Number.isFinite(lat)) return undefined;
+  const zoom = Math.log2(156543.03392 * Math.cos(lat * Math.PI / 180) * windowHeight / meters);
+  return Math.min(Math.max(Math.round(zoom), 0), 22);
+}
 
 function getPermalinkBySelector(selector: string) {
   return function (document: Document) {
