@@ -1,0 +1,153 @@
+{
+    "extensionName": {
+        "message": "OSM智能菜单"
+    },
+    "extensionShortName": {
+        "message": "OSM菜单"
+    },
+    "extensionDescription": {
+        "message": "帮助OpenStreetMap贡献者快速切换不同地图以及使用社区的分析工具。"
+    },
+    "newOptionDetected_notice": {
+        "message": "你想要将这个网站添加到菜单吗？",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "添加链接",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "configurationLink": {
+        "message": "配置",
+        "description": "Link to configuration page inside main popup."
+    },
+    "config_deleteButton": {
+        "message": "删除",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_linkDeleted": {
+        "message": "链接$LINK_NAME$已被删除，点击这里撤销。",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_pattern_formTitle": {
+        "message": "高级选项编辑（实验性）",
+        "description": "Form Legend/Title"
+    },
+    "config_pattern_name": {
+        "message": "名称",
+        "description": "Input label"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "URL模板",
+        "description": "Input label"
+    },
+    "config_pattern_createOption": {
+        "message": "添加选项",
+        "description": "Button"
+    },
+    "site_bingmaps": {
+        "message": "必应地图"
+    },
+    "site_googlemaps": {
+        "message": "谷歌地图"
+    },
+    "site_opencyclemap": {
+        "message": "骑行运动地图"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_historicmap": {
+        "message": "历史对象"
+    },
+    "site_openptmap": {
+        "message": "交通路网地图"
+    },
+    "site_hotmap": {
+        "message": "人道救援地图"
+    },
+    "site_stravaglobal": {
+        "message": "Strava全球热力图"
+    },
+    "loading": {
+        "message": "加载中……\n如果它并未停止，请刷新页面并重试。",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "newOptionDetected_added": {
+        "message": "以 $PAGE_TITLE$添加",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_editButton": {
+        "message": "编辑",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "保存",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap（开放地形地图）"
+    },
+    "site_opnvkarte": {
+        "message": "公共交通地图"
+    },
+    "extensionStoreDescription": {
+        "message": "当你点击菜单按钮时，这个扩展会<strong>检测</strong>当前页面中的OpenStreetMap参数，并<strong>生成</strong>一个包含这些参数相关地图和工具的列表。\n\n识别的参数包括：\n<ul>\n<li>地图坐标（缩放级别、纬度和经度）</li>\n<li>OSM 元素（节点ID、道路ID、关系ID和变更集ID）</li>\n<li>用户名和GPS轨迹ID</li>\n</ul>\n如果你不确定哪些网站会被识别，可以先访问 https://www.openstreetmap.org/ ，然后再点击菜单。\n\n<em>OpenStreetMap 标志是 OpenStreetMap 基金会的商标，并且经过他们的许可使用。本项目未得到 OpenStreetMap 基金会的认可或关联。</em>"
+    },
+    "error_noAccess": {
+        "message": "错误：无法找到或访问当前页面。\n如果页面仍在加载，请重试。\n如果这是意外情况，请在 $EXTENSION_SITE$ 报告。",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_incompatibleWebsite": {
+        "message": "未找到地图或OpenStreetMap参数。\n如果这是意外情况，请在 $EXTENSION_SITE$ 报告。",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noInformationExtracted": {
+        "message": "网站已被识别，但未找到任何参数。\n如果这是地图，尝试稍微移动一下以初始化它的参数。\n如果这看起来像是一个错误，请在 $EXTENSION_SITE$ 报告它。",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "启用的链接中没有一个与此页面中找到的参数兼容。"
+    },
+    "button_showEnabledLinks": {
+        "message": "使用额外的参数显示已启用的链接"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "使用额外的参数显示其余已启用的链接"
+    }
+}

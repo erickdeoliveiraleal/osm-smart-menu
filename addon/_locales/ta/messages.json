@@ -1,0 +1,239 @@
+{
+    "button_showOtherEnabledLinks": {
+        "message": "கூடுதல் அளவுருக்களைப் பயன்படுத்தி இயக்கப்பட்ட மீதமுள்ள இணைப்புகளைக் காட்டுங்கள்"
+    },
+    "site_bingmaps": {
+        "message": "பிங் வரைபடங்கள்"
+    },
+    "site_googlemaps": {
+        "message": "கூகிள் வரைபடங்கள்"
+    },
+    "site_opensnowmap": {
+        "message": "Opensnowmap"
+    },
+    "site_opentopomap": {
+        "message": "ஓபன்டோபோமாப்"
+    },
+    "site_openinframap": {
+        "message": "திறந்த உள்கட்டமைப்பு வரைபடம் "
+    },
+    "site_openptmap": {
+        "message": "பொது போக்குவரத்து வரைபடத்தைத் திறக்கவும்"
+    },
+    "site_opnvkarte": {
+        "message": "Öpnvkarte"
+    },
+    "site_f4map": {
+        "message": "எஃப்சி வரைபடம் (டெம் டெமோப்)"
+    },
+    "site_stamen": {
+        "message": "ச்டேமன் வரைபடங்கள்"
+    },
+    "site_hotmap": {
+        "message": "மனிதாபிமான OSM குழு வரைபடம்"
+    },
+    "site_mapillary": {
+        "message": "Maparyal"
+    },
+    "site_level0": {
+        "message": "நிலை 0 ஆசிரியர்"
+    },
+    "site_ideditor": {
+        "message": "ஐடி ஆசிரியர்"
+    },
+    "site_umap": {
+        "message": "Mup"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM ஆழமான வரலாறு"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM உறவு பகுப்பாய்வி"
+    },
+    "site_mapcompare": {
+        "message": "வரைபடம் ஒப்பிடுக"
+    },
+    "site_keepright": {
+        "message": "சரியாக வைத்திருங்கள்!"
+    },
+    "site_howdidyoucontribute": {
+        "message": "OSM க்கு நீங்கள் எவ்வாறு பங்களித்தீர்கள்?"
+    },
+    "site_osmchangeviz": {
+        "message": "ஒப்பீடுமூலம் மாற்றங்கள் (நிசிச்)"
+    },
+    "site_osmchangetiles": {
+        "message": "அண்மைக் கால OSM திருத்தங்கள் (NEIS)"
+    },
+    "site_waze": {
+        "message": "வேச்"
+    },
+    "site_openstreetbrowser": {
+        "message": "திறந்ததெருஉலாவி"
+    },
+    "site_osmcha": {
+        "message": "ஓச்ம்ச்சா"
+    },
+    "site_osmbuildings": {
+        "message": "OSM கட்டிடங்கள்"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelup!"
+    },
+    "site_indoorequal": {
+        "message": "உட்புற ="
+    },
+    "site_missingmaps": {
+        "message": "வரைபடங்களைக் காணவில்லை"
+    },
+    "site_osmlanevisualizer": {
+        "message": "ஓஎச்எம் லேன் விசுவலைசர்"
+    },
+    "site_stravaglobal": {
+        "message": "ச்ட்ராவா உலகளாவிய ஈட்மேப்"
+    },
+    "extensionName": {
+        "message": "OSM அறிவுள்ள பட்டியல்"
+    },
+    "extensionShortName": {
+        "message": "எட்டாவது"
+    },
+    "extensionDescription": {
+        "message": "OpenStreetMap பங்களிப்பாளர்களுக்கு சமூகத்திலிருந்து வெவ்வேறு வரைபடங்களுக்கும் பகுப்பாய்வுக் கருவிகளுக்கும் இடையில் எளிதாக மாற உதவுகிறது."
+    },
+    "loading": {
+        "message": "ஏற்றுகிறது ...\n இது ஏற்றுவதை நிறுத்தவில்லை என்றால், பக்கத்தை மீண்டும் ஏற்றி மீண்டும் முயற்சிக்கவும்."
+    },
+    "newOptionDetected_notice": {
+        "message": "இந்த வலைத்தளத்தை பட்டியலில் சேர்க்க விரும்புகிறீர்களா?"
+    },
+    "config_deleteButton": {
+        "message": "நீக்கு"
+    },
+    "config_pattern_formTitle": {
+        "message": "மேம்பட்ட விருப்ப உருவாக்கம் (சோதனை)"
+    },
+    "site_openstreetmap": {
+        "message": "ஓபன்ச்ட்ரீட் வரைபடம்"
+    },
+    "site_sentinelhub": {
+        "message": "சென்டினல் அப்"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapsurfer"
+    },
+    "site_opencyclemap": {
+        "message": "OpencyClemap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeamap"
+    },
+    "site_historicmap": {
+        "message": "வரலாற்று பொருள்கள்"
+    },
+    "site_openstreetcam": {
+        "message": "கர்தாவியூ"
+    },
+    "site_deepdiff": {
+        "message": "ஆழமான வேறுபாடு"
+    },
+    "site_osmhistoryviewer": {
+        "message": "ஓஎச்எம் வரலாற்று பார்வையாளர்"
+    },
+    "site_pewuosmhistory": {
+        "message": "எட்டு வரலாற்று பார்வையாளர் (பியூ)"
+    },
+    "site_whodidit": {
+        "message": "Whodidit (பெட்ரோலியம்)"
+    },
+    "site_overpassapi": {
+        "message": "ஆக்மென்ட் OSM மாற்றம் பார்வையாளர்"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM பாதை மேலாளர்"
+    },
+    "site_osmose": {
+        "message": "ஒச்மோச்"
+    },
+    "site_osminspector": {
+        "message": "ஓஎச்எம் இன்ச்பெக்டர்"
+    },
+    "site_osmwiki": {
+        "message": "OpenStreetMap விக்கி"
+    },
+    "extensionStoreDescription": {
+        "message": "மெனுவின் பொத்தானைக் சொடுக்கு செய்தால், இந்த நீட்டிப்பு <strong> கண்டறிதல் </strong> தற்போதைய பக்கத்திற்குள் ஓபன்ச்ட்ரீட்மேப் அளவுருக்கள் மற்றும் <strong> உருவாக்கும் </strong> இந்த அளவுருக்களுடன் தொடர்புடைய வரைபடங்கள் மற்றும் கருவிகளின் பட்டியல்.\n\n அங்கீகரிக்கப்பட்ட அளவுருக்கள் பின்வருமாறு:\n <ul>\n <li> வரைபட ஆயத்தொகுப்புகள் (சூம், அட்சரேகை மற்றும் தீர்க்கரேகை) </li>\n <li> OSM கூறுகள் (முனை ஐடி, வே ஐடி, உறவு ஐடி மற்றும் மாற்றங்கள் ஐடி) </li>\n <li> பயனர் பெயர்கள் மற்றும் சிபிஎச் தடயங்கள் ஐடி </li>\n </ul>\n எந்த வலைத்தளம் அங்கீகரிக்கப்படும் என்று உங்களுக்குத் தெரியாவிட்டால், மெனுவைக் சொடுக்கு செய்வதற்கு முன் https://www.openstreetmap.org/ க்குச் செல்ல முயற்சிக்கவும்.\n\n <em> ஓபன்ச்ட்ரீட்மேப் லோகோ என்பது ஓபன்ச்ட்ரீட்மேப் அறக்கட்டளையின் வர்த்தக முத்திரை, இது அவற்றின் அனுமதியுடன் பயன்படுத்தப்படுகிறது. இந்தத் திட்டம் ஓபன்ச்ட்ரீட்மேப் அறக்கட்டளையுடன் அங்கீகரிக்கப்படவில்லை அல்லது இணைக்கப்படவில்லை.</em>"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "இணைப்பைச் சேர்க்கவும்"
+    },
+    "newOptionDetected_added": {
+        "message": "$PAGE_TITLE$ எனச் சேர்க்கப்பட்டது",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "configurationLink": {
+        "message": "உள்ளமைவு"
+    },
+    "config_editButton": {
+        "message": "தொகு"
+    },
+    "config_saveButton": {
+        "message": "சேமி"
+    },
+    "config_linkDeleted": {
+        "message": "இணைப்பு $LINK_NAME$ நீக்கப்பட்டது. செயல்தவிர்க்க இங்கே சொடுக்கு செய்க.",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_pattern_name": {
+        "message": "பெயர்"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "முகவரி வார்ப்புரு"
+    },
+    "config_pattern_createOption": {
+        "message": "விருப்பத்தை உருவாக்கு"
+    },
+    "error_noAccess": {
+        "message": "பிழை: தற்போதைய பக்கத்தைக் கண்டுபிடிக்கவோ அணுகவோ முடியவில்லை.\n இந்தப் பக்கம் இன்னும் ஏற்றப்பட்டால், மீண்டும் முயற்சிக்கவும்.\n இது எதிர்பாராதது என்றால், தயவுசெய்து அதை $EXTENSION_SITE$ இல் புகாரளிக்கவும்.",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_incompatibleWebsite": {
+        "message": "வரைபடம் அல்லது ஓபன்ச்ட்ரீட்மேப் அளவுருக்கள் எதுவும் காணப்படவில்லை.\n இது எதிர்பாராதது என்றால், நீங்கள் அதை $EXTENSION_SITE$ இல் புகாரளிக்கலாம்.",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noInformationExtracted": {
+        "message": "வலைத்தளம் அங்கீகரிக்கப்பட்டது, ஆனால் அளவுருக்கள் எதுவும் காணப்படவில்லை.\n இது ஒரு வரைபடமாக இருந்தால், அதன் அளவுருக்களைத் தொடங்க அதைச் சிறிது நகர்த்த முயற்சிக்கவும்.\n இது ஒரு பிழைபோல் தோன்றினால், தயவுசெய்து அதை $EXTENSION_SITE$ இல் புகாரளிக்கவும்.",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "இயக்கப்பட்ட இணைப்புகள் எதுவும் இந்த பக்கத்தில் காணப்படும் அளவுருக்களுடன் பொருந்தாது."
+    },
+    "button_showEnabledLinks": {
+        "message": "கூடுதல் அளவுருக்களைப் பயன்படுத்தி இயக்கப்பட்ட இணைப்புகளைக் காட்டு"
+    }
+}
