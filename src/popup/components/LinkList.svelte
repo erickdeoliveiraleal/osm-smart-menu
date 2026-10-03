@@ -26,7 +26,7 @@
 <script lang="ts">
   import type { SiteLink } from "../sites-manipulation-helper";
   import browser from "webextension-polyfill";
-  import { openLink } from "../utils";
+  import { openLink, sendRemoteControlCommand } from "../utils";
   import Icon from "./Icon.svelte";
   import InfoBox from "./InfoBox.svelte";
 
@@ -108,7 +108,11 @@
   <section class="category-{group.category}">
     <h2><Icon name={categoryIcons[group.category]} size={13} />{browser.i18n.getMessage(`category_${group.category}`)}</h2>
     {#each group.items as item (item.site.id)}
-      <a id={item.site.id} href={item.site.url} title={item.site.url} onclick={(e) => { e.preventDefault(); openLink(item.site.url); }}>
+      <a id={item.site.id} href={item.site.url} title={item.site.url} onclick={(e) => {
+          e.preventDefault();
+          if (Sites[item.site.id]?.remoteControl) sendRemoteControlCommand(item.site.url);
+          else openLink(item.site.url);
+        }}>
         <span class="badge"><Icon name={categoryIcons[group.category]} size={16} /></span>
         <span class="text">
           <span class="name">{item.name}</span>

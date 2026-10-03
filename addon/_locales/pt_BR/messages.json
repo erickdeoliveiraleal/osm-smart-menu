@@ -516,5 +516,20 @@
     },
     "site_osmosebyuser": {
         "message": "Erros do Osmose por usuário"
+    },
+    "description_overpassturbo": {
+        "message": "Consulte dados do OSM nesta área"
+    },
+    "description_geohack": {
+        "message": "Coordenadas e links para muitos serviços de mapa"
+    },
+    "description_googlestreetview": {
+        "message": "Panorama de rua mais próximo"
+    },
+    "description_openrouteservice": {
+        "message": "Rotas, isócronas e lugares"
+    },
+    "description_josm": {
+        "message": "Abrir no JOSM (controle remoto)"
     }
 }

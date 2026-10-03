@@ -136,8 +136,10 @@ export function getRelevantSites(
         attributes = { ...retrievedAttributes, zoom: reviewZoom(site.defaultConfiguration, retrievedAttributes.zoom) }
       }
 
-      if (chosenOption) {
-        let path = applyParametersToUrl(chosenOption, attributes);
+      let path = chosenOption
+        ? applyParametersToUrl(chosenOption, attributes)
+        : site.defaultConfiguration.buildPath?.(attributes);
+      if (path !== undefined) {
         const { getDynamicQueryParameters } = site.defaultConfiguration;
         if (getDynamicQueryParameters) {
           const query = new URLSearchParams(getDynamicQueryParameters(new Date())).toString();

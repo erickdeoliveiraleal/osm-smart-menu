@@ -16,6 +16,10 @@ export type DefaultSiteConfiguration = {
   zoomAdjustment?: number;
   // query parameters that can't be fixed in `paramOpts` because they're computed when the link is built (e.g. dates relative to today)
   getDynamicQueryParameters?: (now: Date) => Record<string, string>;
+  // builds the path when none of `paramOpts` can be used, for URLs that need computed values (e.g. a bounding box)
+  buildPath?: (attributes: Partial<Record<OsmAttribute, string>>) => string | undefined;
+  // the link is a command to a program on the user's computer (JOSM remote control), sent without opening a tab
+  remoteControl?: boolean;
 }
 
 export type ParamOpt = {
@@ -250,6 +254,22 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
+  overpassturbo: { // the site doesn't keep the position in its URL, so it's a link target only
+    link: "overpass-turbo.eu",
+    category: "tools",
+    paramOpts: [
+      { ordered: "/?C={lat};{lon};{zoom}" },
+    ],
+  },
+
+  geohack: {
+    link: "geohack.toolforge.org",
+    category: "tools",
+    paramOpts: [
+      { ordered: "/geohack.php?params={lat};{lon}" },
+    ],
+  },
+
   overpassapi: {
     link: "overpass-api.de/achavi",
     category: "history",
@@ -397,6 +417,14 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     zoomAdjustment: +1,
   },
 
+  googlestreetview: { // opens the nearest panorama
+    link: "www.google.com",
+    category: "imagery",
+    paramOpts: [
+      { ordered: "/maps/@?api=1&map_action=pano&viewpoint={lat},{lon}" },
+    ],
+  },
+
   mapillary: {
     link: "www.mapillary.com",
     category: "imagery",
@@ -479,6 +507,14 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     paramOpts: [
       { ordered: "/explorer-les-cartes/?c={lon},{lat}&z={zoom}" },
       { ordered: "c={lon}%2C{lat}&z={zoom}" }, // input-only
+    ],
+  },
+
+  openrouteservice: {
+    link: "maps.openrouteservice.org",
+    category: "general",
+    paramOpts: [
+      { ordered: "/#/place/@{lon},{lat},{zoom}" },
     ],
   },
 
@@ -565,6 +601,25 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "#{zoom}/{lon}/{lat}" }, // input-only
     ],
     disabledByDefault: true,
+  },
+
+  josm: {
+    link: "127.0.0.1:8111",
+    category: "edit",
+    httpOnly: true,
+    remoteControl: true,
+    paramOpts: [ // downloads only the element, not the whole visible area
+      { ordered: "/load_object?objects=n{nodeId}" },
+      { ordered: "/load_object?objects=w{wayId}" },
+      { ordered: "/load_object?objects=r{relationId}" },
+    ],
+    buildPath: ({ lat, lon, zoom }) => {
+      if (!lat || !lon || !zoom) return undefined;
+      const { left, right, top, bottom } = boundingBox(Number(lat), Number(lon), Number(zoom));
+      // downloading a large area fails, so far from the ground only move JOSM's view
+      const command = Number(zoom) >= 16 ? "load_and_zoom" : "zoom";
+      return `/${command}?left=${left}&right=${right}&top=${top}&bottom=${bottom}`;
+    },
   },
 
   level0: {
@@ -713,6 +768,20 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 };
+
+/** Approximate area shown by a 1280×800 pixel map at this position and zoom. */
+export function boundingBox(lat: number, lon: number, zoom: number): Record<"left" | "right" | "top" | "bottom", string> {
+  const degreesPerPixel = 360 / (256 * 2 ** zoom);
+  const halfWidth = 640 * degreesPerPixel;
+  const halfHeight = 400 * degreesPerPixel * Math.cos(lat * Math.PI / 180);
+  const round = (n: number) => n.toFixed(6);
+  return {
+    left: round(lon - halfWidth),
+    right: round(lon + halfWidth),
+    top: round(Math.min(lat + halfHeight, 85)),
+    bottom: round(Math.max(lat - halfHeight, -85)),
+  };
+}
 
 function getPermalinkBySelector(selector: string) {
   return function (document: Document) {

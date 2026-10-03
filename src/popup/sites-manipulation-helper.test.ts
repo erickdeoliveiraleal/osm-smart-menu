@@ -1,6 +1,6 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
 import { SiteConfiguration } from "../storage/config-handler";
-import { Sites, OsmAttribute } from "../sites-configuration";
+import { Sites, OsmAttribute, boundingBox } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {
   id: 'test1',
@@ -249,6 +249,12 @@ describe(getRelevantSites.name, () => {
     { id: 'cartesgouvfr', attributes: zll567_attributes, url: 'https://cartes.gouv.fr/explorer-les-cartes/?c=7,6&z=5' },
     { id: 'whodidit', attributes: zll567_attributes, url: 'https://simon04.dev.openstreetmap.org/whodidit/?zoom=5&lat=6&lon=7' },
     { id: 'esriwayback', attributes: zll567_attributes, url: 'https://livingatlas.arcgis.com/wayback/#mapCenter=7,6,5' },
+    { id: 'overpassturbo', attributes: zll567_attributes, url: 'https://overpass-turbo.eu/?C=6;7;5' },
+    { id: 'geohack', attributes: zll567_attributes, url: 'https://geohack.toolforge.org/geohack.php?params=6;7' },
+    { id: 'googlestreetview', attributes: zll567_attributes, url: 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=6,7' },
+    { id: 'openrouteservice', attributes: zll567_attributes, url: 'https://maps.openrouteservice.org/#/place/@7,6,5' },
+    { id: 'josm', attributes: { nodeId: '123', ...zll567_attributes }, url: 'http://127.0.0.1:8111/load_object?objects=n123' },
+    { id: 'josm', attributes: { relationId: '45' }, url: 'http://127.0.0.1:8111/load_object?objects=r45' },
     { id: 'osmchangesetmap', attributes: { changesetId: '83729' }, url: 'https://osmlab.github.io/changeset-map/#83729' },
     { id: 'osmosebyuser', attributes: { userName: 'someone' }, url: 'https://osmose.openstreetmap.fr/en/byuser/someone' },
   ];
@@ -341,5 +347,32 @@ describe(getRelevantSites.name, () => {
       };
       expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
     });
+  });
+});
+
+describe('JOSM with coordinates', () => {
+  const josm: SiteConfiguration = { id: 'josm', isEnabled: true, defaultConfiguration: Sites['josm'] };
+  test('downloads the visible area when zoomed in', () => {
+    const [link] = getRelevantSites([josm], '', { zoom: '17', lat: '-15.7939', lon: '-47.8828' });
+    const { left, right, top, bottom } = boundingBox(-15.7939, -47.8828, 17);
+    expect(link.url).toBe(`http://127.0.0.1:8111/load_and_zoom?left=${left}&right=${right}&top=${top}&bottom=${bottom}`);
+  });
+  test('only moves the view when zoomed out, to avoid downloading a large area', () => {
+    const [link] = getRelevantSites([josm], '', { zoom: '12', lat: '-15.7939', lon: '-47.8828' });
+    expect(link.url.startsWith('http://127.0.0.1:8111/zoom?left=')).toBe(true);
+  });
+  test('needs a zoom', () => {
+    expect(getRelevantSites([josm], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([]);
+  });
+});
+
+describe(boundingBox.name, () => {
+  test('is centered on the position and shrinks by half per zoom level', () => {
+    const z16 = boundingBox(0, 10, 16);
+    const z17 = boundingBox(0, 10, 17);
+    expect((Number(z16.left) + Number(z16.right)) / 2).toBeCloseTo(10, 6);
+    expect(Number(z16.right) - Number(z16.left)).toBeCloseTo(2 * (Number(z17.right) - Number(z17.left)), 5);
+    // 1280 px at zoom 16 on the equator ≈ 0.0275°
+    expect(Number(z16.right) - Number(z16.left)).toBeCloseTo(0.0275, 3);
   });
 });

@@ -581,5 +581,35 @@
                 "content": "$1"
             }
         }
+    },
+    "site_overpassturbo": {
+        "message": "Overpass Turbo"
+    },
+    "site_geohack": {
+        "message": "GeoHack"
+    },
+    "site_googlestreetview": {
+        "message": "Google Street View"
+    },
+    "site_openrouteservice": {
+        "message": "openrouteservice"
+    },
+    "site_josm": {
+        "message": "JOSM"
+    },
+    "description_overpassturbo": {
+        "message": "Query OSM data in this area"
+    },
+    "description_geohack": {
+        "message": "Coordinates and links to many map services"
+    },
+    "description_googlestreetview": {
+        "message": "Nearest street-level panorama"
+    },
+    "description_openrouteservice": {
+        "message": "Routes, isochrones and places"
+    },
+    "description_josm": {
+        "message": "Open in JOSM (remote control)"
     }
 }
