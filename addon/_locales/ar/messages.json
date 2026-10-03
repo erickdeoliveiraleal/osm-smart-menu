@@ -1,1 +1,11 @@
-{}
+{
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "Open the place you’re looking at in other maps: OpenStreetMap, Google Maps, Bing, satellite imagery, street photos and OSM editors."
+    }
+}

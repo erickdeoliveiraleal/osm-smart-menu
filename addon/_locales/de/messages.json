@@ -1,4 +1,13 @@
 {
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "Hilft OpenStreetMap-Mitwirkenden, einfach zwischen verschiedenen Karten und Analysewerkzeugen aus der Community zu wechseln."
+    },
     "noEnabledCompatibleLinksFound": {
         "message": "Keine der aktivierten Verknüpfungen sind mit den Parametern der Seite kompatibel.",
         "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
@@ -58,9 +67,6 @@
     "newOptionDetected_notice": {
         "message": "Möchten sie diese Website ins Menü hinzufügen?",
         "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
-    },
-    "extensionDescription": {
-        "message": "Hilft OpenStreetMap-Mitwirkenden, einfach zwischen verschiedenen Karten und Analysewerkzeugen aus der Community zu wechseln."
     },
     "config_pattern_createOption": {
         "message": "Option erstellen",

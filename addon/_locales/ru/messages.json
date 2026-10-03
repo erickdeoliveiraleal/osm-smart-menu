@@ -1,4 +1,13 @@
 {
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "Open the place you’re looking at in other maps: OpenStreetMap, Google Maps, Bing, satellite imagery, street photos and OSM editors."
+    },
     "site_f4map": {
         "message": "F4 Map (3D демо)"
     },
@@ -103,12 +112,6 @@
     "newOptionDetected_buttonText": {
         "message": "Добавить ссылку",
         "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
-    },
-    "extensionShortName": {
-        "message": "OSMenu"
-    },
-    "extensionName": {
-        "message": "OSM Smart Menu"
     },
     "site_openlevelup": {
         "message": "OpenLevelUp!"

@@ -1,4 +1,13 @@
 {
+    "extensionName": {
+        "message": "OSM-Saĝmenuo"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "Open the place you’re looking at in other maps: OpenStreetMap, Google Maps, Bing, satellite imagery, street photos and OSM editors."
+    },
     "config_pattern_formTitle": {
         "message": "Kreo de Altnivelaj Opcioj (eksperimenta)",
         "description": "Form Legend/Title"
@@ -47,12 +56,6 @@
     },
     "site_openinframap": {
         "message": "Open Infrastructure Map "
-    },
-    "extensionShortName": {
-        "message": "OSMenu"
-    },
-    "extensionName": {
-        "message": "OSM-Saĝmenuo"
     },
     "site_openmapsurfer": {
         "message": "OpenMapSurfer"
