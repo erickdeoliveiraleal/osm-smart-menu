@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+  Composes a 1280×800 store screenshot: a caption on the left and the real popup or options page on the right.
+  The page on the right comes from a local page that fakes the WebExtension APIs and serves the built extension (addon/).
+  Parameters: ?title=…&subtitle=…&frame=<url of the faked page>&width=…&height=…
+  Render with: chrome --headless --screenshot=out.png --window-size=1280,800 "file:///…/screenshot.html?…"
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    html, body {
+      margin: 0;
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #f4f3ee;
+      color: #1f1f1e;
+    }
+    main {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      height: 100%;
+      padding: 0 80px;
+      box-sizing: border-box;
+    }
+    .text {
+      flex: 1;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 36px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #5f5e5a;
+    }
+    .brand img {
+      width: 44px;
+      height: 44px;
+    }
+    h1 {
+      margin: 0 0 20px;
+      font-size: 44px;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+    p {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.5;
+      color: #5f5e5a;
+    }
+    iframe {
+      flex-shrink: 0;
+      border: 1px solid #d3d1c7;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="text">
+      <div class="brand"><img src="../../addon/icons/osm128x128.png" alt="">OSM Smart Menu</div>
+      <h1 id="title"></h1>
+      <p id="subtitle"></p>
+    </div>
+    <iframe id="frame" title="Extension"></iframe>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search);
+    document.getElementById("title").textContent = params.get("title") || "";
+    document.getElementById("subtitle").textContent = params.get("subtitle") || "";
+    const frame = document.getElementById("frame");
+    frame.width = params.get("width") || "340";
+    frame.height = params.get("height") || "640";
+    frame.src = params.get("frame") || "";
+  </script>
+</body>
+</html>

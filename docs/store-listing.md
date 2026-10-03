@@ -76,7 +76,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 ## Screenshots
 
-Chrome Web Store: 1280×800 or 640×400. Suggested set:
+Chrome Web Store: 1280×800. Rendered images in [docs/store](store/) (`node docs/store/render.js`):
 
 1. Popup on openstreetmap.org showing the detected position and the grouped tools
 2. Popup on a user page (OSMCha, How did you contribute, Osmose by user)

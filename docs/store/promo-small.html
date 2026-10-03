@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+  Small promo tile for the Chrome Web Store (440×280).
+  Render with: chrome --headless --screenshot=promo-small.png --window-size=440,280 "file:///…/promo-small.html"
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    html, body {
+      margin: 0;
+      width: 440px;
+      height: 280px;
+      overflow: hidden;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #7ebc6f; /* OpenStreetMap green */
+      color: #fff;
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 0 36px;
+      box-sizing: border-box;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 30px;
+      font-weight: 700;
+    }
+    .brand img {
+      width: 64px;
+      height: 64px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 6px;
+    }
+    p {
+      margin: 18px 0 0;
+      font-size: 19px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand"><img src="../../addon/icons/osm128x128.png" alt="">OSM Smart Menu</div>
+    <p>Open the place you're looking at in other OpenStreetMap maps, editors and tools.</p>
+  </main>
+</body>
+</html>
