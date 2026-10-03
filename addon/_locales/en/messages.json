@@ -297,5 +297,11 @@
     },
     "site_cartesgouvfr": {
         "message": "cartes.gouv.fr"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT"
+    },
+    "site_esriwayback": {
+        "message": "Esri World Imagery Wayback"
     }
 }

@@ -168,6 +168,8 @@ describe(pickWinningCandidate.name, () => {
     { id: 'panoramax', url: 'https://api.panoramax.xyz/pt-BR/index#focus=map&map=16/-15.7939/-47.8828', zoom: '17' },
     { id: 'openrailwaymap', url: 'https://www.openrailwaymap.org/?lat=-15.7939&lon=-47.8828&zoom=14', zoom: '14' },
     { id: 'cartesgouvfr', url: 'https://cartes.gouv.fr/explorer-les-cartes/?c=-47.8828%2C-15.7939&z=14', zoom: '14' },
+    { id: 'whodidit', url: 'https://simon04.dev.openstreetmap.org/whodidit/?zoom=14&lat=-15.7939&lon=-47.8828&layers=BTT', zoom: '14' },
+    { id: 'esriwayback', url: 'https://livingatlas.arcgis.com/wayback/#mapCenter=-47.8828%2C-15.7939%2C14&mode=explore&active=26334', zoom: '14' },
     { id: 'sentinelhub', url: 'https://browser.dataspace.copernicus.eu/?zoom=14&lat=-15.7939&lng=-47.8828&themeId=DEFAULT-THEME&datasetId=S2_L2A_CDAS&cloudCoverage=30', zoom: '14' },
     { id: 'sentinelhub', url: 'https://dataspace.copernicus.eu/browser/?zoom=14&lat=-15.7939&lng=-47.8828&datasetId=S2_L2A_CDAS', zoom: '14' },
   ];
@@ -244,6 +246,8 @@ describe(getRelevantSites.name, () => {
     { id: 'panoramax', attributes: zll567_attributes, url: 'https://api.panoramax.xyz/#focus=map&map=4/6/7' },
     { id: 'openrailwaymap', attributes: zll567_attributes, url: 'https://www.openrailwaymap.org/?lat=6&lon=7&zoom=5' },
     { id: 'cartesgouvfr', attributes: zll567_attributes, url: 'https://cartes.gouv.fr/explorer-les-cartes/?c=7,6&z=5' },
+    { id: 'whodidit', attributes: zll567_attributes, url: 'https://simon04.dev.openstreetmap.org/whodidit/?zoom=5&lat=6&lon=7' },
+    { id: 'esriwayback', attributes: zll567_attributes, url: 'https://livingatlas.arcgis.com/wayback/#mapCenter=7,6,5' },
     { id: 'osmchangesetmap', attributes: { changesetId: '83729' }, url: 'https://osmlab.github.io/changeset-map/#83729' },
     { id: 'osmosebyuser', attributes: { userName: 'someone' }, url: 'https://osmose.openstreetmap.fr/en/byuser/someone' },
   ];

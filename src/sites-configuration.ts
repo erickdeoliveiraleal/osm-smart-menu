@@ -251,6 +251,13 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
+  whodidit: {
+    link: "simon04.dev.openstreetmap.org",
+    paramOpts: [
+      { ordered: "/whodidit/", unordered: { zoom: "zoom", lat: "lat", lon: "lon" } },
+    ],
+  },
+
   osmchangeviz: {
     link: "resultmaps.neis-one.org",
     paramOpts: [
@@ -371,6 +378,14 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
     ],
     zoomAdjustment: +1,
+  },
+
+  esriwayback: {
+    link: "livingatlas.arcgis.com",
+    paramOpts: [
+      { ordered: "/wayback/#mapCenter={lon},{lat},{zoom}" },
+      { ordered: "mapCenter={lon}%2C{lat}%2C{zoom}" }, // input-only
+    ],
   },
 
   opentopomap: {
