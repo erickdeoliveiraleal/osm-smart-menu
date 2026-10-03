@@ -585,6 +585,13 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
     ],
   },
+
+  osmosebyuser: {
+    link: "osmose.openstreetmap.fr",
+    paramOpts: [
+      { ordered: "/en/byuser/{userName}" },
+    ],
+  },
 };
 
 function getPermalinkBySelector(selector: string) {
