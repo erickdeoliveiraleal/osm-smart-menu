@@ -124,7 +124,12 @@ export function getRelevantSites(
       }
 
       if (chosenOption) {
-        const path = applyParametersToUrl(chosenOption, attributes);
+        let path = applyParametersToUrl(chosenOption, attributes);
+        const { getDynamicQueryParameters } = site.defaultConfiguration;
+        if (getDynamicQueryParameters) {
+          const query = new URLSearchParams(getDynamicQueryParameters(new Date())).toString();
+          path += (path.includes('?') ? '&' : '?') + query;
+        }
         const protocol = site.defaultConfiguration.httpOnly ? 'http' : 'https';
         return {
           id,
