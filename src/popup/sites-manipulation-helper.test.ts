@@ -257,6 +257,16 @@ describe(getRelevantSites.name, () => {
       expect(getRelevantSites([config], '', attributes)).toEqual([{ id, url }]);
     });
   });
+  test('user name with spaces is not encoded twice from osm.org to osmcha', () => {
+    const osm: SiteConfiguration = { id: 'openstreetmap', isEnabled: true, defaultConfiguration: Sites['openstreetmap'] };
+    const osmcha: SiteConfiguration = { id: 'osmcha', isEnabled: true, defaultConfiguration: Sites['osmcha'] };
+    const { attributes } = pickWinningCandidate([osm], [{ siteId: 'openstreetmap' }], 'https://www.openstreetmap.org/user/Bruno%20Girard')!;
+    expect(attributes).toEqual({ userName: 'Bruno Girard' });
+    expect(getRelevantSites([osmcha], '', attributes)).toEqual([{
+      id: 'osmcha',
+      url: 'https://osmcha.org/?filters=%7B%22users%22:[%7B%22label%22:%22%22,%22value%22:%22Bruno%20Girard%22%7D]%7D',
+    }]);
+  });
 
   describe('zoom', () => {
     test('with zoomAdjustment=1', () => {
