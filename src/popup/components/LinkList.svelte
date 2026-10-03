@@ -1,6 +1,6 @@
 <script lang="ts">
   import { SiteLink } from "../sites-manipulation-helper";
-  import { browser } from "webextension-polyfill-ts";
+  import browser from "webextension-polyfill";
   import { openLink } from "../utils";
   import InfoBox from "./InfoBox.svelte";
 

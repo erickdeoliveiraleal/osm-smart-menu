@@ -1,7 +1,8 @@
 import { DefaultSiteConfiguration, ParamOpt, OsmAttribute } from "../sites-configuration";
 import { ContentScriptOutputMessage } from "../injectable-content-script";
 import { SiteConfiguration } from "../storage/config-handler";
-import escaperegexp from 'lodash.escaperegexp';
+
+const escaperegexp = (s: string) => s.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&');
 
 const naturalNumberRegExp = "[0-9]+";
 const decimalNumberRegExp = "[0-9.-]+";

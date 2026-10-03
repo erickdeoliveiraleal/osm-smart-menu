@@ -1,9 +1,9 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Sites, OsmAttribute } from './sites-configuration';
 
-browser.runtime.onMessage.addListener(async (message: ContentScriptInputMessage): Promise<ContentScriptOutputMessage> =>
-  message.candidateSiteIds.length !== 0 ?
-    message.candidateSiteIds.map(extractData) :
+browser.runtime.onMessage.addListener(async (message: unknown): Promise<ContentScriptOutputMessage> =>
+  (message as ContentScriptInputMessage).candidateSiteIds.length !== 0 ?
+    (message as ContentScriptInputMessage).candidateSiteIds.map(extractData) :
     [ lookForPermalink() ] // helps to get parameters from unknown websites
 );
 

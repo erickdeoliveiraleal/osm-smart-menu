@@ -1,4 +1,4 @@
-import { browser, Runtime } from "webextension-polyfill-ts";
+import browser, { type Runtime } from "webextension-polyfill";
 
 export async function idempotentMigrations(_details: Runtime.OnInstalledDetailsType): Promise<void> {
   await migrateLocalStorageToSyncStorage();

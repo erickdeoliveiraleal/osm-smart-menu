@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { browser } from "webextension-polyfill-ts";
+  import browser from "webextension-polyfill";
   import { KnownError, openLink } from "../utils";
   import InfoBox from "./InfoBox.svelte";
 

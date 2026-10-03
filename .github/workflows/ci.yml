@@ -1,16 +1,24 @@
 name: CI
 
-on: push
+on:
+  push:
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: 16
+        node-version: 22
+        cache: npm
     - run: npm ci
     - run: npm test
     - run: npm run build
+    - run: npm run lint:ext
+    - uses: actions/upload-artifact@v4
+      with:
+        name: osm-smart-menu
+        path: web-ext-artifacts/*.zip

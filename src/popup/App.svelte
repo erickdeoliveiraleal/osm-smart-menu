@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { EventualSitesOrError } from "./main";
-  import { browser } from "webextension-polyfill-ts";
+  import browser from "webextension-polyfill";
   import { KnownError } from "./utils";
   import ConfigurationLink from "./components/ConfigurationLink.svelte";
   import InfoBox from "./components/InfoBox.svelte";

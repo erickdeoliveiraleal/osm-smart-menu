@@ -1,4 +1,4 @@
-import { browser } from "webextension-polyfill-ts";
+import browser from "webextension-polyfill";
 import { UrlPattern } from "./sites-manipulation-helper";
 
 export type CustomUserOption = {

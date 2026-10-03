@@ -1,38 +1,42 @@
 {
   "name": "osm-smart-menu",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "test": "jest",
     "tscompile": "svelte-check && webpack --mode=production",
-    "watch": "npm run tscompile -- --watch",
-    "build": "npm run tscompile && web-ext build --source-dir addon"
+    "watch": "webpack --mode=development --watch",
+    "lint:ext": "web-ext lint --source-dir addon",
+    "build": "npm run tscompile && web-ext build --source-dir addon --overwrite-dest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jgpacker/osm-smart-menu.git"
+    "url": "git+https://github.com/erickdeoliveiraleal/osm-smart-menu.git"
   },
   "bugs": {
-    "url": "https://github.com/jgpacker/osm-smart-menu/issues"
+    "url": "https://github.com/erickdeoliveiraleal/osm-smart-menu/issues"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "dependencies": {
-    "@types/dragula": "^3.7.0",
-    "dragula": "^3.7.2",
-    "@types/lodash.escaperegexp": "^4.1.6",
-    "lodash.escaperegexp": "^4.1.2",
-    "webextension-polyfill-ts": "^0.22.0"
+    "dragula": "^3.7.3",
+    "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
-    "@types/jest": "27",
-    "jest": "27",
-    "svelte": "^3.37.0",
-    "svelte-check": "^1.3.0",
-    "svelte-loader": "^2.13.6",
-    "svelte-preprocess": "^4.6.1",
-    "ts-jest": "27",
-    "ts-loader": "^8.0.3",
-    "typescript": "^4.1.2",
-    "web-ext": "^6.5.0",
-    "webpack": "^5.30.0",
-    "webpack-cli": "^4.6.0"
+    "@types/dragula": "^3.7.5",
+    "@types/jest": "^29.5.14",
+    "@types/webextension-polyfill": "^0.12.6",
+    "jest": "^29.7.0",
+    "svelte": "^4.2.20",
+    "svelte-check": "^3.8.6",
+    "svelte-loader": "^3.2.4",
+    "svelte-preprocess": "^5.1.4",
+    "ts-jest": "^29.4.14",
+    "ts-loader": "^9.6.2",
+    "typescript": "^5.9.3",
+    "web-ext": "^10.7.0",
+    "webpack": "^5.111.1",
+    "webpack-cli": "^7.2.3"
   }
 }

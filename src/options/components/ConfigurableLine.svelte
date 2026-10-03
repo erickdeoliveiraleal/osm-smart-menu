@@ -6,7 +6,7 @@
     deleteUrlPattern,
   } from "../../storage/config-handler";
   import type { SiteConfiguration } from "../../storage/config-handler";
-  import { browser } from "webextension-polyfill-ts";
+  import browser from "webextension-polyfill";
   import { dragHandleClass } from "../utils";
   export let siteConfig: SiteConfiguration;
   export let currentEditableLinkById: string | undefined;
@@ -120,7 +120,7 @@
       {/if}
     </label>
   {:else}
-    <div class="deleted" role="link" on:click={restoreDeletedConfig}>
+    <div class="deleted" role="link" tabindex="0" on:click={restoreDeletedConfig} on:keydown={(e) => e.key === 'Enter' && restoreDeletedConfig()}>
       {browser.i18n.getMessage('config_linkDeleted', getSiteTitle(siteConfig))}
     </div>
   {/if}

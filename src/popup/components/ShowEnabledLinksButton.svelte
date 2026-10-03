@@ -47,7 +47,7 @@
 </script>
 
 <script lang="ts">
-  import { browser } from "webextension-polyfill-ts";
+  import browser from "webextension-polyfill";
   import { getRelevantSites } from "../sites-manipulation-helper";
   import type { SiteLink } from "../sites-manipulation-helper";
   import type { SiteConfiguration } from "../../storage/config-handler";

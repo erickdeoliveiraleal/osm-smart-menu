@@ -1,4 +1,4 @@
-import { browser, Storage } from "webextension-polyfill-ts";
+import browser, { type Storage } from "webextension-polyfill";
 import { Sites, DefaultSiteConfiguration } from "../sites-configuration";
 import { UrlPattern } from "../popup/sites-manipulation-helper";
 
@@ -27,7 +27,7 @@ async function getStoredConfig(siteId: string): Promise<StoredConfiguration> {
   if (typeof storedObject === "object" && storedObject &&
     typeof storedObject[key] === "object" && storedObject[key]
   ) {
-    const s = storedObject[key];
+    const s = storedObject[key] as Partial<StoredConfiguration>;
     const siteConfig: StoredConfiguration = {
       isEnabled: typeof s.isEnabled !== "undefined"? s.isEnabled: getDefaultEnabledAttribute(siteId),
       customName: s.customName,

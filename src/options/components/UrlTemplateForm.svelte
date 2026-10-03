@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { browser } from "webextension-polyfill-ts";
+  import browser from "webextension-polyfill";
   import { UrlPattern } from "../../popup/sites-manipulation-helper";
   import { addNewUrlPattern } from "../../storage/config-handler";
 

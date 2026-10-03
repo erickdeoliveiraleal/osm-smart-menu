@@ -1,5 +1,5 @@
 <script>
-  import { browser } from "webextension-polyfill-ts";
+  import browser from "webextension-polyfill";
 </script>
 
 <style>
@@ -16,6 +16,8 @@
 <span
   role="link"
   style="--i18n-align:{browser.i18n.getMessage('@@bidi_end_edge')}"
-  on:click={() => browser.runtime.openOptionsPage()}>
+  tabindex="0"
+  on:click={() => browser.runtime.openOptionsPage()}
+  on:keydown={(e) => e.key === 'Enter' && browser.runtime.openOptionsPage()}>
   {browser.i18n.getMessage('configurationLink')}
 </span>

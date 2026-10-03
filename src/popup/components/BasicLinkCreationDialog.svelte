@@ -1,7 +1,7 @@
 <script lang="ts">
   import { CustomUserOption } from "../utils";
   import { addNewUrlPattern } from "../../storage/config-handler";
-  import { browser } from "webextension-polyfill-ts";
+  import browser from "webextension-polyfill";
   import InfoBox from "./InfoBox.svelte";
 
   export let customUserOption: CustomUserOption | undefined;

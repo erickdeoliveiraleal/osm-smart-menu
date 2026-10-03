@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+  target: ['web', 'es2020'], // emits `globalThis` instead of `Function('return this')`
   optimization: {
     minimize: false, // ease code review by webextension stores
   },
@@ -36,7 +37,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.svelte', '.mjs'],
-    alias: { svelte: path.resolve('node_modules', 'svelte') },
+    conditionNames: ['svelte', 'browser', 'import'],
     mainFields: ['svelte', 'browser', 'module', 'main'],
   },
 };

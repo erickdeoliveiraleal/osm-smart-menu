@@ -1,9 +1,8 @@
-import { browser } from 'webextension-polyfill-ts'
+import browser from 'webextension-polyfill';
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 import { KnownError, CustomUserOption } from './utils';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites, SiteLink } from './sites-manipulation-helper';
 import { getSitesConfiguration, SiteConfiguration } from '../storage/config-handler';
-// @ts-expect-error
 import App from './App.svelte';
 import { OsmAttribute } from "../sites-configuration";
 
@@ -67,7 +66,7 @@ async function getSitesOrError(): EventualSitesOrError {
 
 async function getDataFromContentScript(tabId: number, candidateSiteIds: string[]): Promise<ContentScriptOutputMessage | undefined> {
   try {
-    await browser.tabs.executeScript(tabId, { file: "/injectable-content-script.js" });
+    await browser.scripting.executeScript({ target: { tabId }, files: ["/injectable-content-script.js"] });
 
     const message: ContentScriptInputMessage = { candidateSiteIds };
     return (await browser.tabs.sendMessage(tabId, message)) as ContentScriptOutputMessage;
