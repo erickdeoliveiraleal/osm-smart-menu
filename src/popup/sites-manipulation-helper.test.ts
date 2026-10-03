@@ -164,6 +164,8 @@ describe(pickWinningCandidate.name, () => {
   const coordinateSitesTests: { id: string; url: string; zoom: string }[] = [
     { id: 'rapideditor', url: 'https://rapideditor.org/edit#map=17.00/-15.7939/-47.8828', zoom: '17.00' },
     { id: 'waymarkedtrailsHiking', url: 'https://hiking.waymarkedtrails.org/#?map=14/-15.7939/-47.8828', zoom: '14' },
+    { id: 'waymarkedtrailsHiking', url: 'https://hiking.waymarkedtrails.org/#route?id=2966504&map=14.0/-15.7939/-47.8828', zoom: '14.0' },
+    { id: 'wikimap', url: 'https://wikimap.toolforge.org/?wp=false&cluster=false&zoom=14&lat=-15.7939&lon=-47.8828', zoom: '14' },
     { id: 'americana', url: 'https://americanamap.org/#map=13/-15.7939/-47.8828', zoom: '14' },
     { id: 'cyclosm', url: 'https://www.cyclosm.org/#map=14/-15.7939/-47.8828/cyclosm', zoom: '14' },
     { id: 'panoramax', url: 'https://api.panoramax.xyz/pt-BR/index#focus=map&map=16/-15.7939/-47.8828', zoom: '17' },
@@ -242,6 +244,8 @@ describe(getRelevantSites.name, () => {
   const siteLinksTests: { id: string; attributes: Partial<Record<OsmAttribute, string>>; url: string }[] = [
     { id: 'rapideditor', attributes: zll567_attributes, url: 'https://rapideditor.org/edit#map=5/6/7' },
     { id: 'waymarkedtrailsHiking', attributes: zll567_attributes, url: 'https://hiking.waymarkedtrails.org/#?map=5/6/7' },
+    { id: 'wikimap', attributes: zll567_attributes, url: 'https://wikimap.toolforge.org/?wp=false&cluster=false&zoom=5&lat=6&lon=7' },
+    { id: 'level0', attributes: { changesetId: '123' }, url: 'http://level0.osmz.ru/?url=changeset/123' },
     { id: 'americana', attributes: zll567_attributes, url: 'https://americanamap.org/#map=4/6/7' },
     { id: 'cyclosm', attributes: zll567_attributes, url: 'https://www.cyclosm.org/#map=5/6/7/cyclosm' },
     { id: 'panoramax', attributes: zll567_attributes, url: 'https://api.panoramax.xyz/#focus=map&map=4/6/7' },
@@ -372,4 +376,19 @@ test('goes from the Google Maps satellite view straight to Bing with the right z
   expect(getRelevantSites([bing], 'googlemaps', attributes)).toEqual([
     { id: 'bingmaps', url: expect.stringContaining('cp=-15.7939~-47.8828&lvl=15') },
   ]);
+});
+
+test('reads positions from Wikipedia and Wikidata pages but never offers them as a link', () => {
+  const wikimedia: SiteConfiguration = { id: 'wikimedia', isEnabled: true, defaultConfiguration: Sites['wikimedia'] };
+  expect(findSiteCandidates([wikimedia], 'https://pt.wikipedia.org/wiki/Bras%C3%ADlia')).toEqual(['wikimedia']);
+  expect(findSiteCandidates([wikimedia], 'https://www.wikidata.org/wiki/Q2844')).toEqual(['wikimedia']);
+  const attributes = { lat: '-15.7939', lon: '-47.8828', zoom: '12' };
+  expect(pickWinningCandidate([wikimedia], [{ siteId: 'wikimedia', additionalAttributes: attributes }], 'https://pt.wikipedia.org/wiki/Bras%C3%ADlia')!.attributes).toEqual(attributes);
+  expect(getRelevantSites([wikimedia], '', attributes)).toEqual([]);
+});
+
+test('opens the Historic Objects map in the browser language', () => {
+  const historicmap: SiteConfiguration = { id: 'historicmap', isEnabled: true, defaultConfiguration: Sites['historicmap'] };
+  const [link] = getRelevantSites([historicmap], '', { zoom: '5', lat: '6', lon: '7' });
+  expect(link.url).toMatch(/^https:\/\/gk\.historic\.place\/historische_objekte\/l\/(de|en|fr|nl|pt-br|cs|es|gl|ro|tr|ru|da|pl|ja|hu|ko|uk)\/\?zoom=5&lat=6&lon=7$/);
 });

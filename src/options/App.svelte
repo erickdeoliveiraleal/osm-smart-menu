@@ -39,7 +39,7 @@
 <input type="search" bind:value={query} placeholder={searchPlaceholder} aria-label={searchPlaceholder} />
 
 <div>
-  {#each sitesConfig as siteConfig (siteConfig.id)}
+  {#each sitesConfig.filter((siteConfig) => !siteConfig.defaultConfiguration?.sourceOnly) as siteConfig (siteConfig.id)}
     <ConfigurableLine bind:currentEditableLinkById {siteConfig} {query} />
   {/each}
 </div>

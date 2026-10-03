@@ -602,5 +602,17 @@
     },
     "config_sourceCode": {
         "message": "Source code"
+    },
+    "site_wikimap": {
+        "message": "WikiMap (Wikimedia Commons)"
+    },
+    "description_wikimap": {
+        "message": "Photos from Wikimedia Commons nearby"
+    },
+    "site_wikimedia": {
+        "message": "Wikipedia and Wikidata"
+    },
+    "description_wikimedia": {
+        "message": "Reads coordinates from articles and items"
     }
 }

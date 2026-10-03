@@ -16,6 +16,8 @@ export type DefaultSiteConfiguration = {
   zoomAdjustment?: number;
   // query parameters that can't be fixed in `paramOpts` because they're computed when the link is built (e.g. dates relative to today)
   getDynamicQueryParameters?: (now: Date) => Record<string, string>;
+  // a website where positions are read but that isn't offered as a link (e.g. Wikipedia)
+  sourceOnly?: boolean;
 }
 
 export type ParamOpt = {
@@ -250,6 +252,26 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
+  wikimap: { // nearby Wikimedia Commons photos
+    link: "wikimap.toolforge.org",
+    category: "imagery",
+    paramOpts: [
+      { ordered: "/?wp=false&cluster=false&zoom={zoom}&lat={lat}&lon={lon}" },
+      { ordered: "/", unordered: { zoom: "zoom", lat: "lat", lon: "lon" } }, // input-only
+    ],
+  },
+
+  wikimedia: { // reads coordinates from Wikipedia articles and Wikidata items
+    link: "www.wikipedia.org",
+    domainRegexp: /(^|\.)(wikipedia|wikidata|wikivoyage)\.org$/,
+    category: "tools",
+    sourceOnly: true,
+    paramOpts: [],
+    extractors: {
+      getAttributesFromPage: (window: Window) => wikimediaCoordinates(window.document) ?? {},
+    },
+  },
+
   overpassapi: {
     link: "overpass-api.de/achavi",
     category: "history",
@@ -436,7 +458,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   },
 
   historicmap: {
-    link: "gk.historic.place/historische_objekte",
+    link: `gk.historic.place/historische_objekte/l/${historicMapLanguage()}`,
     category: "thematic",
     paramOpts: [urlPattern1],
     maxZoom: 19,
@@ -584,6 +606,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/?url=n{nodeId}" },
       { ordered: "/?url=w{wayId}!" },
       { ordered: "/?url=r{relationId}" },
+      { ordered: "/?url=changeset/{changesetId}" },
       { ordered: "/?url=map={zoom}/{lat}/{lon}" },
       //In the future, there might be a permalink for the mini-map: https://github.com/Zverik/Level0/issues/16
     ],
@@ -671,6 +694,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only; also matches route pages (#route?id=…&map=…)
     ],
   },
 
@@ -679,6 +703,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only; also matches route pages (#route?id=…&map=…)
     ],
   },
 
@@ -687,6 +712,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only; also matches route pages (#route?id=…&map=…)
     ],
   },
 
@@ -695,6 +721,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only; also matches route pages (#route?id=…&map=…)
     ],
   },
 
@@ -703,6 +730,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only; also matches route pages (#route?id=…&map=…)
     ],
   },
 
@@ -711,6 +739,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     category: "thematic",
     paramOpts: [
       { ordered: "/#?map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only; also matches route pages (#route?id=…&map=…)
     ],
   },
 
@@ -731,6 +760,74 @@ export function zoomFromGoogleMeters(meters: number, lat: number, windowHeight: 
   if (!(meters > 0) || !(windowHeight > 0) || !Number.isFinite(lat)) return undefined;
   const zoom = Math.log2(156543.03392 * Math.cos(lat * Math.PI / 180) * windowHeight / meters);
   return Math.min(Math.max(Math.round(zoom), 0), 22);
+}
+
+/** Language of the Historic Objects map, from the browser's language. */
+function historicMapLanguage(): string {
+  const supported = ["de", "en", "fr", "nl", "pt-br", "cs", "es", "gl", "ro", "tr", "ru", "da", "pl", "ja", "hu", "ko", "uk"];
+  const language = (globalThis.navigator?.language ?? "en").toLowerCase();
+  if (supported.includes(language)) return language;
+  const base = language.split("-")[0];
+  if (base === "pt") return "pt-br";
+  return supported.includes(base) ? base : "en";
+}
+
+/**
+ * Parses GeoHack "params", used by Wikipedia coordinate links, e.g. "48.8566;2.3522",
+ * "48_51_24_N_2_21_03_E_type:city" or "-15.79_-47.88_region:BR".
+ */
+export function parseGeohackParams(params: string): { lat: number; lon: number; type?: string } | undefined {
+  const [coordinates, ...rest] = params.split(/_(?=[a-z]+:)/i);
+  const type = rest.map((p) => p.match(/^type:([a-z0-9]+)/i)?.[1]).find(Boolean);
+  if (coordinates.includes(";")) {
+    const [lat, lon] = coordinates.split(";").map(Number);
+    return Number.isFinite(lat) && Number.isFinite(lon) ? { lat, lon, type } : undefined;
+  }
+  const parts = coordinates.split("_").filter(Boolean);
+  const latEnd = parts.findIndex((p) => /^[NS]$/i.test(p));
+  if (latEnd === -1) {
+    const [lat, lon] = parts.map(Number);
+    return parts.length === 2 && Number.isFinite(lat) && Number.isFinite(lon) ? { lat, lon, type } : undefined;
+  }
+  const lonEnd = parts.findIndex((p, i) => i > latEnd && /^[EW]$/i.test(p));
+  if (lonEnd === -1) return undefined;
+  const toDecimal = (dms: string[], hemisphere: string) => {
+    const [d = 0, m = 0, sec = 0] = dms.map(Number);
+    const value = d + m / 60 + sec / 3600;
+    return /^[SW]$/i.test(hemisphere) ? -value : value;
+  };
+  const lat = toDecimal(parts.slice(0, latEnd), parts[latEnd]);
+  const lon = toDecimal(parts.slice(latEnd + 1, lonEnd), parts[lonEnd]);
+  return Number.isFinite(lat) && Number.isFinite(lon) ? { lat, lon, type } : undefined;
+}
+
+const zoomByGeohackType: Record<string, number> = {
+  country: 5, state: 7, adm1st: 7, adm2nd: 9, adm3rd: 11, isle: 11, city: 12, mountain: 13, waterbody: 12, river: 12,
+  airport: 14, railwaystation: 16, landmark: 17, edu: 17,
+};
+
+/** Coordinates of the current Wikidata item (property P625) or Wikipedia article. */
+export function wikimediaCoordinates(document: Document): Partial<Record<OsmAttribute, string>> | undefined {
+  // Wikidata: each P625 statement links to Special:Map/{zoom}/{lat}/{lon}; skip deprecated statements
+  const statements = [...document.querySelectorAll("#P625 .wikibase-statementview")];
+  const statement = statements.find((s) => !s.querySelector(".wikibase-rankselector-deprecated")) ?? statements[0];
+  const mapLink = statement?.querySelector<HTMLAnchorElement>('a[href*="Special:Map/"]');
+  const map = mapLink?.href.match(/Special:Map\/([0-9.]+)\/(-?[0-9.]+)\/(-?[0-9.]+)/);
+  if (map) return { zoom: map[1], lat: map[2], lon: map[3] };
+
+  // Wikipedia: the article's coordinates (shown next to the title) are either an interactive map link
+  // with the position in data attributes (e.g. Portuguese Wikipedia) or a link to GeoHack (e.g. English Wikipedia)
+  const mapLinkOfArticle = document.querySelector<HTMLElement>("#coordinates .mw-kartographer-maplink[data-lat][data-lon]");
+  if (mapLinkOfArticle) {
+    const { lat, lon, zoom } = mapLinkOfArticle.dataset;
+    if (lat && lon) return { lat, lon, zoom: zoom || "15" };
+  }
+  const geohackLink = document.querySelector<HTMLAnchorElement>('#coordinates a[href*="geohack"], a[href*="geohack.toolforge.org"]');
+  const params = geohackLink && new URL(geohackLink.href).searchParams.get("params");
+  const position = params ? parseGeohackParams(params) : undefined;
+  if (!position) return undefined;
+  const zoom = (position.type && zoomByGeohackType[position.type.toLowerCase()]) || 15;
+  return { lat: position.lat.toFixed(6), lon: position.lon.toFixed(6), zoom: zoom.toString() };
 }
 
 function getPermalinkBySelector(selector: string) {
