@@ -137,11 +137,11 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
-  sentinelhub: {
-    link: "apps.sentinel-hub.com",
+  sentinelhub: { // Sentinel Hub's EO Browser became the Copernicus Browser; id kept to preserve user settings
+    link: "browser.dataspace.copernicus.eu",
+    domainRegexp: /(^|\.)dataspace\.copernicus\.eu$/, // also matches the older dataspace.copernicus.eu/browser/
     paramOpts: [
-      { ordered: "/sentinel-playground/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
-      { ordered: "/eo-browser/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
+      { ordered: "/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
     ],
   },
 

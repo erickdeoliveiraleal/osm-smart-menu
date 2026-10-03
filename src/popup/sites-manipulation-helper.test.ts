@@ -38,6 +38,11 @@ describe(findSiteCandidates.name, () => {
     };
     expect(findSiteCandidates([siteConfigWithAdjustment], 'http://example.com/map?zoom=1&lat=2&lon=3')).toEqual([]);
   });
+  test('finds the Copernicus Browser on both of its domains', () => {
+    const copernicus: SiteConfiguration = { id: 'sentinelhub', isEnabled: true, defaultConfiguration: Sites['sentinelhub'] };
+    expect(findSiteCandidates([copernicus], 'https://browser.dataspace.copernicus.eu/?zoom=7&lat=51&lng=11')).toEqual(['sentinelhub']);
+    expect(findSiteCandidates([copernicus], 'https://dataspace.copernicus.eu/browser/?zoom=7&lat=51&lng=11')).toEqual(['sentinelhub']);
+  });
   test('get user url template that that includes domain', () => {
     const configUrlPat: SiteConfiguration = {
       id: 'url-pat',
@@ -161,6 +166,8 @@ describe(pickWinningCandidate.name, () => {
     { id: 'americana', url: 'https://americanamap.org/#map=13/-15.7939/-47.8828', zoom: '14' },
     { id: 'cyclosm', url: 'https://www.cyclosm.org/#map=14/-15.7939/-47.8828/cyclosm', zoom: '14' },
     { id: 'panoramax', url: 'https://api.panoramax.xyz/pt-BR/index#focus=map&map=16/-15.7939/-47.8828', zoom: '17' },
+    { id: 'sentinelhub', url: 'https://browser.dataspace.copernicus.eu/?zoom=14&lat=-15.7939&lng=-47.8828&themeId=DEFAULT-THEME&datasetId=S2_L2A_CDAS&cloudCoverage=30', zoom: '14' },
+    { id: 'sentinelhub', url: 'https://dataspace.copernicus.eu/browser/?zoom=14&lat=-15.7939&lng=-47.8828&datasetId=S2_L2A_CDAS', zoom: '14' },
   ];
   coordinateSitesTests.forEach(({ id, url, zoom }) => {
     test(`recognize coordinates from '${id}'`, () => {
@@ -233,6 +240,7 @@ describe(getRelevantSites.name, () => {
     { id: 'americana', attributes: zll567_attributes, url: 'https://americanamap.org/#map=4/6/7' },
     { id: 'cyclosm', attributes: zll567_attributes, url: 'https://www.cyclosm.org/#map=5/6/7/cyclosm' },
     { id: 'panoramax', attributes: zll567_attributes, url: 'https://api.panoramax.xyz/#focus=map&map=4/6/7' },
+    { id: 'sentinelhub', attributes: zll567_attributes, url: 'https://browser.dataspace.copernicus.eu/?lat=6&lng=7&zoom=5' },
     { id: 'osmchangesetmap', attributes: { changesetId: '83729' }, url: 'https://osmlab.github.io/changeset-map/#83729' },
     { id: 'osmosebyuser', attributes: { userName: 'someone' }, url: 'https://osmose.openstreetmap.fr/en/byuser/someone' },
   ];
