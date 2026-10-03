@@ -1,5 +1,6 @@
 <script module lang="ts">
   import { Sites, siteCategories } from "../../sites-configuration";
+  import { normalize } from "../../text";
   import type { SiteCategory } from "../../sites-configuration";
 
   type Category = SiteCategory | "custom";
@@ -20,10 +21,6 @@
     return Sites[siteId]?.category ?? "custom";
   }
 
-  // case- and accent-insensitive, so "historico" finds "Histórico"
-  export function normalize(text: string): string {
-    return text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-  }
 </script>
 
 <script lang="ts">
