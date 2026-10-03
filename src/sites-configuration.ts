@@ -613,12 +613,11 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/load_object?objects=w{wayId}" },
       { ordered: "/load_object?objects=r{relationId}" },
     ],
-    buildPath: ({ lat, lon, zoom }) => {
-      if (!lat || !lon || !zoom) return undefined;
-      const { left, right, top, bottom } = boundingBox(Number(lat), Number(lon), Number(zoom));
-      // downloading a large area fails, so far from the ground only move JOSM's view
-      const command = Number(zoom) >= 16 ? "load_and_zoom" : "zoom";
-      return `/${command}?left=${left}&right=${right}&top=${top}&bottom=${bottom}`;
+    buildPath: ({ lat, lon }) => {
+      if (!lat || !lon) return undefined;
+      // JOSM refuses to download large areas, so it downloads 200 m around the position
+      const { left, right, top, bottom } = boxAround(Number(lat), Number(lon), 200);
+      return `/load_and_zoom?left=${left}&right=${right}&top=${top}&bottom=${bottom}`;
     },
   },
 
@@ -769,11 +768,11 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   },
 };
 
-/** Approximate area shown by a 1280×800 pixel map at this position and zoom. */
-export function boundingBox(lat: number, lon: number, zoom: number): Record<"left" | "right" | "top" | "bottom", string> {
-  const degreesPerPixel = 360 / (256 * 2 ** zoom);
-  const halfWidth = 640 * degreesPerPixel;
-  const halfHeight = 400 * degreesPerPixel * Math.cos(lat * Math.PI / 180);
+/** Square extending `meters` to each side of the position. */
+export function boxAround(lat: number, lon: number, meters: number): Record<"left" | "right" | "top" | "bottom", string> {
+  const metersPerDegree = 111320; // of latitude, and of longitude on the equator
+  const halfHeight = meters / metersPerDegree;
+  const halfWidth = meters / (metersPerDegree * Math.max(Math.cos(lat * Math.PI / 180), 0.01));
   const round = (n: number) => n.toFixed(6);
   return {
     left: round(lon - halfWidth),
