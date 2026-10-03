@@ -1,3 +1,9 @@
+<script lang="ts">
+  import type { Snippet } from "svelte";
+
+  let { children }: { children?: Snippet } = $props();
+</script>
+
 <style>
   #info {
     text-align: center;
@@ -16,5 +22,5 @@
 </style>
 
 <div id="info">
-  <slot />
+  {@render children?.()}
 </div>

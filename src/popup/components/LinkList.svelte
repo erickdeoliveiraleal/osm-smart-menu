@@ -1,10 +1,14 @@
 <script lang="ts">
-  import { SiteLink } from "../sites-manipulation-helper";
+  import type { SiteLink } from "../sites-manipulation-helper";
   import browser from "webextension-polyfill";
   import { openLink } from "../utils";
   import InfoBox from "./InfoBox.svelte";
 
-  export let siteLinks: SiteLink[];
+  interface Props {
+    siteLinks: SiteLink[];
+  }
+
+  let { siteLinks }: Props = $props();
 </script>
 
 <style>
@@ -26,7 +30,7 @@
 </style>
 
 {#each siteLinks as site}
-  <a id={site.id} href={site.url} class="site" on:click|preventDefault={() => openLink(site.url)}>
+  <a id={site.id} href={site.url} class="site" onclick={(e) => { e.preventDefault(); openLink(site.url); }}>
     {site.customName || browser.i18n.getMessage(`site_${site.id}`) || '???'}
   </a>
 {:else}

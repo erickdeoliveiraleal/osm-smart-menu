@@ -1,10 +1,20 @@
 const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   target: ['web', 'es2020'], // emits `globalThis` instead of `Function('return this')`
   optimization: {
-    minimize: false, // ease code review by webextension stores
+    // removes unused code (most of the Svelte runtime) but keeps the output readable for webextension store reviewers
+    minimizer: [new TerserPlugin({
+      extractComments: false,
+      terserOptions: {
+        mangle: false,
+        compress: { defaults: false, dead_code: true, unused: true },
+        format: { beautify: true, comments: false },
+      },
+    })],
   },
+  performance: { hints: false }, // size limits are meant for websites, not for extension files loaded from disk
   devtool: false, // related to optimization.minimize=false and https://bugzilla.mozilla.org/show_bug.cgi?id=1437937
   entry: {
     "injectable-content-script": "./src/injectable-content-script.ts",
@@ -25,12 +35,7 @@ module.exports = {
       },
       {
         test: /\.(html|svelte)$/,
-        use: {
-          loader: 'svelte-loader',
-          options: {
-            preprocess: require('svelte-preprocess')({}), // TypeScript support
-          },
-        },
+        use: 'svelte-loader', // Svelte 5 compiles `<script lang="ts">` natively
         exclude: /node_modules/,
       },
     ],
