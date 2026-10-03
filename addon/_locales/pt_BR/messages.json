@@ -522,5 +522,20 @@
     },
     "config_pattern_invalidTemplate": {
         "message": "Digite um endereço web com pelo menos um parâmetro, como {zoom}, {latitude} ou {longitude}."
+    },
+    "config_pattern_parameters": {
+        "message": "Parâmetros:"
+    },
+    "config_pattern_documentation": {
+        "message": "Documentação e exemplos"
+    },
+    "config_help": {
+        "message": "Ajuda"
+    },
+    "config_reportProblem": {
+        "message": "Relatar um problema"
+    },
+    "config_sourceCode": {
+        "message": "Código-fonte"
     }
 }
