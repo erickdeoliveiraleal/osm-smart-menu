@@ -232,5 +232,23 @@
     },
     "site_openstreetmap": {
         "message": "OpenStreetMap"
+    },
+    "config_backup_title": {
+        "message": "Backup das configurações"
+    },
+    "config_export_button": {
+        "message": "Exportar para arquivo"
+    },
+    "config_import_button": {
+        "message": "Importar de arquivo"
+    },
+    "config_import_confirm": {
+        "message": "Importar substitui todos os seus links atuais, a ordem deles e os links personalizados. Continuar?"
+    },
+    "config_import_invalidFile": {
+        "message": "Este arquivo não é um arquivo de configurações válido do OSM Smart Menu."
+    },
+    "config_import_failed": {
+        "message": "Não foi possível salvar as configurações."
     }
 }

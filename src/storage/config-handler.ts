@@ -1,6 +1,7 @@
 import browser, { type Storage } from "webextension-polyfill";
 import { Sites, DefaultSiteConfiguration } from "../sites-configuration";
 import { UrlPattern } from "../popup/sites-manipulation-helper";
+import { toConfigFile, type ConfigFile, type StoredData } from "./config-file";
 
 export type StoredConfiguration = {
   isEnabled: boolean;
@@ -122,4 +123,18 @@ export async function getSiteConfiguration(siteId: string): Promise<SiteConfigur
     ...storedConfig,
     defaultConfiguration: Sites[siteId],
   };
+}
+
+export async function exportSettings(): Promise<ConfigFile> {
+  return toConfigFile(await storage.get(null));
+}
+
+/** Replaces all stored settings. Writes the new data before removing old keys, so a failed write loses nothing. */
+export async function importSettings(data: StoredData): Promise<void> {
+  const oldKeys = Object.keys(toConfigFile(await storage.get(null)).data);
+  await storage.set(data);
+  const keysToRemove = oldKeys.filter((key) => !(key in data));
+  if (keysToRemove.length > 0) {
+    await storage.remove(keysToRemove);
+  }
 }
