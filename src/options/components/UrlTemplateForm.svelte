@@ -8,6 +8,9 @@
   const urlTemplatePattern: string = /([^{}]+\{(zoom|latitude|longitude|osm_(user_name|tag_key|tag_value|(changeset|node|way|relation)_id))\})+[^{}]*/
     .source; // must contain curly braces; but only with known parameters
 
+  const parametersHelpUrl = "https://wiki.openstreetmap.org/wiki/OSM_Smart_Menu#Advanced_method_to_add_new_links";
+  const parameters = ["zoom", "latitude", "longitude", "osm_user_name", "osm_changeset_id", "osm_node_id", "osm_way_id", "osm_relation_id", "osm_tag_key", "osm_tag_value"];
+
   let linkName = $state("");
   let linkUrlTemplate = $state("");
   let errorMessage = $state("");
@@ -55,6 +58,15 @@
     color: #c00;
   }
 
+  .help {
+    font-size: 0.9em;
+    margin: 0 0 8px;
+  }
+
+  code {
+    white-space: nowrap;
+  }
+
   @media (prefers-color-scheme: dark) {
     .error {
       color: #ff8a8a;
@@ -79,6 +91,11 @@
         placeholder={urlTemplatePlaceholder}
         pattern={urlTemplatePattern} />
     </label>
+    <p class="help">
+      {browser.i18n.getMessage("config_pattern_parameters")}
+      {#each parameters as parameter, i}<code>{"{" + parameter + "}"}</code>{i < parameters.length - 1 ? ", " : ". "}{/each}
+      <a href={parametersHelpUrl} target="_blank" rel="noopener">{browser.i18n.getMessage("config_pattern_documentation")}</a>
+    </p>
     {#if errorMessage}
       <p class="error" role="alert">{errorMessage}</p>
     {/if}

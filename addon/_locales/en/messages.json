@@ -587,5 +587,20 @@
     },
     "config_pattern_invalidTemplate": {
         "message": "Enter a web address with at least one parameter, like {zoom}, {latitude} or {longitude}."
+    },
+    "config_pattern_parameters": {
+        "message": "Parameters:"
+    },
+    "config_pattern_documentation": {
+        "message": "Documentation and examples"
+    },
+    "config_help": {
+        "message": "Help"
+    },
+    "config_reportProblem": {
+        "message": "Report a problem"
+    },
+    "config_sourceCode": {
+        "message": "Source code"
     }
 }
