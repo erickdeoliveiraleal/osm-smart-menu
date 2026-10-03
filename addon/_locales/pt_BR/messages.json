@@ -250,5 +250,271 @@
     },
     "config_import_failed": {
         "message": "Não foi possível salvar as configurações."
+    },
+    "category_edit": {
+        "message": "Editar"
+    },
+    "category_general": {
+        "message": "Mapas gerais"
+    },
+    "category_thematic": {
+        "message": "Mapas temáticos"
+    },
+    "category_imagery": {
+        "message": "Imagens e fotos de rua"
+    },
+    "category_history": {
+        "message": "Histórico e alterações"
+    },
+    "category_quality": {
+        "message": "Qualidade dos dados"
+    },
+    "category_tools": {
+        "message": "Outras ferramentas"
+    },
+    "category_custom": {
+        "message": "Seus links"
+    },
+    "description_openstreetmap": {
+        "message": "O site principal do OpenStreetMap"
+    },
+    "description_rapideditor": {
+        "message": "Editor com sugestões assistidas por IA"
+    },
+    "description_ideditor": {
+        "message": "O editor padrão do OpenStreetMap"
+    },
+    "description_level0": {
+        "message": "Editor de dados do OSM em modo texto"
+    },
+    "description_opencyclemap": {
+        "message": "Mapa de ciclismo com rotas de bicicleta"
+    },
+    "description_cyclosm": {
+        "message": "Mapa detalhado para ciclistas"
+    },
+    "description_hotmap": {
+        "message": "Estilo de mapa humanitário"
+    },
+    "description_openseamap": {
+        "message": "Carta náutica"
+    },
+    "description_opensnowmap": {
+        "message": "Pistas de esqui e esportes de inverno"
+    },
+    "description_sentinelhub": {
+        "message": "Imagens recentes do satélite Sentinel-2"
+    },
+    "description_mapcompare": {
+        "message": "Compare vários mapas lado a lado"
+    },
+    "description_openstreetbrowser": {
+        "message": "Explore pontos de interesse por tema"
+    },
+    "description_osmcha": {
+        "message": "Revise conjuntos de alterações recentes"
+    },
+    "description_pewuosmhistory": {
+        "message": "Histórico de versões de um elemento"
+    },
+    "description_osmchangesetmap": {
+        "message": "Visualizador de alterações no mapa"
+    },
+    "description_osmdeephistory": {
+        "message": "Histórico detalhado de um elemento"
+    },
+    "description_deepdiff": {
+        "message": "Compare versões de um elemento"
+    },
+    "description_osmhistoryviewer": {
+        "message": "Histórico de alterações e elementos"
+    },
+    "description_overpassapi": {
+        "message": "Visualizador de diferenças (Achavi)"
+    },
+    "description_howdidyoucontribute": {
+        "message": "Estatísticas de um mapeador"
+    },
+    "description_whodidit": {
+        "message": "Quem editou esta área recentemente"
+    },
+    "description_osmchangeviz": {
+        "message": "Visualização animada de alterações"
+    },
+    "description_openptmap": {
+        "message": "Mapa de transporte público"
+    },
+    "description_opnvkarte": {
+        "message": "Mapa de transporte público (ÖPNVKarte)"
+    },
+    "description_stamen": {
+        "message": "Estilos de mapa artísticos"
+    },
+    "description_f4map": {
+        "message": "Mapa interativo em 3D"
+    },
+    "description_osmbuildings": {
+        "message": "Edifícios em 3D"
+    },
+    "description_openlevelup": {
+        "message": "Mapa de interiores por andar"
+    },
+    "description_indoorequal": {
+        "message": "Mapa de interiores por andar"
+    },
+    "description_umap": {
+        "message": "Crie seu próprio mapa"
+    },
+    "description_openstreetcam": {
+        "message": "Fotos de rua (KartaView)"
+    },
+    "description_mapillary": {
+        "message": "Fotos de rua"
+    },
+    "description_panoramax": {
+        "message": "Fotos de rua livres e abertas"
+    },
+    "description_esriwayback": {
+        "message": "Imagens de satélite históricas"
+    },
+    "description_opentopomap": {
+        "message": "Mapa topográfico"
+    },
+    "description_historicmap": {
+        "message": "Objetos e lugares históricos"
+    },
+    "description_openrailwaymap": {
+        "message": "Infraestrutura ferroviária"
+    },
+    "description_openinframap": {
+        "message": "Energia, telecomunicações, petróleo e gás"
+    },
+    "description_americana": {
+        "message": "Estilo de mapa com placas de rodovias dos EUA"
+    },
+    "description_cartesgouvfr": {
+        "message": "Mapas oficiais da França (ex-Géoportail)"
+    },
+    "description_bingmaps": {
+        "message": "Mapas e imagens aéreas da Microsoft"
+    },
+    "description_googlemaps": {
+        "message": "Mapas e satélite do Google"
+    },
+    "description_waze": {
+        "message": "Mapa de trânsito ao vivo"
+    },
+    "description_stravaglobal": {
+        "message": "Onde as pessoas correm e pedalam"
+    },
+    "description_osmrelationanalyzer": {
+        "message": "Verifique falhas em uma relação"
+    },
+    "description_osmroutemanager": {
+        "message": "Inspecione relações de rotas"
+    },
+    "description_osmose": {
+        "message": "Erros de dados nesta área"
+    },
+    "description_osmosebyuser": {
+        "message": "Erros de dados por mapeador"
+    },
+    "description_osminspector": {
+        "message": "Visões de qualidade de dados da Geofabrik"
+    },
+    "description_osmchangetiles": {
+        "message": "Onde o mapa mudou recentemente"
+    },
+    "description_missingmaps": {
+        "message": "Contribuições no Missing Maps"
+    },
+    "description_osmlanevisualizer": {
+        "message": "Visualize as faixas das vias"
+    },
+    "description_waymarkedtrailsHiking": {
+        "message": "Trilhas de caminhada"
+    },
+    "description_waymarkedtrailsCycling": {
+        "message": "Rotas de bicicleta"
+    },
+    "description_waymarkedtrailsMtb": {
+        "message": "Rotas de mountain bike"
+    },
+    "description_waymarkedtrailsSkating": {
+        "message": "Rotas de patinação"
+    },
+    "description_waymarkedtrailsRiding": {
+        "message": "Rotas de cavalgada"
+    },
+    "description_waymarkedtrailsSlopes": {
+        "message": "Pistas de esqui e trilhas"
+    },
+    "popup_detectedOn": {
+        "message": "Detectado em $HOST$",
+        "placeholders": {
+            "HOST": {
+                "content": "$1"
+            }
+        }
+    },
+    "popup_searchPlaceholder": {
+        "message": "Buscar ferramentas"
+    },
+    "popup_noSearchResults": {
+        "message": "Nenhuma ferramenta corresponde à busca."
+    },
+    "popup_settings": {
+        "message": "Configurações"
+    },
+    "attribute_user": {
+        "message": "Usuário $NAME$",
+        "placeholders": {
+            "NAME": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_changeset": {
+        "message": "Conjunto de alterações $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_node": {
+        "message": "Nó $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_way": {
+        "message": "Via $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_relation": {
+        "message": "Relação $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_tag": {
+        "message": "Etiqueta $TAG$",
+        "placeholders": {
+            "TAG": {
+                "content": "$1"
+            }
+        }
+    },
+    "site_osmosebyuser": {
+        "message": "Erros do Osmose por usuário"
     }
 }

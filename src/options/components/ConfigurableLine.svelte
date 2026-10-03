@@ -27,6 +27,11 @@
       "???"
     );
   }
+  function getSiteDetails(siteConfig: SiteConfiguration) {
+    const category = browser.i18n.getMessage(`category_${siteConfig.defaultConfiguration?.category ?? "custom"}`);
+    const description = siteConfig.defaultConfiguration ? browser.i18n.getMessage(`description_${siteConfig.id}`) : siteConfig.customPattern?.url;
+    return description ? `${category} · ${description}` : category;
+  }
   async function updateTitle() {
     await updateStoredConfig(siteConfig.id, {
       customName: siteTitle,
@@ -68,6 +73,19 @@
     align-items: center;
   }
 
+  .text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 2px 0;
+  }
+  .description {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   img {
     height: 100%;
     touch-action: none;
@@ -88,7 +106,7 @@
   }
   div.deleted {
     text-align: center;
-    background-color: #f0f0f0;
+    background-color: var(--hover);
     border-radius: 2px;
     cursor: pointer;
     padding: 3px;
@@ -106,7 +124,10 @@
         checked={siteConfig.isEnabled}
         onclick={toggleIsEnabled} />
       {#if siteConfig.id !== currentEditableLinkById}
-        {getSiteTitle(siteConfig)}
+        <span class="text">
+          {getSiteTitle(siteConfig)}
+          <span class="description">{getSiteDetails(siteConfig)}</span>
+        </span>
         <button
           class="edit"
           onclick={(e) => { e.preventDefault(); currentEditableLinkById = siteConfig.id; }}>

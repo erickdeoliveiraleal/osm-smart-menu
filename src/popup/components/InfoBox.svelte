@@ -14,7 +14,7 @@
   }
 
   #info {
-    border-bottom: 1px solid lightgray; /* add "separator" line before other elements */
+    border-bottom: 1px solid var(--border); /* add "separator" line before other elements */
   }
   #info:only-child {
     border-bottom: none;
