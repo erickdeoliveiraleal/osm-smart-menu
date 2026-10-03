@@ -611,5 +611,13 @@
     },
     "description_josm": {
         "message": "Open in JOSM (remote control)"
+    },
+    "remoteControl_noAnswer": {
+        "message": "$NAME$ didn't answer. Check that it's open and that remote control is enabled in its preferences.",
+        "placeholders": {
+            "NAME": {
+                "content": "$1"
+            }
+        }
     }
 }

@@ -531,5 +531,13 @@
     },
     "description_josm": {
         "message": "Abrir no JOSM (controle remoto)"
+    },
+    "remoteControl_noAnswer": {
+        "message": "O $NAME$ não respondeu. Confira se ele está aberto e se o controle remoto está ativado nas preferências.",
+        "placeholders": {
+            "NAME": {
+                "content": "$1"
+            }
+        }
     }
 }

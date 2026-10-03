@@ -18,22 +18,19 @@ export function openLink(url: string): void {
 
 /**
  * Sends a command to a program on the user's computer (e.g. JOSM remote control) without opening a tab.
- * If the program answers with an error, or the request can't be sent (program closed, or blocked by the
- * browser), opens it in a tab instead, which shows the user what went wrong.
+ * The command is sent only once, because a failure may happen after the program already received it.
+ * - accepted: closes the popup
+ * - refused: opens it in a tab, where the program's error message is shown
+ * - no answer (program closed or remote control disabled): returns false so the popup can say so
  */
-export async function sendRemoteControlCommand(url: string): Promise<void> {
+export async function sendRemoteControlCommand(url: string): Promise<boolean> {
+  let response: Response;
   try {
-    const response = await fetch(url);
-    if (response.ok) window.close();
-    else openLink(url);
-    return;
+    response = await fetch(url);
   } catch {
-    // the answer couldn't be read (e.g. no CORS headers): send it without reading the answer
+    return false;
   }
-  try {
-    await fetch(url, { mode: "no-cors" });
-    window.close();
-  } catch {
-    openLink(url);
-  }
+  if (response.ok) window.close();
+  else openLink(url);
+  return true;
 }
