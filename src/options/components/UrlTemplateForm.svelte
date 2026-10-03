@@ -10,9 +10,29 @@
 
   let linkName = $state("");
   let linkUrlTemplate = $state("");
+  let errorMessage = $state("");
+
+  // Firefox doesn't show the browser's validation messages inside the add-ons manager,
+  // so the form is validated here and the error is shown in the page
+  function validate(): string {
+    if (!linkName.trim()) return browser.i18n.getMessage("config_pattern_nameRequired");
+    let isUrl = false;
+    try {
+      isUrl = ["http:", "https:"].includes(new URL(linkUrlTemplate).protocol);
+    } catch {
+      isUrl = false;
+    }
+    if (!isUrl || !new RegExp(`^(?:${urlTemplatePattern})$`).test(linkUrlTemplate)) {
+      return browser.i18n.getMessage("config_pattern_invalidTemplate");
+    }
+    return "";
+  }
 
   async function onFormSubmit(event: Event) {
     event.preventDefault(); // needed to ensure this async function executes completely
+
+    errorMessage = validate();
+    if (errorMessage) return;
 
     const urlPattern: UrlPattern = { tag: "user-v1", url: linkUrlTemplate };
     await addNewUrlPattern(linkName, urlPattern);
@@ -30,14 +50,24 @@
     display: block;
     margin-bottom: 5px;
   }
+
+  .error {
+    color: #c00;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .error {
+      color: #ff8a8a;
+    }
+  }
 </style>
 
-<form action="#" onsubmit={onFormSubmit}>
+<form action="#" novalidate onsubmit={onFormSubmit}>
   <fieldset>
     <legend>{browser.i18n.getMessage('config_pattern_formTitle')}</legend>
     <label>
       {browser.i18n.getMessage('config_pattern_name')}
-      <input type="text" required bind:value={linkName} />
+      <input type="text" required bind:value={linkName} oninput={() => (errorMessage = "")} />
     </label>
     <label>
       {browser.i18n.getMessage('config_pattern_urlTemplate')}
@@ -45,9 +75,13 @@
         type="url"
         required
         bind:value={linkUrlTemplate}
+        oninput={() => (errorMessage = "")}
         placeholder={urlTemplatePlaceholder}
         pattern={urlTemplatePattern} />
     </label>
+    {#if errorMessage}
+      <p class="error" role="alert">{errorMessage}</p>
+    {/if}
     <button type="submit">
       {browser.i18n.getMessage('config_pattern_createOption')}
     </button>

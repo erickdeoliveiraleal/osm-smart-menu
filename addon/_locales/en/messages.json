@@ -581,5 +581,11 @@
                 "content": "$1"
             }
         }
+    },
+    "config_pattern_nameRequired": {
+        "message": "Enter a name for the link."
+    },
+    "config_pattern_invalidTemplate": {
+        "message": "Enter a web address with at least one parameter, like {zoom}, {latitude} or {longitude}."
     }
 }
