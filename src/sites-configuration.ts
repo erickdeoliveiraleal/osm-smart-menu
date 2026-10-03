@@ -179,7 +179,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: 'osmcha.org',
     paramOpts: [
       { ordered: "/changesets/{changesetId}" },
-      { ordered: "/?filters=%7B%22users%22:[%7B%22label%22:%22%22,%22value%22:%22{userName}%22%7D]%7D" },
+      { ordered: "/?filters=%7B%22users%22:[%7B%22label%22:%22{userName}%22,%22value%22:%22{userName}%22%7D]%7D" },
     ],
   },
 
@@ -391,6 +391,13 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
+  openrailwaymap: {
+    link: "www.openrailwaymap.org",
+    paramOpts: [
+      { ordered: "/", unordered: { lat: "lat", lon: "lon", zoom: "zoom" } },
+    ],
+  },
+
   openinframap: {
     link: 'openinframap.org',
     paramOpts: [
@@ -407,6 +414,14 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: 'map={zoom}/{lat}/{lon}' }, // input-only
     ],
     zoomAdjustment: +1,
+  },
+
+  cartesgouvfr: { // successor of the French Geoportail; it removes the parameters from the URL after loading
+    link: "cartes.gouv.fr",
+    paramOpts: [
+      { ordered: "/explorer-les-cartes/?c={lon},{lat}&z={zoom}" },
+      { ordered: "c={lon}%2C{lat}&z={zoom}" }, // input-only
+    ],
   },
 
   bingmaps: {

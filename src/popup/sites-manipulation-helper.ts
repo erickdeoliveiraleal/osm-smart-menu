@@ -71,6 +71,7 @@ export function pickWinningCandidate(
   } else {
     [detectedPattern, extractedAttributes] = detectAndExtractAttributesFromUrl(head.permalink || currentTabUrl);
   }
+  extractedAttributes = decodeValues(extractedAttributes); // they're encoded again when building links
   const allExtractedAttributes = Object.assign(extractedAttributes, head.additionalAttributes);
 
   if (Object.values(allExtractedAttributes).length === 0) {
@@ -82,6 +83,18 @@ export function pickWinningCandidate(
       detectedPattern,
     };
   }
+}
+
+function decodeValues(attributes: Record<string, string>): Record<string, string> {
+  const decoded: Record<string, string> = {};
+  for (const [key, value] of Object.entries(attributes)) {
+    try {
+      decoded[key] = decodeURIComponent(value);
+    } catch { // malformed escape sequence, e.g. a literal '%'
+      decoded[key] = value;
+    }
+  }
+  return decoded;
 }
 
 function withAdjustedZoom(config: SiteConfiguration | undefined, extractedAttributes: Record<string, string>): Record<string, string> {
@@ -330,10 +343,9 @@ function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration): R
       let extractedAttributes: Record<string, string> = {};
       const [orderedParameters] = extractParametersFromParamOpt(config.paramOpts[i]);
   
-      let partialUrl = config.paramOpts[i].ordered;
-      partialUrl = partialUrl.replace(/([.?^$])/g, '\\$1'); // escape regex special characters TODO: add more and review location in code
+      let partialUrl = escaperegexp(config.paramOpts[i].ordered);
       orderedParameters.forEach(function (parameter) {
-        partialUrl = partialUrl.replace(`{${parameter}}`, `(${InfoRegExp[parameter]})`);
+        partialUrl = partialUrl.replace(`\\{${parameter}\\}`, `(${InfoRegExp[parameter]})`);
       });
       const orderedPartRegExp = new RegExp(partialUrl);
   
@@ -402,7 +414,7 @@ function applyParametersToUrl(option: ParamOpt, retrievedAttributes: Record<stri
 
   Object.keys(retrievedAttributes).forEach(function (key) {
     encodedAttributes[key] = encodeURIComponent(retrievedAttributes[key]);
-    url = url.replace('{' + key + '}', encodedAttributes[key]);
+    url = url.split('{' + key + '}').join(encodedAttributes[key]);
   });
 
   if (option.unordered) {
