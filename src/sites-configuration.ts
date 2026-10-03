@@ -16,6 +16,10 @@ export type DefaultSiteConfiguration = {
   zoomAdjustment?: number;
   // query parameters that can't be fixed in `paramOpts` because they're computed when the link is built (e.g. dates relative to today)
   getDynamicQueryParameters?: (now: Date) => Record<string, string>;
+  // builds the path when none of `paramOpts` can be used, for URLs that need computed values (e.g. a bounding box)
+  buildPath?: (attributes: Partial<Record<OsmAttribute, string>>) => string | undefined;
+  // the link is a command to a program on the user's computer (JOSM remote control), sent without opening a tab
+  remoteControl?: boolean;
   // a website where positions are read but that isn't offered as a link (e.g. Wikipedia)
   sourceOnly?: boolean;
 }
@@ -252,6 +256,22 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
+  overpassturbo: { // the site doesn't keep the position in its URL, so it's a link target only
+    link: "overpass-turbo.eu",
+    category: "tools",
+    paramOpts: [
+      { ordered: "/?C={lat};{lon};{zoom}" },
+    ],
+  },
+
+  geohack: {
+    link: "geohack.toolforge.org",
+    category: "tools",
+    paramOpts: [
+      { ordered: "/geohack.php?params={lat};{lon}" },
+    ],
+  },
+
   wikimap: { // nearby Wikimedia Commons photos
     link: "wikimap.toolforge.org",
     category: "imagery",
@@ -419,6 +439,14 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     zoomAdjustment: +1,
   },
 
+  googlestreetview: { // opens the nearest panorama
+    link: "www.google.com",
+    category: "imagery",
+    paramOpts: [
+      { ordered: "/maps/@?api=1&map_action=pano&viewpoint={lat},{lon}" },
+    ],
+  },
+
   mapillary: {
     link: "www.mapillary.com",
     category: "imagery",
@@ -501,6 +529,14 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     paramOpts: [
       { ordered: "/explorer-les-cartes/?c={lon},{lat}&z={zoom}" },
       { ordered: "c={lon}%2C{lat}&z={zoom}" }, // input-only
+    ],
+  },
+
+  openrouteservice: {
+    link: "maps.openrouteservice.org",
+    category: "general",
+    paramOpts: [
+      { ordered: "/#/place/@{lon},{lat},{zoom}" },
     ],
   },
 
@@ -596,6 +632,24 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "#{zoom}/{lon}/{lat}" }, // input-only
     ],
     disabledByDefault: true,
+  },
+
+  josm: {
+    link: "127.0.0.1:8111",
+    category: "edit",
+    httpOnly: true,
+    remoteControl: true,
+    paramOpts: [ // downloads only the element, not the whole visible area
+      { ordered: "/load_object?objects=n{nodeId}" },
+      { ordered: "/load_object?objects=w{wayId}" },
+      { ordered: "/load_object?objects=r{relationId}" },
+    ],
+    buildPath: ({ lat, lon }) => {
+      if (!lat || !lon) return undefined;
+      // JOSM refuses to download large areas, so it downloads 200 m around the position
+      const { left, right, top, bottom } = boxAround(Number(lat), Number(lon), 200);
+      return `/load_and_zoom?left=${left}&right=${right}&top=${top}&bottom=${bottom}`;
+    },
   },
 
   level0: {
@@ -751,6 +805,20 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 };
+
+/** Square extending `meters` to each side of the position. */
+export function boxAround(lat: number, lon: number, meters: number): Record<"left" | "right" | "top" | "bottom", string> {
+  const metersPerDegree = 111320; // of latitude, and of longitude on the equator
+  const halfHeight = meters / metersPerDegree;
+  const halfWidth = meters / (metersPerDegree * Math.max(Math.cos(lat * Math.PI / 180), 0.01));
+  const round = (n: number) => n.toFixed(6);
+  return {
+    left: round(lon - halfWidth),
+    right: round(lon + halfWidth),
+    top: round(Math.min(lat + halfHeight, 85)),
+    bottom: round(Math.max(lat - halfHeight, -85)),
+  };
+}
 
 /**
  * Google Maps writes "@lat,lon,{meters}m" for the satellite view: the ground distance covered by the window height.

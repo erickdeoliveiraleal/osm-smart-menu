@@ -26,7 +26,7 @@
 <script lang="ts">
   import type { SiteLink } from "../sites-manipulation-helper";
   import browser from "webextension-polyfill";
-  import { openLink } from "../utils";
+  import { openLink, sendRemoteControlCommand } from "../utils";
   import Icon from "./Icon.svelte";
   import InfoBox from "./InfoBox.svelte";
 
@@ -36,6 +36,13 @@
   }
 
   let { siteLinks, query = "" }: Props = $props();
+
+  let unreachable: string | undefined = $state(); // id of the remote control link that got no answer
+
+  async function sendCommand(siteId: string, url: string) {
+    unreachable = undefined;
+    if (!(await sendRemoteControlCommand(url))) unreachable = siteId;
+  }
 
   const items = $derived(siteLinks.map((site) => ({
     site,
@@ -97,6 +104,11 @@
   .name {
     line-height: 1.3;
   }
+  .warning {
+    margin: 0 12px 6px 50px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
   .description {
     color: var(--text-secondary);
     font-size: 12px;
@@ -108,13 +120,20 @@
   <section class="category-{group.category}">
     <h2><Icon name={categoryIcons[group.category]} size={13} />{browser.i18n.getMessage(`category_${group.category}`)}</h2>
     {#each group.items as item (item.site.id)}
-      <a id={item.site.id} href={item.site.url} title={item.site.url} onclick={(e) => { e.preventDefault(); openLink(item.site.url); }}>
+      <a id={item.site.id} href={item.site.url} title={item.site.url} onclick={(e) => {
+          e.preventDefault();
+          if (Sites[item.site.id]?.remoteControl) sendCommand(item.site.id, item.site.url);
+          else openLink(item.site.url);
+        }}>
         <span class="badge"><Icon name={categoryIcons[group.category]} size={16} /></span>
         <span class="text">
           <span class="name">{item.name}</span>
           {#if item.description}<div class="description">{item.description}</div>{/if}
         </span>
       </a>
+      {#if unreachable === item.site.id}
+        <p class="warning" role="alert">{browser.i18n.getMessage("remoteControl_noAnswer", item.name)}</p>
+      {/if}
     {/each}
   </section>
 {:else}

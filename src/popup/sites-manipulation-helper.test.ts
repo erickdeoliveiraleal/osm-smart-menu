@@ -1,6 +1,6 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
 import { SiteConfiguration } from "../storage/config-handler";
-import { Sites, OsmAttribute, zoomFromGoogleMeters } from "../sites-configuration";
+import { Sites, OsmAttribute, zoomFromGoogleMeters, boxAround } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {
   id: 'test1',
@@ -253,6 +253,12 @@ describe(getRelevantSites.name, () => {
     { id: 'cartesgouvfr', attributes: zll567_attributes, url: 'https://cartes.gouv.fr/explorer-les-cartes/?c=7,6&z=5' },
     { id: 'whodidit', attributes: zll567_attributes, url: 'https://simon04.dev.openstreetmap.org/whodidit/?zoom=5&lat=6&lon=7' },
     { id: 'esriwayback', attributes: zll567_attributes, url: 'https://livingatlas.arcgis.com/wayback/#mapCenter=7,6,5' },
+    { id: 'overpassturbo', attributes: zll567_attributes, url: 'https://overpass-turbo.eu/?C=6;7;5' },
+    { id: 'geohack', attributes: zll567_attributes, url: 'https://geohack.toolforge.org/geohack.php?params=6;7' },
+    { id: 'googlestreetview', attributes: zll567_attributes, url: 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=6,7' },
+    { id: 'openrouteservice', attributes: zll567_attributes, url: 'https://maps.openrouteservice.org/#/place/@7,6,5' },
+    { id: 'josm', attributes: { nodeId: '123', ...zll567_attributes }, url: 'http://127.0.0.1:8111/load_object?objects=n123' },
+    { id: 'josm', attributes: { relationId: '45' }, url: 'http://127.0.0.1:8111/load_object?objects=r45' },
     { id: 'osmchangesetmap', attributes: { changesetId: '83729' }, url: 'https://osmlab.github.io/changeset-map/#83729' },
     { id: 'osmosebyuser', attributes: { userName: 'someone' }, url: 'https://osmose.openstreetmap.fr/en/byuser/someone' },
   ];
@@ -345,6 +351,33 @@ describe(getRelevantSites.name, () => {
       };
       expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
     });
+  });
+});
+
+describe('JOSM with coordinates', () => {
+  const josm: SiteConfiguration = { id: 'josm', isEnabled: true, defaultConfiguration: Sites['josm'] };
+  test('downloads 200 m around the position, whatever the zoom', () => {
+    const { left, right, top, bottom } = boxAround(-15.7939, -47.8828, 200);
+    const expected = `http://127.0.0.1:8111/load_and_zoom?left=${left}&right=${right}&top=${top}&bottom=${bottom}`;
+    expect(getRelevantSites([josm], '', { zoom: '17', lat: '-15.7939', lon: '-47.8828' })).toEqual([{ id: 'josm', url: expected }]);
+    expect(getRelevantSites([josm], '', { zoom: '8', lat: '-15.7939', lon: '-47.8828' })).toEqual([{ id: 'josm', url: expected }]);
+    expect(getRelevantSites([josm], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([{ id: 'josm', url: expected }]);
+  });
+});
+
+describe(boxAround.name, () => {
+  const distance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    // haversine, in meters
+    const r = 6371008.8, rad = Math.PI / 180;
+    const a = Math.sin((lat2 - lat1) * rad / 2) ** 2 + Math.cos(lat1 * rad) * Math.cos(lat2 * rad) * Math.sin((lon2 - lon1) * rad / 2) ** 2;
+    return 2 * r * Math.asin(Math.sqrt(a));
+  };
+  test.each([[0, 10], [-15.7939, -47.8828], [60.17, 24.94]])('reaches 200 m to each side at %s, %s', (lat, lon) => {
+    const box = boxAround(lat, lon, 200);
+    expect(distance(lat, lon, Number(box.top), lon)).toBeCloseTo(200, -1);
+    expect(distance(lat, lon, Number(box.bottom), lon)).toBeCloseTo(200, -1);
+    expect(distance(lat, lon, lat, Number(box.right))).toBeCloseTo(200, -1);
+    expect(distance(lat, lon, lat, Number(box.left))).toBeCloseTo(200, -1);
   });
 });
 

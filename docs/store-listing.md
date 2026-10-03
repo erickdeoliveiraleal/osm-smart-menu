@@ -16,7 +16,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 >
 > Click the toolbar button on a map page and the extension reads what you're looking at — the coordinates and zoom, or the OpenStreetMap node, way, relation, changeset, user or tag — and lists tools that can open that same thing:
 >
-> • Editors: iD, Rapid, Level0
+> • Editors: iD, Rapid, JOSM, Level0
 > • Thematic maps: CyclOSM, OpenTopoMap, OpenRailwayMap, Waymarked Trails, OpenSeaMap and more
 > • Imagery and street photos: Copernicus (Sentinel-2), Esri Wayback, Mapillary, Panoramax, KartaView
 > • History and changes: OSMCha, OSM Deep History, WHODIDIT, How did you contribute
@@ -27,7 +27,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 >
 > You can search the list, turn tools on or off, reorder them, add your own links with URL templates, and export your settings to another browser.
 >
-> Privacy: the extension only reads the current tab when you click its button. It collects no data and makes no network requests of its own.
+> Privacy: the extension only reads the current tab when you click its button. It collects no data, and its only network request of its own is the command sent to JOSM on your computer when you choose the JOSM link.
 >
 > Open source (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Originally created by João Guilherme Packer.
@@ -58,7 +58,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 >
 > Clique no botão da extensão numa página de mapa e ela identifica o que você está vendo — coordenadas e zoom, ou o nó, via, relação, conjunto de alterações, usuário ou etiqueta do OpenStreetMap — e lista ferramentas que abrem esse mesmo conteúdo:
 >
-> • Editores: iD, Rapid, Level0
+> • Editores: iD, Rapid, JOSM, Level0
 > • Mapas temáticos: CyclOSM, OpenTopoMap, OpenRailwayMap, Waymarked Trails, OpenSeaMap e outros
 > • Imagens e fotos de rua: Copernicus (Sentinel-2), Esri Wayback, Mapillary, Panoramax, KartaView
 > • Histórico e alterações: OSMCha, OSM Deep History, WHODIDIT, How did you contribute
@@ -69,7 +69,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 >
 > Você pode buscar na lista, ativar ou desativar ferramentas, reordená-las, criar seus próprios links com modelos de URL e exportar suas configurações para outro navegador.
 >
-> Privacidade: a extensão só lê a aba atual quando você clica no botão dela. Ela não coleta dados e não faz requisições de rede próprias.
+> Privacidade: a extensão só lê a aba atual quando você clica no botão dela. Ela não coleta dados, e a única requisição de rede própria é o comando enviado ao JOSM no seu computador quando você escolhe o link do JOSM.
 >
 > Código aberto (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Criada originalmente por João Guilherme Packer.
