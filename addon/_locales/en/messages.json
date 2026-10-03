@@ -258,5 +258,23 @@
     },
     "site_stravaglobal": {
       "message": "Strava Global Heatmap"
+    },
+    "site_waymarkedtrailsHiking": {
+        "message": "Waymarked Trails: Hiking"
+    },
+    "site_waymarkedtrailsCycling": {
+        "message": "Waymarked Trails: Cycling"
+    },
+    "site_waymarkedtrailsMtb": {
+        "message": "Waymarked Trails: MTB"
+    },
+    "site_waymarkedtrailsSkating": {
+        "message": "Waymarked Trails: Inline Skating"
+    },
+    "site_waymarkedtrailsRiding": {
+        "message": "Waymarked Trails: Horse Riding"
+    },
+    "site_waymarkedtrailsSlopes": {
+        "message": "Waymarked Trails: Winter Sport Slopes"
     }
 }
