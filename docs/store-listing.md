@@ -8,22 +8,24 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 **Summary** (Chrome Web Store: max. 132 characters):
 
-> Open the place you're looking at in other OpenStreetMap maps, editors and analysis tools — at the same position and zoom.
+> Open the place you’re looking at in other maps: OpenStreetMap, Google Maps, Bing, satellite imagery, street photos and OSM editors.
 
 **Description:**
 
-> OSM Smart Menu helps OpenStreetMap contributors move between the community's maps and tools without losing their place.
+> Looking at a place on Google Maps and want to see it on OpenStreetMap, in recent satellite imagery or in street photos? OSM Smart Menu takes you there in one click, at the same position and zoom.
 >
-> Click the toolbar button on a map page and the extension reads what you're looking at — the coordinates and zoom, or the OpenStreetMap node, way, relation, changeset, user or tag — and lists tools that can open that same thing:
+> Click the toolbar button on a map page — or on a Wikipedia article with coordinates — and the extension reads where you are and lists the maps and tools that can open that same place:
 >
-> • Editors: iD, Rapid, JOSM, Level0
+> • General maps: OpenStreetMap, Google Maps, Bing Maps, openrouteservice, cartes.gouv.fr
+> • Imagery and street photos: Copernicus (Sentinel-2), Esri Wayback, Google Street View, Mapillary, Panoramax, Wikimedia Commons photos
 > • Thematic maps: CyclOSM, OpenTopoMap, OpenRailwayMap, Waymarked Trails, OpenSeaMap and more
-> • Imagery and street photos: Copernicus (Sentinel-2), Esri Wayback, Mapillary, Panoramax, KartaView
+>
+> For OpenStreetMap contributors, it goes further: it also understands OSM nodes, ways, relations, changesets, users and tags, and opens them in the community's tools:
+>
+> • Editors: iD, Rapid, JOSM (via remote control), Level0
 > • History and changes: OSMCha, OSM Deep History, WHODIDIT, How did you contribute
 > • Data quality: Osmose, OSM Inspector, Relation Analyzer
-> • General maps: OpenStreetMap, Google Maps, Bing Maps, cartes.gouv.fr
->
-> It works in both directions: from Google Maps or Bing you can jump straight to OpenStreetMap or an editor at the same place.
+> • Data tools: Overpass Turbo, GeoHack
 >
 > You can search the list, turn tools on or off, reorder them, add your own links with URL templates, and export your settings to another browser.
 >
@@ -32,7 +34,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 > Open source (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Originally created by João Guilherme Packer.
 >
-> The OpenStreetMap logo is a trademark of the OpenStreetMap Foundation, and is used with their permission. This project is not endorsed by or affiliated with the OpenStreetMap Foundation.
+> The OpenStreetMap logo is a trademark of the OpenStreetMap Foundation. This project is not endorsed by or affiliated with the OpenStreetMap Foundation.
 
 **Category:** Chrome Web Store: Tools · AMO: Search Tools, Other
 
@@ -44,28 +46,30 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 **Single purpose** (Chrome Web Store):
 
-> Open the map position or OpenStreetMap element shown in the current tab in other OpenStreetMap-related websites.
+> Open the map position or OpenStreetMap element shown in the current tab in other map websites and OpenStreetMap tools.
 
 ## Português (Brasil)
 
 **Resumo:**
 
-> Abra o lugar que você está vendo em outros mapas, editores e ferramentas do OpenStreetMap, na mesma posição e zoom.
+> Abra o lugar que você está vendo em outros mapas: OpenStreetMap, Google Maps, Bing, satélite, fotos de rua e editores do OSM.
 
 **Descrição:**
 
-> O OSM Smart Menu ajuda quem contribui com o OpenStreetMap a passar entre os mapas e ferramentas da comunidade sem perder o lugar.
+> Está vendo um lugar no Google Maps e quer vê-lo no OpenStreetMap, em imagens de satélite recentes ou em fotos de rua? O OSM Smart Menu leva você até lá com um clique, na mesma posição e zoom.
 >
-> Clique no botão da extensão numa página de mapa e ela identifica o que você está vendo — coordenadas e zoom, ou o nó, via, relação, conjunto de alterações, usuário ou etiqueta do OpenStreetMap — e lista ferramentas que abrem esse mesmo conteúdo:
+> Clique no botão da extensão numa página de mapa — ou num artigo da Wikipedia com coordenadas — e ela identifica onde você está e lista os mapas e ferramentas que abrem esse mesmo lugar:
 >
-> • Editores: iD, Rapid, JOSM, Level0
+> • Mapas gerais: OpenStreetMap, Google Maps, Bing Maps, openrouteservice, cartes.gouv.fr
+> • Imagens e fotos de rua: Copernicus (Sentinel-2), Esri Wayback, Google Street View, Mapillary, Panoramax, fotos do Wikimedia Commons
 > • Mapas temáticos: CyclOSM, OpenTopoMap, OpenRailwayMap, Waymarked Trails, OpenSeaMap e outros
-> • Imagens e fotos de rua: Copernicus (Sentinel-2), Esri Wayback, Mapillary, Panoramax, KartaView
+>
+> Para quem contribui com o OpenStreetMap, ela vai além: também entende nós, vias, relações, conjuntos de alterações, usuários e etiquetas do OSM e os abre nas ferramentas da comunidade:
+>
+> • Editores: iD, Rapid, JOSM (por controle remoto), Level0
 > • Histórico e alterações: OSMCha, OSM Deep History, WHODIDIT, How did you contribute
 > • Qualidade dos dados: Osmose, OSM Inspector, Relation Analyzer
-> • Mapas gerais: OpenStreetMap, Google Maps, Bing Maps, cartes.gouv.fr
->
-> Funciona nos dois sentidos: do Google Maps ou do Bing você vai direto para o OpenStreetMap ou para um editor no mesmo lugar.
+> • Ferramentas de dados: Overpass Turbo, GeoHack
 >
 > Você pode buscar na lista, ativar ou desativar ferramentas, reordená-las, criar seus próprios links com modelos de URL e exportar suas configurações para outro navegador.
 >

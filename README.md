@@ -1,5 +1,7 @@
 # OSM Smart Menu
-A browser extension to help the OpenStreetMap community easily access different maps and tools to analyze OSM data.
+A browser extension that opens the place you’re looking at in other maps — OpenStreetMap, Google Maps, Bing, satellite imagery, street photos — at the same position and zoom.
+
+For OpenStreetMap contributors it goes further: it understands OSM nodes, ways, relations, changesets, users and tags, and opens them in editors (iD, Rapid, JOSM) and in history and data quality tools (OSMCha, Osmose, Overpass Turbo…).
 
 It works on Google Chrome (and other Chromium-based browsers) and Mozilla Firefox (Desktop and Android).
 

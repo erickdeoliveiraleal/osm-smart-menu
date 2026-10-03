@@ -14,9 +14,9 @@ const harness = (q) => "http://localhost:5199/harness?" + new URLSearchParams(q)
 const shots = [
   {
     file: "screenshot-1-map.png",
-    title: "Open the same place in other OSM tools",
-    subtitle: "On a map, the extension detects the position and zoom and lists editors, thematic maps, imagery and history tools that open right there.",
-    frame: harness({ page: "popup", locale: "en", tab: "https://www.openstreetmap.org/#map=17/48.8584/2.2945" }),
+    title: "Open the same place in other maps",
+    subtitle: "On OpenStreetMap, Google Maps, Bing or a Wikipedia article, the extension detects the position and lists maps, satellite imagery, street photos and OSM editors that open right there.",
+    frame: harness({ page: "popup", locale: "en", tab: "https://www.google.com/maps/@48.8584,2.2945,17z" }),
   },
   {
     file: "screenshot-2-user.png",
