@@ -102,6 +102,14 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
+  cyclosm: {
+    link: "www.cyclosm.org",
+    paramOpts: [
+      { ordered: "/#map={zoom}/{lat}/{lon}/cyclosm" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
+    ],
+  },
+
   hotmap: {
     link: "map.hotosm.org",
     httpOnly: true,
@@ -341,6 +349,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "www.mapillary.com",
     paramOpts: [
       { ordered: "/app", unordered: { zoom: "z", lat: "lat", lon: "lng" } }
+    ],
+    zoomAdjustment: +1,
+  },
+
+  panoramax: {
+    link: "api.panoramax.xyz",
+    paramOpts: [
+      { ordered: "/#focus=map&map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
     ],
     zoomAdjustment: +1,
   },

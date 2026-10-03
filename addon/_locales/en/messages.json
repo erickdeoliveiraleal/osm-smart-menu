@@ -285,5 +285,11 @@
     },
     "site_osmosebyuser": {
         "message": "Osmose errors by user"
+    },
+    "site_cyclosm": {
+        "message": "CyclOSM"
+    },
+    "site_panoramax": {
+        "message": "Panoramax"
     }
 }
