@@ -619,5 +619,38 @@
                 "content": "$1"
             }
         }
+    },
+    "config_pattern_nameRequired": {
+        "message": "Enter a name for the link."
+    },
+    "config_pattern_invalidTemplate": {
+        "message": "Enter a web address with at least one parameter, like {zoom}, {latitude} or {longitude}."
+    },
+    "config_pattern_parameters": {
+        "message": "Parameters:"
+    },
+    "config_pattern_documentation": {
+        "message": "Documentation and examples"
+    },
+    "config_help": {
+        "message": "Help"
+    },
+    "config_reportProblem": {
+        "message": "Report a problem"
+    },
+    "config_sourceCode": {
+        "message": "Source code"
+    },
+    "site_wikimap": {
+        "message": "WikiMap (Wikimedia Commons)"
+    },
+    "description_wikimap": {
+        "message": "Photos from Wikimedia Commons nearby"
+    },
+    "site_wikimedia": {
+        "message": "Wikipedia and Wikidata"
+    },
+    "description_wikimedia": {
+        "message": "Reads coordinates from articles and items"
     }
 }

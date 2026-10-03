@@ -1,6 +1,6 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
 import { SiteConfiguration } from "../storage/config-handler";
-import { Sites, OsmAttribute, boxAround } from "../sites-configuration";
+import { Sites, OsmAttribute, zoomFromGoogleMeters, boxAround } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {
   id: 'test1',
@@ -164,6 +164,8 @@ describe(pickWinningCandidate.name, () => {
   const coordinateSitesTests: { id: string; url: string; zoom: string }[] = [
     { id: 'rapideditor', url: 'https://rapideditor.org/edit#map=17.00/-15.7939/-47.8828', zoom: '17.00' },
     { id: 'waymarkedtrailsHiking', url: 'https://hiking.waymarkedtrails.org/#?map=14/-15.7939/-47.8828', zoom: '14' },
+    { id: 'waymarkedtrailsHiking', url: 'https://hiking.waymarkedtrails.org/#route?id=2966504&map=14.0/-15.7939/-47.8828', zoom: '14.0' },
+    { id: 'wikimap', url: 'https://wikimap.toolforge.org/?wp=false&cluster=false&zoom=14&lat=-15.7939&lon=-47.8828', zoom: '14' },
     { id: 'americana', url: 'https://americanamap.org/#map=13/-15.7939/-47.8828', zoom: '14' },
     { id: 'cyclosm', url: 'https://www.cyclosm.org/#map=14/-15.7939/-47.8828/cyclosm', zoom: '14' },
     { id: 'panoramax', url: 'https://api.panoramax.xyz/pt-BR/index#focus=map&map=16/-15.7939/-47.8828', zoom: '17' },
@@ -242,6 +244,8 @@ describe(getRelevantSites.name, () => {
   const siteLinksTests: { id: string; attributes: Partial<Record<OsmAttribute, string>>; url: string }[] = [
     { id: 'rapideditor', attributes: zll567_attributes, url: 'https://rapideditor.org/edit#map=5/6/7' },
     { id: 'waymarkedtrailsHiking', attributes: zll567_attributes, url: 'https://hiking.waymarkedtrails.org/#?map=5/6/7' },
+    { id: 'wikimap', attributes: zll567_attributes, url: 'https://wikimap.toolforge.org/?wp=false&cluster=false&zoom=5&lat=6&lon=7' },
+    { id: 'level0', attributes: { changesetId: '123' }, url: 'http://level0.osmz.ru/?url=changeset/123' },
     { id: 'americana', attributes: zll567_attributes, url: 'https://americanamap.org/#map=4/6/7' },
     { id: 'cyclosm', attributes: zll567_attributes, url: 'https://www.cyclosm.org/#map=5/6/7/cyclosm' },
     { id: 'panoramax', attributes: zll567_attributes, url: 'https://api.panoramax.xyz/#focus=map&map=4/6/7' },
@@ -375,4 +379,49 @@ describe(boxAround.name, () => {
     expect(distance(lat, lon, lat, Number(box.right))).toBeCloseTo(200, -1);
     expect(distance(lat, lon, lat, Number(box.left))).toBeCloseTo(200, -1);
   });
+});
+
+describe(zoomFromGoogleMeters.name, () => {
+  // values written by Google Maps (satellite view) for a known zoom, measured in a real browser
+  test.each([
+    [3665, 0, 768, 15],
+    [3527, -15.7939, 768, 15],
+    [112849, -15.7939, 768, 10],
+    [441, -15.7939, 768, 18],
+    [1823, 60.17, 768, 15],
+    [2386, 0, 500, 15],
+  ])('%sm at latitude %s with a %spx window is zoom %s', (meters, lat, height, zoom) => {
+    expect(zoomFromGoogleMeters(meters, lat, height)).toBe(zoom);
+  });
+  test('rejects invalid values', () => {
+    expect(zoomFromGoogleMeters(0, 0, 768)).toBeUndefined();
+    expect(zoomFromGoogleMeters(100, 0, 0)).toBeUndefined();
+  });
+});
+
+test('goes from the Google Maps satellite view straight to Bing with the right zoom', () => {
+  const google: SiteConfiguration = { id: 'googlemaps', isEnabled: true, defaultConfiguration: Sites['googlemaps'] };
+  const bing: SiteConfiguration = { id: 'bingmaps', isEnabled: true, defaultConfiguration: Sites['bingmaps'] };
+  const url = 'https://www.google.com/maps/@-15.7939,-47.8828,3527m/data=!3m1!1e3?entry=ttu';
+  // the zoom comes from the content script, which knows the window height
+  const { attributes } = pickWinningCandidate([google], [{ siteId: 'googlemaps', additionalAttributes: { zoom: '15' } }], url)!;
+  expect(attributes).toEqual({ lat: '-15.7939', lon: '-47.8828', zoom: '15' });
+  expect(getRelevantSites([bing], 'googlemaps', attributes)).toEqual([
+    { id: 'bingmaps', url: expect.stringContaining('cp=-15.7939~-47.8828&lvl=15') },
+  ]);
+});
+
+test('reads positions from Wikipedia and Wikidata pages but never offers them as a link', () => {
+  const wikimedia: SiteConfiguration = { id: 'wikimedia', isEnabled: true, defaultConfiguration: Sites['wikimedia'] };
+  expect(findSiteCandidates([wikimedia], 'https://pt.wikipedia.org/wiki/Bras%C3%ADlia')).toEqual(['wikimedia']);
+  expect(findSiteCandidates([wikimedia], 'https://www.wikidata.org/wiki/Q2844')).toEqual(['wikimedia']);
+  const attributes = { lat: '-15.7939', lon: '-47.8828', zoom: '12' };
+  expect(pickWinningCandidate([wikimedia], [{ siteId: 'wikimedia', additionalAttributes: attributes }], 'https://pt.wikipedia.org/wiki/Bras%C3%ADlia')!.attributes).toEqual(attributes);
+  expect(getRelevantSites([wikimedia], '', attributes)).toEqual([]);
+});
+
+test('opens the Historic Objects map in the browser language', () => {
+  const historicmap: SiteConfiguration = { id: 'historicmap', isEnabled: true, defaultConfiguration: Sites['historicmap'] };
+  const [link] = getRelevantSites([historicmap], '', { zoom: '5', lat: '6', lon: '7' });
+  expect(link.url).toMatch(/^https:\/\/gk\.historic\.place\/historische_objekte\/l\/(de|en|fr|nl|pt-br|cs|es|gl|ro|tr|ru|da|pl|ja|hu|ko|uk)\/\?zoom=5&lat=6&lon=7$/);
 });

@@ -29,12 +29,17 @@
   p {
     color: var(--text-secondary);
   }
+  footer {
+    margin-top: 16px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+  }
 </style>
 
 <input type="search" bind:value={query} placeholder={searchPlaceholder} aria-label={searchPlaceholder} />
 
 <div>
-  {#each sitesConfig as siteConfig (siteConfig.id)}
+  {#each sitesConfig.filter((siteConfig) => !siteConfig.defaultConfiguration?.sourceOnly) as siteConfig (siteConfig.id)}
     <ConfigurableLine bind:currentEditableLinkById {siteConfig} {query} />
   {/each}
 </div>
@@ -43,3 +48,10 @@
 {/if}
 <UrlTemplateForm />
 <SettingsBackup />
+<footer>
+  <a href="https://wiki.openstreetmap.org/wiki/OSM_Smart_Menu" target="_blank" rel="noopener">{browser.i18n.getMessage("config_help")}</a>
+  ·
+  <a href="https://github.com/erickdeoliveiraleal/osm-smart-menu/issues" target="_blank" rel="noopener">{browser.i18n.getMessage("config_reportProblem")}</a>
+  ·
+  <a href="https://github.com/erickdeoliveiraleal/osm-smart-menu" target="_blank" rel="noopener">{browser.i18n.getMessage("config_sourceCode")}</a>
+</footer>

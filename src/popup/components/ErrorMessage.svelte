@@ -10,14 +10,14 @@
   let { error }: Props = $props();
 
   const linkPlaceholder = "__LINK__";
-  const linkText = "erickdeoliveiraleal/osm-smart-menu";
+  const linkText = "GitHub";
   const errorMessage = $derived.by(() => {
     const text = browser.i18n.getMessage(`error_${error}`, linkPlaceholder);
     const [firstPart, lastPart] = text.split(linkPlaceholder);
     return {
       firstPart,
       linkText,
-      linkHref: `https://github.com/${linkText}/blob/master/README.md#osm-smart-menu`,
+      linkHref: "https://github.com/erickdeoliveiraleal/osm-smart-menu/issues",
       lastPart,
     };
   });

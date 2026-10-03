@@ -2,7 +2,7 @@
   import type { EventualSitesOrError } from "./main";
   import type { SiteLink } from "./sites-manipulation-helper";
   import browser from "webextension-polyfill";
-  import { KnownError } from "./utils";
+  import { KnownError, openLink } from "./utils";
   import ContextHeader from "./components/ContextHeader.svelte";
   import Icon from "./components/Icon.svelte";
   import InfoBox from "./components/InfoBox.svelte";
@@ -55,6 +55,17 @@
   main {
     padding-bottom: 4px;
   }
+  footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 12px;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 11px;
+  }
+  footer a {
+    color: inherit;
+  }
 </style>
 
 {#await eventualSitesOrError}
@@ -90,4 +101,12 @@
       <ShowEnabledLinksButton config={sitesListOrError.config} onshow={(links) => (otherLinks = links)} />
     {/if}
   {/if}
+{:catch}
+  <!-- without this, any unexpected error would leave the popup on "Loading" forever -->
+  <ContextHeader />
+  <ErrorMessage error={KnownError.NO_ACCESS} />
 {/await}
+<footer>
+  <span>{browser.i18n.getMessage("extensionName")} {browser.runtime.getManifest().version}</span>
+  <a href="https://wiki.openstreetmap.org/wiki/OSM_Smart_Menu" onclick={(e) => { e.preventDefault(); openLink(e.currentTarget.href); }}>{browser.i18n.getMessage("config_help")}</a>
+</footer>

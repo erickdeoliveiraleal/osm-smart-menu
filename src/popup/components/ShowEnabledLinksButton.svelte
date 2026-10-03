@@ -76,6 +76,7 @@
     config
       .filter((linkConfig) =>
         linkConfig.isEnabled &&
+        !linkConfig.defaultConfiguration?.sourceOnly &&
         currentlyShownLinks.every((link) => link.id !== linkConfig.id))
       .map((linkConfig) => linkConfig.id)
   ));
