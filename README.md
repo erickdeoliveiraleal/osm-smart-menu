@@ -1,11 +1,11 @@
 # OSM Smart Menu
 A browser extension to help the OpenStreetMap community easily access different maps and tools to analyze OSM data.
 
-It's officially supported for [Google Chrome][chrome-desktop] and Mozilla Firefox (for [Desktop][firefox-desktop] and [Android][firefox-android]).
+It works on Google Chrome (and other Chromium-based browsers) and Mozilla Firefox (Desktop and Android).
 
-[chrome-desktop]: https://chrome.google.com/webstore/detail/osm-smart-menu/icipmdhgbkejfideagkhdebiaeohfijk
-[firefox-desktop]: https://addons.mozilla.org/firefox/addon/osm-smart-menu/
-[firefox-android]: https://addons.mozilla.org/android/addon/osm-smart-menu/
+> This is a community-maintained continuation of [jgpacker/osm-smart-menu](https://github.com/jgpacker/osm-smart-menu),
+> created by João Guilherme Packer, which is no longer maintained.
+> It has been migrated to Manifest V3 so it keeps working on current browsers.
 
 User documentation is available at the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/OSM_Smart_Menu).
 
@@ -14,7 +14,7 @@ User documentation is available at the [OpenStreetMap Wiki](https://wiki.openstr
 > See technical details in [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ### Report bugs or request features
-You can [open a new issue](https://github.com/jgpacker/osm-smart-menu/issues/new)  in Github or [send a message](https://www.openstreetmap.org/message/new/jgpacker) to the author's OpenStreetMap account.
+[Open a new issue](https://github.com/erickdeoliveiraleal/osm-smart-menu/issues/new) on GitHub.
 
 ### Translations
-Translate this extensions' interface using [Weblate](https://hosted.weblate.org/engage/osm-smart-menu/).
+Translate this extension's interface using [Weblate](https://hosted.weblate.org/engage/osm-smart-menu/).
