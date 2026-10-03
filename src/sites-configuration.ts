@@ -365,6 +365,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     zoomAdjustment: +1,
   },
 
+  americana: {
+    link: 'americanamap.org',
+    paramOpts: [
+      { ordered: '/#map={zoom}/{lat}/{lon}' },
+      { ordered: 'map={zoom}/{lat}/{lon}' }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
   bingmaps: {
     link: "www.bing.com",
     paramOpts: [
