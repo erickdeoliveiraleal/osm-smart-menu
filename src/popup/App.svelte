@@ -90,4 +90,8 @@
       <ShowEnabledLinksButton config={sitesListOrError.config} onshow={(links) => (otherLinks = links)} />
     {/if}
   {/if}
+{:catch}
+  <!-- without this, any unexpected error would leave the popup on "Loading" forever -->
+  <ContextHeader />
+  <ErrorMessage error={KnownError.NO_ACCESS} />
 {/await}

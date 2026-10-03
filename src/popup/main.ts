@@ -22,7 +22,10 @@ export type EventualSitesOrError = Promise<
     }
 >;
 
-const eventualSitesOrError: EventualSitesOrError = getSitesOrError();
+const eventualSitesOrError: EventualSitesOrError = getSitesOrError().catch((e) => {
+  logUnexpectedError(e);
+  throw e; // shown as an error by the popup
+});
 mount(App, {
   target: document.body,
   props: { eventualSitesOrError },
@@ -72,7 +75,9 @@ async function getDataFromContentScript(tabId: number, candidateSiteIds: string[
     await browser.scripting.executeScript({ target: { tabId }, files: ["/injectable-content-script.js"] });
 
     const message: ContentScriptInputMessage = { candidateSiteIds };
-    return (await browser.tabs.sendMessage(tabId, message)) as ContentScriptOutputMessage;
+    const timeout = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("The page did not answer in time")), 5000));
+    return (await Promise.race([browser.tabs.sendMessage(tabId, message), timeout])) as ContentScriptOutputMessage;
   } catch (e) {
     logUnexpectedError(e);
     return;
