@@ -343,10 +343,9 @@ function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration): R
       let extractedAttributes: Record<string, string> = {};
       const [orderedParameters] = extractParametersFromParamOpt(config.paramOpts[i]);
   
-      let partialUrl = config.paramOpts[i].ordered;
-      partialUrl = partialUrl.replace(/([.?^$])/g, '\\$1'); // escape regex special characters TODO: add more and review location in code
+      let partialUrl = escaperegexp(config.paramOpts[i].ordered);
       orderedParameters.forEach(function (parameter) {
-        partialUrl = partialUrl.replace(`{${parameter}}`, `(${InfoRegExp[parameter]})`);
+        partialUrl = partialUrl.replace(`\\{${parameter}\\}`, `(${InfoRegExp[parameter]})`);
       });
       const orderedPartRegExp = new RegExp(partialUrl);
   
@@ -415,7 +414,7 @@ function applyParametersToUrl(option: ParamOpt, retrievedAttributes: Record<stri
 
   Object.keys(retrievedAttributes).forEach(function (key) {
     encodedAttributes[key] = encodeURIComponent(retrievedAttributes[key]);
-    url = url.replace('{' + key + '}', encodedAttributes[key]);
+    url = url.split('{' + key + '}').join(encodedAttributes[key]);
   });
 
   if (option.unordered) {
