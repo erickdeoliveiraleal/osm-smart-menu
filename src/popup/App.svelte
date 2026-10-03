@@ -9,7 +9,11 @@
   import ErrorMessage from "./components/ErrorMessage.svelte";
   import ShowEnabledLinksButton from "./components/ShowEnabledLinksButton.svelte";
 
-  export let eventualSitesOrError: EventualSitesOrError;
+  interface Props {
+    eventualSitesOrError: EventualSitesOrError;
+  }
+
+  let { eventualSitesOrError }: Props = $props();
 </script>
 
 <style>

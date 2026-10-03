@@ -17,7 +17,7 @@
   role="link"
   style="--i18n-align:{browser.i18n.getMessage('@@bidi_end_edge')}"
   tabindex="0"
-  on:click={() => browser.runtime.openOptionsPage()}
-  on:keydown={(e) => e.key === 'Enter' && browser.runtime.openOptionsPage()}>
+  onclick={() => browser.runtime.openOptionsPage()}
+  onkeydown={(e) => e.key === 'Enter' && browser.runtime.openOptionsPage()}>
   {browser.i18n.getMessage('configurationLink')}
 </span>

@@ -6,13 +6,18 @@
     deleteUrlPattern,
   } from "../../storage/config-handler";
   import type { SiteConfiguration } from "../../storage/config-handler";
+  import { untrack } from "svelte";
   import browser from "webextension-polyfill";
   import { dragHandleClass } from "../utils";
-  export let siteConfig: SiteConfiguration;
-  export let currentEditableLinkById: string | undefined;
+  interface Props {
+    siteConfig: SiteConfiguration;
+    currentEditableLinkById: string | undefined;
+  }
 
-  let deleted = false;
-  let siteTitle = getSiteTitle(siteConfig);
+  let { siteConfig, currentEditableLinkById = $bindable() }: Props = $props();
+
+  let deleted = $state(false);
+  let siteTitle = $state(untrack(() => getSiteTitle(siteConfig))); // initial value of an editable field
 
   const dragHandleSrc = "/icons/drag_indicator-black.svg"; // from https://fonts.gstatic.com/s/i/materialicons/drag_indicator/v5/24px.svg?download=true
   function getSiteTitle(siteConfig: SiteConfiguration) {
@@ -99,28 +104,28 @@
         type="checkbox"
         name={siteConfig.id}
         checked={siteConfig.isEnabled}
-        on:click={toggleIsEnabled} />
+        onclick={toggleIsEnabled} />
       {#if siteConfig.id !== currentEditableLinkById}
         {getSiteTitle(siteConfig)}
         <button
           class="edit"
-          on:click|preventDefault={() => (currentEditableLinkById = siteConfig.id)}>
+          onclick={(e) => { e.preventDefault(); currentEditableLinkById = siteConfig.id; }}>
           {browser.i18n.getMessage('config_editButton')}
         </button>
       {:else}
         <input type="text" bind:value={siteTitle} />
-        <button class="save" on:click={updateTitle}>
+        <button class="save" onclick={updateTitle}>
           {browser.i18n.getMessage('config_saveButton')}
         </button>
         {#if siteConfig.customPattern}
-          <button class="delete" on:click={deleteConfig}>
+          <button class="delete" onclick={deleteConfig}>
             {browser.i18n.getMessage('config_deleteButton')}
           </button>
         {/if}
       {/if}
     </label>
   {:else}
-    <div class="deleted" role="link" tabindex="0" on:click={restoreDeletedConfig} on:keydown={(e) => e.key === 'Enter' && restoreDeletedConfig()}>
+    <div class="deleted" role="link" tabindex="0" onclick={restoreDeletedConfig} onkeydown={(e) => e.key === 'Enter' && restoreDeletedConfig()}>
       {browser.i18n.getMessage('config_linkDeleted', getSiteTitle(siteConfig))}
     </div>
   {/if}

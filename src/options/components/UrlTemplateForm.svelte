@@ -1,6 +1,6 @@
 <script lang="ts">
   import browser from "webextension-polyfill";
-  import { UrlPattern } from "../../popup/sites-manipulation-helper";
+  import type { UrlPattern } from "../../popup/sites-manipulation-helper";
   import { addNewUrlPattern } from "../../storage/config-handler";
 
   const urlTemplatePlaceholder =
@@ -8,8 +8,8 @@
   const urlTemplatePattern: string = /([^{}]+\{(zoom|latitude|longitude|osm_(user_name|tag_key|tag_value|(changeset|node|way|relation)_id))\})+[^{}]*/
     .source; // must contain curly braces; but only with known parameters
 
-  let linkName = "";
-  let linkUrlTemplate = "";
+  let linkName = $state("");
+  let linkUrlTemplate = $state("");
 
   async function onFormSubmit(event: Event) {
     event.preventDefault(); // needed to ensure this async function executes completely
@@ -32,7 +32,7 @@
   }
 </style>
 
-<form action="#" on:submit={onFormSubmit}>
+<form action="#" onsubmit={onFormSubmit}>
   <fieldset>
     <legend>{browser.i18n.getMessage('config_pattern_formTitle')}</legend>
     <label>

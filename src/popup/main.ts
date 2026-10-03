@@ -3,6 +3,7 @@ import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../inject
 import { KnownError, CustomUserOption } from './utils';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites, SiteLink } from './sites-manipulation-helper';
 import { getSitesConfiguration, SiteConfiguration } from '../storage/config-handler';
+import { mount } from "svelte";
 import App from './App.svelte';
 import { OsmAttribute } from "../sites-configuration";
 
@@ -21,7 +22,7 @@ export type EventualSitesOrError = Promise<
 >;
 
 const eventualSitesOrError: EventualSitesOrError = getSitesOrError();
-new App({
+mount(App, {
   target: document.body,
   props: { eventualSitesOrError },
 });
