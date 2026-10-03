@@ -10,7 +10,7 @@
   let { error }: Props = $props();
 
   const linkPlaceholder = "__LINK__";
-  const linkText = "jgpacker/osm-smart-menu";
+  const linkText = "erickdeoliveiraleal/osm-smart-menu";
   const errorMessage = $derived.by(() => {
     const text = browser.i18n.getMessage(`error_${error}`, linkPlaceholder);
     const [firstPart, lastPart] = text.split(linkPlaceholder);
