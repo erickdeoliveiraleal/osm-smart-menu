@@ -14,7 +14,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 > OSM Smart Menu lets you look at the same place on a different map without searching for it again.
 >
-> Click the toolbar button on a map page and the extension reads the position and zoom shown in the current tab. It then lists other maps and tools that can open that exact spot, so you can switch with one click between general maps, thematic maps (for cycling, hiking, public transport or railways), satellite imagery and street-level photos. It also works on Wikipedia articles that have coordinates.
+> Click the toolbar button on a map page and the extension reads the position and zoom shown in the current tab. It then lists other maps and tools that can open that exact spot, so you can switch with one click between general maps like Google Maps or Waze, thematic maps (for cycling, hiking, public transport or railways), satellite imagery and street-level photos. It works from Google Maps too, and on Wikipedia articles that have coordinates.
 >
 > For OpenStreetMap contributors, it also recognizes map elements, changesets and user profiles, and opens them in editors and in tools for reviewing edits and checking data quality. It can send the current area or element straight to the JOSM desktop editor.
 >
@@ -49,7 +49,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 > O OSM Smart Menu permite ver o mesmo lugar em outro mapa sem precisar procurá-lo de novo.
 >
-> Clique no botão da extensão numa página de mapa e ela identifica a posição e o zoom mostrados na aba atual. Depois lista outros mapas e ferramentas que abrem exatamente aquele ponto, para você alternar com um clique entre mapas gerais, mapas temáticos (de ciclismo, trilhas, transporte público ou ferrovias), imagens de satélite e fotos de rua. Também funciona em artigos da Wikipedia que têm coordenadas.
+> Clique no botão da extensão numa página de mapa e ela identifica a posição e o zoom mostrados na aba atual. Depois lista outros mapas e ferramentas que abrem exatamente aquele ponto, para você alternar com um clique entre mapas gerais como o Google Maps ou o Waze, mapas temáticos (de ciclismo, trilhas, transporte público ou ferrovias), imagens de satélite e fotos de rua. Também funciona a partir do Google Maps e em artigos da Wikipedia que têm coordenadas.
 >
 > Para quem contribui com o OpenStreetMap, ela também reconhece elementos do mapa, conjuntos de alterações e perfis de usuário, e os abre em editores e em ferramentas para revisar edições e verificar a qualidade dos dados. Também envia a área ou o elemento atual direto para o editor JOSM.
 >
