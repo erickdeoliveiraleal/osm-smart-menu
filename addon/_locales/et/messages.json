@@ -46,7 +46,7 @@
         }
     },
     "extensionDescription": {
-        "message": "Open the place you’re looking at in other maps: OpenStreetMap, Google Maps, Bing, satellite imagery, street photos and OSM editors."
+        "message": "Open the place you’re looking at in other maps, satellite imagery and street photos, at the same position and zoom."
     },
     "newOptionDetected_notice": {
         "message": "Kas sa soovid lisada selle veebisaidi menüüsse?",

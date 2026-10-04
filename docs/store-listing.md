@@ -8,7 +8,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 **Summary** (Chrome Web Store: max. 132 characters):
 
-> Open the place you’re looking at in other maps: OpenStreetMap, Google Maps, Bing, satellite imagery, street photos and OSM editors.
+> Open the place you’re looking at in other maps, satellite imagery and street photos, at the same position and zoom.
 
 **Description:**
 
@@ -43,7 +43,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 **Resumo:**
 
-> Abra o lugar que você está vendo em outros mapas: OpenStreetMap, Google Maps, Bing, satélite, fotos de rua e editores do OSM.
+> Abra o lugar que você está vendo em outros mapas, imagens de satélite e fotos de rua, na mesma posição e zoom.
 
 **Descrição:**
 

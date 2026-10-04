@@ -6,7 +6,7 @@
         "message": "OSMenu"
     },
     "extensionDescription": {
-        "message": "Open the place you’re looking at in other maps: OpenStreetMap, Google Maps, Bing, satellite imagery, street photos and OSM editors."
+        "message": "Open the place you’re looking at in other maps, satellite imagery and street photos, at the same position and zoom."
     },
     "site_f4map": {
         "message": "F4 Map (3D демо)"

@@ -15,13 +15,13 @@ const shots = [
   {
     file: "screenshot-1-map.png",
     title: "Open the same place in other maps",
-    subtitle: "On OpenStreetMap, Google Maps, Bing or a Wikipedia article, the extension detects the position and lists maps, satellite imagery, street photos and OSM editors that open right there.",
+    subtitle: "On a map page or a Wikipedia article, the extension detects the position and lists maps, satellite imagery, street photos and editors that open right there.",
     frame: harness({ page: "popup", locale: "en", tab: "https://www.openstreetmap.org/#map=17/48.8584/2.2945" }),
   },
   {
     file: "screenshot-2-user.png",
     title: "Works with OSM elements and users",
-    subtitle: "On a node, way, relation, changeset or user page, it offers the tools that understand it, like OSMCha, Osmose or JOSM.",
+    subtitle: "On a node, way, relation, changeset or user page, it offers the editors and the history and data quality tools that understand it.",
     frame: harness({ page: "popup", locale: "en", tab: "https://www.openstreetmap.org/user/Bruno%20Girard" }),
     height: 520,
   },
@@ -42,7 +42,7 @@ const shots = [
   {
     file: "screenshot-5-google.png",
     title: "Works from Google Maps too",
-    subtitle: "Jump from Google Maps or Bing straight to OpenStreetMap, an editor or recent satellite imagery, at the same place.",
+    subtitle: "Jump from Google Maps straight to OpenStreetMap, an editor or recent satellite imagery, at the same place.",
     frame: harness({ page: "popup", locale: "en", tab: "https://www.google.com/maps/@48.8584,2.2945,17z" }),
   },
 ];
