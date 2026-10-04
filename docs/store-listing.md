@@ -12,24 +12,15 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 **Description:**
 
-> Looking at a place on Google Maps and want to see it on OpenStreetMap, in recent satellite imagery or in street photos? OSM Smart Menu takes you there in one click, at the same position and zoom.
+> OSM Smart Menu lets you look at the same place on a different map without searching for it again.
 >
-> Click the toolbar button on a map page — or on a Wikipedia article with coordinates — and the extension reads where you are and lists the maps and tools that can open that same place:
+> Click the toolbar button on a map page and the extension reads the position and zoom shown in the current tab. It then lists other maps and tools that can open that exact spot, so you can switch with one click between general maps, thematic maps (for cycling, hiking, public transport or railways), satellite imagery and street-level photos. It also works on Wikipedia articles that have coordinates.
 >
-> • General maps: OpenStreetMap, Google Maps, Bing Maps, openrouteservice, cartes.gouv.fr
-> • Imagery and street photos: Copernicus (Sentinel-2), Esri Wayback, Google Street View, Mapillary, Panoramax, Wikimedia Commons photos
-> • Thematic maps: CyclOSM, OpenTopoMap, OpenRailwayMap, Waymarked Trails, OpenSeaMap and more
+> For OpenStreetMap contributors, it also recognizes map elements, changesets and user profiles, and opens them in editors and in tools for reviewing edits and checking data quality. It can send the current area or element straight to the JOSM desktop editor.
 >
-> For OpenStreetMap contributors, it goes further: it also understands OSM nodes, ways, relations, changesets, users and tags, and opens them in the community's tools:
+> Tools are grouped by category, each with a one-line description, and the list can be searched. In the settings you can turn tools on or off, change their order, add your own links with URL templates, and export your settings to another browser.
 >
-> • Editors: iD, Rapid, JOSM (via remote control), Level0
-> • History and changes: OSMCha, OSM Deep History, WHODIDIT, How did you contribute
-> • Data quality: Osmose, OSM Inspector, Relation Analyzer
-> • Data tools: Overpass Turbo, GeoHack
->
-> You can search the list, turn tools on or off, reorder them, add your own links with URL templates, and export your settings to another browser.
->
-> Privacy: the extension only reads the current tab when you click its button. It collects no data, and its only network request of its own is the command sent to JOSM on your computer when you choose the JOSM link.
+> Privacy: the extension only reads the current tab when you click its button and collects no personal data. Its only network request of its own is the command sent to JOSM on your own computer, when you choose that option.
 >
 > Open source (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Originally created by João Guilherme Packer.
@@ -56,24 +47,15 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 
 **Descrição:**
 
-> Está vendo um lugar no Google Maps e quer vê-lo no OpenStreetMap, em imagens de satélite recentes ou em fotos de rua? O OSM Smart Menu leva você até lá com um clique, na mesma posição e zoom.
+> O OSM Smart Menu permite ver o mesmo lugar em outro mapa sem precisar procurá-lo de novo.
 >
-> Clique no botão da extensão numa página de mapa — ou num artigo da Wikipedia com coordenadas — e ela identifica onde você está e lista os mapas e ferramentas que abrem esse mesmo lugar:
+> Clique no botão da extensão numa página de mapa e ela identifica a posição e o zoom mostrados na aba atual. Depois lista outros mapas e ferramentas que abrem exatamente aquele ponto, para você alternar com um clique entre mapas gerais, mapas temáticos (de ciclismo, trilhas, transporte público ou ferrovias), imagens de satélite e fotos de rua. Também funciona em artigos da Wikipedia que têm coordenadas.
 >
-> • Mapas gerais: OpenStreetMap, Google Maps, Bing Maps, openrouteservice, cartes.gouv.fr
-> • Imagens e fotos de rua: Copernicus (Sentinel-2), Esri Wayback, Google Street View, Mapillary, Panoramax, fotos do Wikimedia Commons
-> • Mapas temáticos: CyclOSM, OpenTopoMap, OpenRailwayMap, Waymarked Trails, OpenSeaMap e outros
+> Para quem contribui com o OpenStreetMap, ela também reconhece elementos do mapa, conjuntos de alterações e perfis de usuário, e os abre em editores e em ferramentas para revisar edições e verificar a qualidade dos dados. Também envia a área ou o elemento atual direto para o editor JOSM.
 >
-> Para quem contribui com o OpenStreetMap, ela vai além: também entende nós, vias, relações, conjuntos de alterações, usuários e etiquetas do OSM e os abre nas ferramentas da comunidade:
+> As ferramentas ficam agrupadas por categoria, cada uma com uma descrição curta, e a lista tem busca. Nas configurações você pode ativar ou desativar ferramentas, mudar a ordem, criar seus próprios links com modelos de URL e exportar suas configurações para outro navegador.
 >
-> • Editores: iD, Rapid, JOSM (por controle remoto), Level0
-> • Histórico e alterações: OSMCha, OSM Deep History, WHODIDIT, How did you contribute
-> • Qualidade dos dados: Osmose, OSM Inspector, Relation Analyzer
-> • Ferramentas de dados: Overpass Turbo, GeoHack
->
-> Você pode buscar na lista, ativar ou desativar ferramentas, reordená-las, criar seus próprios links com modelos de URL e exportar suas configurações para outro navegador.
->
-> Privacidade: a extensão só lê a aba atual quando você clica no botão dela. Ela não coleta dados, e a única requisição de rede própria é o comando enviado ao JOSM no seu computador quando você escolhe o link do JOSM.
+> Privacidade: a extensão só lê a aba atual quando você clica no botão dela e não coleta dados pessoais. A única requisição de rede própria é o comando enviado ao JOSM no seu computador, quando você escolhe essa opção.
 >
 > Código aberto (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Criada originalmente por João Guilherme Packer.
