@@ -569,5 +569,29 @@
     },
     "description_wikimedia": {
         "message": "Lê coordenadas de artigos e itens"
+    },
+    "site_openskimap": {
+        "message": "OpenSkiMap"
+    },
+    "description_openskimap": {
+        "message": "Pistas de esqui e teleféricos"
+    },
+    "site_opentrailmap": {
+        "message": "OpenTrailMap"
+    },
+    "description_opentrailmap": {
+        "message": "Trilhas e acesso a trilhas nos Estados Unidos"
+    },
+    "site_openwhatevermap": {
+        "message": "OpenWhateverMap"
+    },
+    "description_openwhatevermap": {
+        "message": "Mosaico de estilos de mapa do OpenStreetMap"
+    },
+    "site_overture": {
+        "message": "Overture Maps Explorer"
+    },
+    "description_overture": {
+        "message": "Dados da Overture Maps (lugares, edifícios…), para comparar com o OpenStreetMap"
     }
 }
