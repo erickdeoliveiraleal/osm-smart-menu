@@ -676,5 +676,11 @@
     },
     "description_overture": {
         "message": "Overture Maps data (places, buildings…), to compare with OpenStreetMap"
+    },
+    "site_osm411": {
+        "message": "OSM 411"
+    },
+    "description_osm411": {
+        "message": "Directory of OpenStreetMap projects, opened at this place"
     }
 }

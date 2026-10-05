@@ -264,6 +264,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 
+  osm411: { // directory of OpenStreetMap projects; its zoom is passed unchanged to osm.org links
+    link: "osm411.org",
+    category: "tools",
+    paramOpts: [
+      { ordered: "/#map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
+    ],
+  },
+
   geohack: {
     link: "geohack.toolforge.org",
     category: "tools",
