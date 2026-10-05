@@ -652,5 +652,29 @@
     },
     "description_wikimedia": {
         "message": "Reads coordinates from articles and items"
+    },
+    "site_openskimap": {
+        "message": "OpenSkiMap"
+    },
+    "description_openskimap": {
+        "message": "Ski slopes and lifts"
+    },
+    "site_opentrailmap": {
+        "message": "OpenTrailMap"
+    },
+    "description_opentrailmap": {
+        "message": "Trails and trail access in the United States"
+    },
+    "site_openwhatevermap": {
+        "message": "OpenWhateverMap"
+    },
+    "description_openwhatevermap": {
+        "message": "Mosaic of OpenStreetMap map styles"
+    },
+    "site_overture": {
+        "message": "Overture Maps Explorer"
+    },
+    "description_overture": {
+        "message": "Overture Maps data (places, buildings…), to compare with OpenStreetMap"
     }
 }

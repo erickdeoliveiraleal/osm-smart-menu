@@ -523,6 +523,46 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     zoomAdjustment: +1,
   },
 
+  openskimap: {
+    link: "openskimap.org",
+    category: "thematic",
+    paramOpts: [
+      { ordered: "/#{zoom}/{lat}/{lon}" },
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
+  opentrailmap: { // trails in the United States
+    link: "opentrailmap.us",
+    category: "thematic",
+    paramOpts: [
+      { ordered: "/#map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
+  openwhatevermap: {
+    link: "openwhatevermap.xyz",
+    category: "general",
+    disabledByDefault: true, // a mosaic of map styles, more a curiosity than a tool
+    paramOpts: [
+      { ordered: "/#{zoom}/{lat}/{lon}" },
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
+    ],
+  },
+
+  overture: {
+    link: "explore.overturemaps.org",
+    category: "quality",
+    paramOpts: [
+      { ordered: "/#{zoom}/{lat}/{lon}" },
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
   cartesgouvfr: { // successor of the French Geoportail; it removes the parameters from the URL after loading
     link: "cartes.gouv.fr",
     category: "general",
