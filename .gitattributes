@@ -1,0 +1,4 @@
+# Keep LF line endings everywhere, so packages built on Windows match the ones built from a source archive
+* text=auto eol=lf
+*.png binary
+*.svg text eol=lf
