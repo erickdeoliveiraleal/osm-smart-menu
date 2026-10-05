@@ -143,7 +143,7 @@
         "description": "Shown in popup shortly before menu appears."
     },
     "extensionDescription": {
-        "message": "Ayuda a los contribuidores de OpenStreetMap a cambiar fácilmente entre los distintos mapas y herramientas de análisis comunitarias."
+        "message": "Abre el lugar que estás viendo en otros mapas, imágenes satelitales y fotos de calle, en la misma posición y zoom."
     },
     "extensionShortName": {
         "message": "OSMenu"

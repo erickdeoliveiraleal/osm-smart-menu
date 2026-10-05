@@ -6,7 +6,7 @@
         "message": "OSM菜单"
     },
     "extensionDescription": {
-        "message": "帮助OpenStreetMap贡献者快速切换不同地图以及使用社区的分析工具。"
+        "message": "在其他地图、卫星影像和街景照片中打开你正在查看的地点，保持相同的位置和缩放级别。"
     },
     "newOptionDetected_notice": {
         "message": "你想要将这个网站添加到菜单吗？",

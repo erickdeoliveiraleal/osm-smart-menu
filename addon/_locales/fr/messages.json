@@ -66,7 +66,7 @@
         "description": "Shown in popup shortly before menu appears."
     },
     "extensionDescription": {
-        "message": "Aide les contributeurs d'OpenStreetMap à jongler entre les cartes et outils d'analyse de la communauté."
+        "message": "Ouvrez l’endroit que vous regardez dans d’autres cartes, images satellite et photos de rue, à la même position et au même zoom."
     },
     "noEnabledCompatibleLinksFound": {
         "message": "Aucun des liens activés n'est compatible avec les paramètres trouvés sur cette page.",

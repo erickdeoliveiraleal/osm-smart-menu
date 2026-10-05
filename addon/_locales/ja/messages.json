@@ -1,0 +1,11 @@
+{
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "見ている場所を、同じ位置とズームのまま、ほかの地図・衛星画像・ストリート写真で開きます。"
+    }
+}

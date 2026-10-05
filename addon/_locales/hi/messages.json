@@ -1,0 +1,11 @@
+{
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "आप जो जगह देख रहे हैं, उसे दूसरे नक्शों, सैटेलाइट तस्वीरों और सड़क की तस्वीरों में उसी स्थान और ज़ूम पर खोलें।"
+    }
+}

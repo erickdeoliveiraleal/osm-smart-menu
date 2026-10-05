@@ -1,0 +1,11 @@
+{
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "Buka tempat yang sedang Anda lihat di peta lain, citra satelit, dan foto jalan, dengan posisi dan zoom yang sama."
+    }
+}

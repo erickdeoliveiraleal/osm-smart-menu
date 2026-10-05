@@ -122,7 +122,7 @@
         "description": "Shown in popup shortly before menu appears."
     },
     "extensionDescription": {
-        "message": "Facilita o acesso de contribuidores do OpenStreetMap entre diferentes mapas e ferramentas de análise da comunidade."
+        "message": "Abra o local que está a ver noutros mapas, imagens de satélite e fotografias de rua, na mesma posição e zoom."
     },
     "extensionShortName": {
         "message": "Menu OSM"

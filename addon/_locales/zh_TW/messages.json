@@ -6,7 +6,7 @@
         "message": "OSMenu"
     },
     "extensionDescription": {
-        "message": "幫助開放街圖貢獻者簡單切換社群當中不同的地圖與分析工具。"
+        "message": "在其他地圖、衛星影像和街景照片中開啟你正在查看的地點，保持相同的位置和縮放等級。"
     },
     "extensionStoreDescription": {
         "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>\n"
