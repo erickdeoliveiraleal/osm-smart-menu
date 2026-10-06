@@ -14,7 +14,7 @@
         "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
     },
     "extensionDescription": {
-        "message": "Pomáhá přispěvatelům OpenStreetMap snadno přepínat mezi různými mapami a analytickými nástroji komunity."
+        "message": "Otevřete místo, které hledáte v jiných mapách: OpenStreetMap, Mapy Google, Bing, satelitní snímky, pouliční fotografie a editory OSM."
     },
     "loading": {
         "message": "Načítání...\nPokud se načítání nezastaví, načtěte stránku znovu a zkuste to znovu.",
@@ -128,7 +128,7 @@
         "message": "Google Maps"
     },
     "site_sentinelhub": {
-        "message": "Sentinel Hub"
+        "message": "prohlížeč Copernicus"
     },
     "site_openmapsurfer": {
         "message": "OpenMapSurfer"
@@ -255,5 +255,402 @@
     },
     "site_stravaglobal": {
         "message": "Strava Global Heatmap"
+    },
+    "site_americana": {
+        "message": "OSM Americana"
+    },
+    "site_rapideditor": {
+        "message": "Rapid Editor"
+    },
+    "site_osmchangesetmap": {
+        "message": "OSM Changeset Viewer na GL Map"
+    },
+    "site_waymarkedtrailsHiking": {
+        "message": "Waymarked Trails: Turistika"
+    },
+    "site_waymarkedtrailsCycling": {
+        "message": "Waymarked Trails: Cyklistika"
+    },
+    "site_waymarkedtrailsMtb": {
+        "message": "Waymarked Trails: MTB"
+    },
+    "site_waymarkedtrailsSkating": {
+        "message": "Waymarked Trails: Inline bruslení"
+    },
+    "site_waymarkedtrailsRiding": {
+        "message": "Waymarked Trails: Jízda na koni"
+    },
+    "site_waymarkedtrailsSlopes": {
+        "message": "Waymarked Trails: Zimní sportovní svahy"
+    },
+    "site_osmosebyuser": {
+        "message": "Osmose chyby podle uživatele"
+    },
+    "site_cyclosm": {
+        "message": "CyclOSM"
+    },
+    "site_panoramax": {
+        "message": "Panoramax"
+    },
+    "site_openrailwaymap": {
+        "message": "OpenRailwayMap"
+    },
+    "site_cartesgouvfr": {
+        "message": "cartes.gouv.fr"
+    },
+    "site_esriwayback": {
+        "message": "Esri World Imagery Wayback"
+    },
+    "config_backup_title": {
+        "message": "Nastavení zálohy"
+    },
+    "config_export_button": {
+        "message": "Export do souboru"
+    },
+    "config_import_button": {
+        "message": "Import ze souboru"
+    },
+    "config_import_confirm": {
+        "message": "Import nahradí všechny vaše aktuální odkazy, jejich pořadí a vlastní odkazy. Pokračovat?"
+    },
+    "config_import_invalidFile": {
+        "message": "Tento soubor není platný soubor OSM Smart Menu."
+    },
+    "config_import_failed": {
+        "message": "Nastavení nelze uložit."
+    },
+    "category_edit": {
+        "message": "Upravit"
+    },
+    "category_general": {
+        "message": "Všeobecné mapy"
+    },
+    "category_thematic": {
+        "message": "Tematické mapy"
+    },
+    "category_imagery": {
+        "message": "Obrázky a pouliční fotografie"
+    },
+    "category_history": {
+        "message": "Historie a změny"
+    },
+    "category_quality": {
+        "message": "Kvalita dat"
+    },
+    "category_tools": {
+        "message": "Ostatní nástroje"
+    },
+    "category_custom": {
+        "message": "Vaše odkazy"
+    },
+    "description_openstreetmap": {
+        "message": "Hlavní strana OpenStreetMap"
+    },
+    "description_rapideditor": {
+        "message": "Editor s návrhy AI"
+    },
+    "description_ideditor": {
+        "message": "Výchozí editor OpenStreetMap"
+    },
+    "description_level0": {
+        "message": "Textový editor pro OSM data"
+    },
+    "description_opencyclemap": {
+        "message": "Cyklomapa s cyklistickými trasami"
+    },
+    "description_cyclosm": {
+        "message": "Podrobná mapa pro cyklisty"
+    },
+    "description_hotmap": {
+        "message": "Styl Humanitární mapy"
+    },
+    "description_openseamap": {
+        "message": "Námořní graf"
+    },
+    "description_opensnowmap": {
+        "message": "Lyžařské sjezdovky a zimní sporty"
+    },
+    "description_sentinelhub": {
+        "message": "Nejnovější satelitní snímky Sentinel-2"
+    },
+    "description_mapcompare": {
+        "message": "Porovnejte několik map vedle sebe"
+    },
+    "description_openstreetbrowser": {
+        "message": "Procházejte body zájmu podle tématu"
+    },
+    "description_osmcha": {
+        "message": "Kontrola nedávných sad změn"
+    },
+    "description_pewuosmhistory": {
+        "message": "Historie verzí prvku"
+    },
+    "description_osmchangesetmap": {
+        "message": "Prohlížení sad změn na mapě"
+    },
+    "description_osmdeephistory": {
+        "message": "Podrobná historie prvku"
+    },
+    "description_deepdiff": {
+        "message": "Porovnání verzí prvku"
+    },
+    "description_osmhistoryviewer": {
+        "message": "Historie sady změn a prvků"
+    },
+    "description_overpassapi": {
+        "message": "Rozdílový prohlížeč sad změn (Achavi)"
+    },
+    "description_howdidyoucontribute": {
+        "message": "Statistiky mapovače"
+    },
+    "description_whodidit": {
+        "message": "Kdo naposledy upravil tuto oblast"
+    },
+    "description_osmchangeviz": {
+        "message": "Animovaná vizualizace sad změn"
+    },
+    "description_openptmap": {
+        "message": "Mapa MHD"
+    },
+    "description_opnvkarte": {
+        "message": "Mapa veřejné dopravy (ÖPNVKarte)"
+    },
+    "description_stamen": {
+        "message": "Umělecké styly map"
+    },
+    "description_f4map": {
+        "message": "Interaktivní 3D mapa"
+    },
+    "description_osmbuildings": {
+        "message": "3D budovy"
+    },
+    "description_openlevelup": {
+        "message": "Mapa vnitřních pater"
+    },
+    "description_indoorequal": {
+        "message": "Mapa vnitřních pater"
+    },
+    "description_umap": {
+        "message": "Vytvořte vlastní mapu"
+    },
+    "description_openstreetcam": {
+        "message": "Fotografie z ulice (KartaView)"
+    },
+    "description_mapillary": {
+        "message": "Fotografie z ulice"
+    },
+    "description_panoramax": {
+        "message": "Volné fotografie z ulice"
+    },
+    "description_esriwayback": {
+        "message": "Historické satelitní snímky"
+    },
+    "description_opentopomap": {
+        "message": "Topografické mapy"
+    },
+    "description_historicmap": {
+        "message": "Historické objekty a sídla"
+    },
+    "description_openrailwaymap": {
+        "message": "Železniční infrastruktura"
+    },
+    "description_openinframap": {
+        "message": "Elektřina, telekomunikace, ropa a plyn"
+    },
+    "description_americana": {
+        "message": "Mapový styl s US dálničními štítky"
+    },
+    "description_cartesgouvfr": {
+        "message": "Oficiální francouzské mapy (ex-Géoportail)"
+    },
+    "description_bingmaps": {
+        "message": "Microsoft mapy a letecké fotomapy"
+    },
+    "description_googlemaps": {
+        "message": "Google a satelitní mapy"
+    },
+    "description_waze": {
+        "message": "Mapy s živou dopravou"
+    },
+    "description_stravaglobal": {
+        "message": "Kde lidé běhají a jezdí na kole"
+    },
+    "description_osmrelationanalyzer": {
+        "message": "Zkontrolujte mezery v relacích"
+    },
+    "description_osmroutemanager": {
+        "message": "Zkontrolujte relace dopravy"
+    },
+    "description_osmose": {
+        "message": "Chyby dat v této oblasti"
+    },
+    "description_osmosebyuser": {
+        "message": "Chyby dat od mapera"
+    },
+    "description_osminspector": {
+        "message": "Přehled kvality dat od Geofabrik"
+    },
+    "description_osmchangetiles": {
+        "message": "Kde se mapa nedávno změnila"
+    },
+    "description_missingmaps": {
+        "message": "Přispívání do Missing Maps"
+    },
+    "description_osmlanevisualizer": {
+        "message": "Vizualizace jízdních pruhů"
+    },
+    "description_waymarkedtrailsHiking": {
+        "message": "Turistické trasy"
+    },
+    "description_waymarkedtrailsCycling": {
+        "message": "Cyklistické trasy"
+    },
+    "description_waymarkedtrailsMtb": {
+        "message": "Horské cyklostezky"
+    },
+    "description_waymarkedtrailsSkating": {
+        "message": "Trasy pro Inline brusle"
+    },
+    "description_waymarkedtrailsRiding": {
+        "message": "Koňské stezky"
+    },
+    "description_waymarkedtrailsSlopes": {
+        "message": "Skiareály a lyžařské stopy"
+    },
+    "popup_detectedOn": {
+        "message": "Zjištěno na $HOST$",
+        "placeholders": {
+            "HOST": {
+                "content": "$1"
+            }
+        }
+    },
+    "popup_searchPlaceholder": {
+        "message": "Hledat nástroje"
+    },
+    "popup_noSearchResults": {
+        "message": "Žádné nástroje neodpovídají vašemu hledání."
+    },
+    "popup_settings": {
+        "message": "Nastavení"
+    },
+    "attribute_user": {
+        "message": "Uživatel $NAME$",
+        "placeholders": {
+            "NAME": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_changeset": {
+        "message": "Sada změn $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_node": {
+        "message": "Uzel $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_way": {
+        "message": "Cesta $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_relation": {
+        "message": "Relace $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_tag": {
+        "message": "Tag $TAG$",
+        "placeholders": {
+            "TAG": {
+                "content": "$1"
+            }
+        }
+    },
+    "site_overpassturbo": {
+        "message": "Overpass Turbo"
+    },
+    "site_geohack": {
+        "message": "GeoHack"
+    },
+    "site_googlestreetview": {
+        "message": "Google Street View"
+    },
+    "site_openrouteservice": {
+        "message": "openrouteservice"
+    },
+    "site_josm": {
+        "message": "JOSM"
+    },
+    "description_overpassturbo": {
+        "message": "Dotaz na OSM data v této oblasti"
+    },
+    "description_geohack": {
+        "message": "Souřadnice a odkazy na mnoho mapových služeb"
+    },
+    "description_googlestreetview": {
+        "message": "Nejbližší panorama ulice"
+    },
+    "description_openrouteservice": {
+        "message": "Trasy, isochrony a místa"
+    },
+    "description_josm": {
+        "message": "Otevřít v JOSM (vzdálené ovládání)"
+    },
+    "remoteControl_noAnswer": {
+        "message": "$NAME$ neodpověděl. Zkontrolujte, zda je spuštěn a že dálkové ovládání je povoleno v jeho preferencích.",
+        "placeholders": {
+            "NAME": {
+                "content": "$1"
+            }
+        }
+    },
+    "config_pattern_nameRequired": {
+        "message": "Zadejte název odkazu."
+    },
+    "config_pattern_invalidTemplate": {
+        "message": "Zadejte webovou adresu s alespoň jedním parametrem, jako je {zoom}, {latitude} nebo {longitude}."
+    },
+    "config_pattern_parameters": {
+        "message": "Parametry:"
+    },
+    "config_pattern_documentation": {
+        "message": "Dokumentace a příklady"
+    },
+    "config_help": {
+        "message": "Nápověda"
+    },
+    "config_reportProblem": {
+        "message": "Nahlásit problém"
+    },
+    "config_sourceCode": {
+        "message": "Zdrojový kód"
+    },
+    "site_wikimap": {
+        "message": "WikiMap (Wikimedia Commons)"
+    },
+    "description_wikimap": {
+        "message": "Fotky z Wikimedia Časté otázky"
+    },
+    "site_wikimedia": {
+        "message": "Wikipedie a Wikidata"
+    },
+    "description_wikimedia": {
+        "message": "Načtěte souřadnice z článků a předmětů"
     }
 }
