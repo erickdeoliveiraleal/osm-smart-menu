@@ -610,7 +610,7 @@
         "message": "Routes, isochrones and places"
     },
     "description_josm": {
-        "message": "Open in JOSM (remote control)"
+        "message": "Downloads the visible area in JOSM (remote control)"
     },
     "remoteControl_noAnswer": {
         "message": "$NAME$ didn't answer. Check that it's open and that remote control is enabled in its preferences.",
@@ -682,5 +682,11 @@
     },
     "description_osm411": {
         "message": "Directory of OpenStreetMap projects, opened at this place"
+    },
+    "site_josmview": {
+        "message": "JOSM (move the view only)"
+    },
+    "description_josmview": {
+        "message": "Moves JOSM to the visible area, without downloading"
     }
 }

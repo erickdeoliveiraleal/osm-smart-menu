@@ -1,6 +1,6 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
 import { SiteConfiguration } from "../storage/config-handler";
-import { Sites, OsmAttribute, zoomFromGoogleMeters, boxAround } from "../sites-configuration";
+import { Sites, OsmAttribute, zoomFromGoogleMeters, boxAround, viewBounds, Bounds } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {
   id: 'test1',
@@ -366,12 +366,55 @@ describe(getRelevantSites.name, () => {
 
 describe('JOSM with coordinates', () => {
   const josm: SiteConfiguration = { id: 'josm', isEnabled: true, defaultConfiguration: Sites['josm'] };
-  test('downloads 200 m around the position, whatever the zoom', () => {
-    const { left, right, top, bottom } = boxAround(-15.7939, -47.8828, 200);
-    const expected = `http://127.0.0.1:8111/load_and_zoom?left=${left}&right=${right}&top=${top}&bottom=${bottom}`;
-    expect(getRelevantSites([josm], '', { zoom: '17', lat: '-15.7939', lon: '-47.8828' })).toEqual([{ id: 'josm', url: expected }]);
-    expect(getRelevantSites([josm], '', { zoom: '8', lat: '-15.7939', lon: '-47.8828' })).toEqual([{ id: 'josm', url: expected }]);
-    expect(getRelevantSites([josm], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([{ id: 'josm', url: expected }]);
+  const josmview: SiteConfiguration = { id: 'josmview', isEnabled: true, defaultConfiguration: Sites['josmview'] };
+  const query = (b: Bounds) => `left=${b.left.toFixed(6)}&right=${b.right.toFixed(6)}&top=${b.top.toFixed(6)}&bottom=${b.bottom.toFixed(6)}`;
+  const brasilia = { lat: '-15.7939', lon: '-47.8828', viewWidth: '1280', viewHeight: '800' };
+
+  test('downloads the visible area when it is small', () => {
+    const view = viewBounds(-15.7939, -47.8828, 18, '1280', '800');
+    expect(getRelevantSites([josm], '', { ...brasilia, zoom: '18' }))
+      .toEqual([{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(view)}` }]);
+  });
+  test('downloads at most 400 m to each side of the position', () => {
+    const nearby = boxAround(-15.7939, -47.8828, 400);
+    const expected = [{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(nearby)}` }];
+    expect(getRelevantSites([josm], '', { ...brasilia, zoom: '8' })).toEqual(expected);
+    expect(getRelevantSites([josm], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual(expected);
+  });
+  test('limits only the side that is too large', () => {
+    // at zoom 17, a wide and short tab shows more than 400 m to the sides, but less above and below
+    const view = viewBounds(-15.7939, -47.8828, 17, '2000', '400');
+    const nearby = boxAround(-15.7939, -47.8828, 400);
+    const expected = { left: nearby.left, right: nearby.right, top: view.top, bottom: view.bottom };
+    expect(getRelevantSites([josm], '', { ...brasilia, zoom: '17', viewWidth: '2000', viewHeight: '400' }))
+      .toEqual([{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(expected)}` }]);
+  });
+  test('moves the view to the visible area at any zoom, without downloading', () => {
+    const view = viewBounds(-15.7939, -47.8828, 9, '1280', '800');
+    expect(getRelevantSites([josmview], '', { ...brasilia, zoom: '9' }))
+      .toEqual([{ id: 'josmview', url: `http://127.0.0.1:8111/zoom?${query(view)}` }]);
+  });
+  test('moving the view needs a zoom', () => {
+    expect(getRelevantSites([josmview], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([]);
+    expect(getRelevantSites([josmview], '', { nodeId: '123' })).toEqual([]);
+  });
+});
+
+describe(viewBounds.name, () => {
+  test('the whole world fits in one tile at zoom 0', () => {
+    const b = viewBounds(0, 0, 0, '256', '256');
+    expect(b.left).toBeCloseTo(-180);
+    expect(b.right).toBeCloseTo(180);
+    expect(b.top).toBeCloseTo(85);
+    expect(b.bottom).toBeCloseTo(-85);
+  });
+  test('matches the scale of osm.org at zoom 18', () => {
+    // 156543.03 m per pixel at zoom 0 on the equator × cos(latitude) ÷ 2^18
+    const b = viewBounds(-15.7939, -47.8828, 18, '1000', '1000');
+    const metersPerPixel = 156543.03 * Math.cos(-15.7939 * Math.PI / 180) / 2 ** 18;
+    const widthInMeters = (b.right - b.left) * 111320 * Math.cos(-15.7939 * Math.PI / 180);
+    expect(widthInMeters / metersPerPixel).toBeCloseTo(1000, -1);
+    expect((b.top + b.bottom) / 2).toBeCloseTo(-15.7939, 3);
   });
 });
 

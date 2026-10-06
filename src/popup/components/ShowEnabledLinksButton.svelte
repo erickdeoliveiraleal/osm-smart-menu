@@ -25,6 +25,8 @@
       key: "amenity",
       value: "school",
       tracesId: "1",
+      viewWidth: "1280",
+      viewHeight: "800",
       ...extractedParameters, // overwrite with parameters from current page
     };
     const allEnabledLinks: SiteLink[] = getRelevantSites(
