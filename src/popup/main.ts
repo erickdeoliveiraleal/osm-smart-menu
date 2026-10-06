@@ -60,14 +60,20 @@ async function getSitesOrError(): EventualSitesOrError {
     };
   }
 
-  const sitesList = getRelevantSites(config, currentSite.siteId, currentSite.attributes);
+  // the tab size gives the visible area, e.g. for JOSM
+  const attributes = { ...currentSite.attributes };
+  if (currentTab.width && currentTab.height) {
+    attributes.viewWidth = String(currentTab.width);
+    attributes.viewHeight = String(currentTab.height);
+  }
+  const sitesList = getRelevantSites(config, currentSite.siteId, attributes);
   return {
     config,
     currentSiteId: currentSite.siteId,
     sourceHost: new URL(currentTab.url).hostname,
     sitesList,
     customUserOption,
-    extractedParameters: currentSite.attributes,
+    extractedParameters: attributes,
   };
 }
 

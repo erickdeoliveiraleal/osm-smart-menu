@@ -38,6 +38,7 @@ export type OsmAttribute =
   | "nodeId" | "wayId" | "relationId"
   | "userName" | "changesetId" | "key" | "value"
   | "zoom" | "lat" | "lon" | "tracesId"
+  | "viewWidth" | "viewHeight" // size of the browser tab, in pixels; not read from the page
   ;
 
 const urlPattern1: ParamOpt = { ordered: "/", unordered: { zoom: "zoom", lat: "lat", lon: "lon" } };
@@ -693,11 +694,25 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/load_object?objects=w{wayId}" },
       { ordered: "/load_object?objects=r{relationId}" },
     ],
-    buildPath: ({ lat, lon }) => {
+    buildPath: ({ lat, lon, zoom, viewWidth, viewHeight }) => {
       if (!lat || !lon) return undefined;
-      // JOSM refuses to download large areas, so it downloads 200 m around the position
-      const { left, right, top, bottom } = boxAround(Number(lat), Number(lon), 200);
-      return `/load_and_zoom?left=${left}&right=${right}&top=${top}&bottom=${bottom}`;
+      // downloads the visible area, but not more than 400 m to each side of the position: the OSM API refuses
+      // areas with more than 50,000 nodes, which central São Paulo reaches at about 750 m
+      const nearby = boxAround(Number(lat), Number(lon), 400);
+      const area = zoom ? intersection(nearby, viewBounds(Number(lat), Number(lon), Number(zoom), viewWidth, viewHeight)) : nearby;
+      return `/load_and_zoom?${boundsQuery(area)}`;
+    },
+  },
+
+  josmview: { // moves JOSM to the visible area without downloading, so it works at any zoom
+    link: "127.0.0.1:8111",
+    category: "edit",
+    httpOnly: true,
+    remoteControl: true,
+    paramOpts: [],
+    buildPath: ({ lat, lon, zoom, viewWidth, viewHeight }) => {
+      if (!lat || !lon || !zoom) return undefined;
+      return `/zoom?${boundsQuery(viewBounds(Number(lat), Number(lon), Number(zoom), viewWidth, viewHeight))}`;
     },
   },
 
@@ -855,18 +870,53 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   },
 };
 
+export type Bounds = Record<"left" | "right" | "top" | "bottom", number>;
+
 /** Square extending `meters` to each side of the position. */
-export function boxAround(lat: number, lon: number, meters: number): Record<"left" | "right" | "top" | "bottom", string> {
+export function boxAround(lat: number, lon: number, meters: number): Bounds {
   const metersPerDegree = 111320; // of latitude, and of longitude on the equator
   const halfHeight = meters / metersPerDegree;
   const halfWidth = meters / (metersPerDegree * Math.max(Math.cos(lat * Math.PI / 180), 0.01));
-  const round = (n: number) => n.toFixed(6);
   return {
-    left: round(lon - halfWidth),
-    right: round(lon + halfWidth),
-    top: round(Math.min(lat + halfHeight, 85)),
-    bottom: round(Math.max(lat - halfHeight, -85)),
+    left: lon - halfWidth,
+    right: lon + halfWidth,
+    top: Math.min(lat + halfHeight, 85),
+    bottom: Math.max(lat - halfHeight, -85),
   };
+}
+
+/**
+ * Area shown by a map of `width` × `height` pixels centered on the position, at the zoom of osm.org (256 px tiles,
+ * Web Mercator). The size of the browser tab is used, so it's a bit larger than the map when the page has a sidebar.
+ */
+export function viewBounds(lat: number, lon: number, zoom: number, width = "1280", height = "800"): Bounds {
+  const worldSize = 256 * 2 ** zoom;
+  const sin = Math.sin(Math.max(Math.min(lat, 85), -85) * Math.PI / 180);
+  const x = (lon + 180) / 360 * worldSize;
+  const y = (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * worldSize;
+  const lonAt = (px: number) => px / worldSize * 360 - 180;
+  const latAt = (py: number) => Math.atan(Math.sinh(Math.PI - 2 * Math.PI * py / worldSize)) * 180 / Math.PI;
+  const halfWidth = Number(width) / 2, halfHeight = Number(height) / 2;
+  return {
+    left: Math.max(lonAt(x - halfWidth), -180),
+    right: Math.min(lonAt(x + halfWidth), 180),
+    top: Math.min(latAt(y - halfHeight), 85),
+    bottom: Math.max(latAt(y + halfHeight), -85),
+  };
+}
+
+function intersection(a: Bounds, b: Bounds): Bounds {
+  return {
+    left: Math.max(a.left, b.left),
+    right: Math.min(a.right, b.right),
+    top: Math.min(a.top, b.top),
+    bottom: Math.max(a.bottom, b.bottom),
+  };
+}
+
+function boundsQuery({ left, right, top, bottom }: Bounds): string {
+  const round = (n: number) => n.toFixed(6);
+  return `left=${round(left)}&right=${round(right)}&top=${round(top)}&bottom=${round(bottom)}`;
 }
 
 /**

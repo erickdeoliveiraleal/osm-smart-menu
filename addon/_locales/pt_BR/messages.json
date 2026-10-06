@@ -530,7 +530,7 @@
         "message": "Rotas, isócronas e lugares"
     },
     "description_josm": {
-        "message": "Abrir no JOSM (controle remoto)"
+        "message": "Baixa a área visível no JOSM (controle remoto)"
     },
     "remoteControl_noAnswer": {
         "message": "O $NAME$ não respondeu. Confira se ele está aberto e se o controle remoto está ativado nas preferências.",
@@ -599,5 +599,11 @@
     },
     "description_osm411": {
         "message": "Diretório de projetos do OpenStreetMap, aberto neste lugar"
+    },
+    "site_josmview": {
+        "message": "JOSM (só mover a vista)"
+    },
+    "description_josmview": {
+        "message": "Leva o JOSM até a área visível, sem baixar dados"
     }
 }
