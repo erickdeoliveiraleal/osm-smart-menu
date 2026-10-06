@@ -6,10 +6,10 @@
         "message": "OSMenu"
     },
     "extensionDescription": {
-        "message": "幫助開放街圖貢獻者簡單切換社群當中不同的地圖與分析工具。"
+        "message": "在其他地圖上你會查看的地點開啟地點：開放街圖、Google地圖、Bing地圖、衛星影像、街景影響以及開放街圖編輯器。"
     },
     "extensionStoreDescription": {
-        "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>\n"
+        "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>"
     },
     "loading": {
         "message": "載入中...\n如果沒有停止載入，請試著重新整理再試一次。",
@@ -76,7 +76,7 @@
         "description": "按鈕"
     },
     "error_noAccess": {
-        "message": "錯誤，無法找到或連線到目前頁面。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
+        "message": "錯誤，無法找到或連線到目前頁面。\n如果這一頁仍在載入，請再試一次。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
         "description": "目前頁面無法連線時，錯誤訊息顯示在跳出視窗當中 (技術問題)",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -96,7 +96,7 @@
         }
     },
     "error_noInformationExtracted": {
-        "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
+        "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果這是地圖，請試著移動來啟動取得參數。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
         "description": "如果適當錯誤訊息顯示在跳出視窗當中",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -127,7 +127,7 @@
         "message": "Google 地圖"
     },
     "site_sentinelhub": {
-        "message": "Copernicus Browser"
+        "message": "Copernicus 瀏覽器"
     },
     "site_openmapsurfer": {
         "message": "OpenMapSurfer"
@@ -148,7 +148,7 @@
         "message": "歷史物件"
     },
     "site_openinframap": {
-        "message": "開放設施地圖"
+        "message": "開放設施地圖 "
     },
     "site_openptmap": {
         "message": "開放大眾運輸地圖"
@@ -254,5 +254,402 @@
     },
     "site_ideditor": {
         "message": "iD 編輯器"
+    },
+    "site_americana": {
+        "message": "OSM 美國"
+    },
+    "site_rapideditor": {
+        "message": "Rapid 編輯器"
+    },
+    "site_osmchangesetmap": {
+        "message": "在 GL 地圖的 OSM 變更集檢視器"
+    },
+    "site_waymarkedtrailsHiking": {
+        "message": "Waymarked 路線：登山"
+    },
+    "site_waymarkedtrailsCycling": {
+        "message": "Waymarked 路線：單車"
+    },
+    "site_waymarkedtrailsMtb": {
+        "message": "Waymarked 路線：登山自行車"
+    },
+    "site_waymarkedtrailsSkating": {
+        "message": "Waymarked 路線：直排輪"
+    },
+    "site_waymarkedtrailsRiding": {
+        "message": "Waymarked 路線：騎馬"
+    },
+    "site_waymarkedtrailsSlopes": {
+        "message": "Waymarked 路線：冬季運動山坡"
+    },
+    "site_osmosebyuser": {
+        "message": "由使用者的 Osmose 錯誤"
+    },
+    "site_cyclosm": {
+        "message": "CyclOSM"
+    },
+    "site_panoramax": {
+        "message": "Panoramax"
+    },
+    "site_openrailwaymap": {
+        "message": "開放鐵道地圖"
+    },
+    "site_cartesgouvfr": {
+        "message": "cartes.gouv.fr"
+    },
+    "site_esriwayback": {
+        "message": "Esri 世界影像回遡"
+    },
+    "config_backup_title": {
+        "message": "備分設定"
+    },
+    "config_export_button": {
+        "message": "輸出為檔案"
+    },
+    "config_import_button": {
+        "message": "從檔案匯入"
+    },
+    "config_import_confirm": {
+        "message": "匯入時會取代目前所有連結，更舊以及自訂連結。要繼續嗎？"
+    },
+    "config_import_invalidFile": {
+        "message": "這份檔案並非有效的 OSM 智慧選單設定檔。"
+    },
+    "config_import_failed": {
+        "message": "無法儲存設定。"
+    },
+    "category_edit": {
+        "message": "編輯"
+    },
+    "category_general": {
+        "message": "一般地圖"
+    },
+    "category_thematic": {
+        "message": "主題地圖"
+    },
+    "category_imagery": {
+        "message": "影像與街景照片"
+    },
+    "category_history": {
+        "message": "歷史與變動"
+    },
+    "category_quality": {
+        "message": "資料品質"
+    },
+    "category_tools": {
+        "message": "其他工具"
+    },
+    "category_custom": {
+        "message": "你的連結"
+    },
+    "description_openstreetmap": {
+        "message": "主要開放街圖網站"
+    },
+    "description_rapideditor": {
+        "message": "有 AI 輔助建議的編輯器"
+    },
+    "description_ideditor": {
+        "message": "預設開放街圖編輯器"
+    },
+    "description_level0": {
+        "message": "文字為主的 OSM 資料編輯器"
+    },
+    "description_opencyclemap": {
+        "message": "有單車路線的單車地圖"
+    },
+    "description_cyclosm": {
+        "message": "單車騎士適用的詳細地圖"
+    },
+    "description_hotmap": {
+        "message": "人道救援地圖樣式"
+    },
+    "description_openseamap": {
+        "message": "海圖"
+    },
+    "description_opensnowmap": {
+        "message": "滑雪坡與冬季運動"
+    },
+    "description_sentinelhub": {
+        "message": "最新 Sentinel-2 衛星影像"
+    },
+    "description_mapcompare": {
+        "message": "並排比較多種地圖"
+    },
+    "description_openstreetbrowser": {
+        "message": "由主題檢視興趣點"
+    },
+    "description_osmcha": {
+        "message": "檢視最近變動"
+    },
+    "description_pewuosmhistory": {
+        "message": "元素的版本歷史"
+    },
+    "description_osmchangesetmap": {
+        "message": "在地圖上的變動集檢視器"
+    },
+    "popup_noSearchResults": {
+        "message": "沒有搜尋到符合的工具。"
+    },
+    "popup_settings": {
+        "message": "設定"
+    },
+    "attribute_user": {
+        "message": "使用者 $NAME$",
+        "placeholders": {
+            "NAME": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_changeset": {
+        "message": "變動集 $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_node": {
+        "message": "節點 $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_way": {
+        "message": "路徑 $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_relation": {
+        "message": "關聯 $ID$",
+        "placeholders": {
+            "ID": {
+                "content": "$1"
+            }
+        }
+    },
+    "attribute_tag": {
+        "message": "標籤 $TAG$",
+        "placeholders": {
+            "TAG": {
+                "content": "$1"
+            }
+        }
+    },
+    "site_overpassturbo": {
+        "message": "Overpass Turbo"
+    },
+    "site_geohack": {
+        "message": "GeoHack"
+    },
+    "site_googlestreetview": {
+        "message": "Google 街景"
+    },
+    "site_openrouteservice": {
+        "message": "openrouteservice"
+    },
+    "site_josm": {
+        "message": "JOSM"
+    },
+    "description_overpassturbo": {
+        "message": "檢索這一區域的 OSM 資料"
+    },
+    "description_geohack": {
+        "message": "到許多地圖服務的座標與連結"
+    },
+    "description_googlestreetview": {
+        "message": "最近的 panorama 街景影像"
+    },
+    "description_openrouteservice": {
+        "message": "導航、等時線與地方"
+    },
+    "description_josm": {
+        "message": "以 JOSM 開啟 (遠端控制)"
+    },
+    "remoteControl_noAnswer": {
+        "message": "$NAME$ 還沒有回應，檢查是否已經開啟並且在設定中啟用遠端控制。",
+        "placeholders": {
+            "NAME": {
+                "content": "$1"
+            }
+        }
+    },
+    "config_pattern_nameRequired": {
+        "message": "輸入連結的名稱。"
+    },
+    "config_pattern_invalidTemplate": {
+        "message": "輸入至少一個參數的網址，像是 {zoom}、{latitude} 或是{longitude}。"
+    },
+    "config_pattern_parameters": {
+        "message": "參數："
+    },
+    "config_pattern_documentation": {
+        "message": "說明文件與範例"
+    },
+    "config_help": {
+        "message": "說明文件"
+    },
+    "config_reportProblem": {
+        "message": "回報出狀況"
+    },
+    "config_sourceCode": {
+        "message": "原始碼"
+    },
+    "site_wikimap": {
+        "message": "WikiMap (維基共享資源)"
+    },
+    "description_wikimap": {
+        "message": "維基共享資源上附近的圖片"
+    },
+    "site_wikimedia": {
+        "message": "維基百科與維基數據"
+    },
+    "description_wikimedia": {
+        "message": "從條目與項目讀取座標"
+    },
+    "description_osmdeephistory": {
+        "message": "元素的詳細歷史"
+    },
+    "description_deepdiff": {
+        "message": "比較元素的歷史版本"
+    },
+    "description_osmhistoryviewer": {
+        "message": "變更集與元素歷史"
+    },
+    "description_overpassapi": {
+        "message": "變更集差異檢視器 (Achavi)"
+    },
+    "description_howdidyoucontribute": {
+        "message": "圖客的統計數據"
+    },
+    "description_whodidit": {
+        "message": "最近有誰編輯這附近"
+    },
+    "description_osmchangeviz": {
+        "message": "變更集的動畫視覺化"
+    },
+    "description_openptmap": {
+        "message": "大眾運輸地圖"
+    },
+    "description_opnvkarte": {
+        "message": "大眾運輸地圖 (ÖPNVKarte)"
+    },
+    "description_stamen": {
+        "message": "藝術風格地圖樣式"
+    },
+    "description_f4map": {
+        "message": "互動 3D 地圖"
+    },
+    "description_osmbuildings": {
+        "message": "3D 建築"
+    },
+    "description_openlevelup": {
+        "message": "逐層的室內地圖"
+    },
+    "description_indoorequal": {
+        "message": "逐層的室內地圖"
+    },
+    "description_umap": {
+        "message": "創建你自己的地圖"
+    },
+    "description_openstreetcam": {
+        "message": "街景影像 (KartaView)"
+    },
+    "description_mapillary": {
+        "message": "街景影像"
+    },
+    "description_panoramax": {
+        "message": "自由與開放的街景影像"
+    },
+    "description_esriwayback": {
+        "message": "歷史衛星影像"
+    },
+    "description_opentopomap": {
+        "message": "地形圖"
+    },
+    "description_historicmap": {
+        "message": "歷史物件與場所"
+    },
+    "description_openrailwaymap": {
+        "message": "鐵道設施"
+    },
+    "description_openinframap": {
+        "message": "輸電線路、電信、輸油與輸氣"
+    },
+    "description_americana": {
+        "message": "美國公路標誌的地圖樣式"
+    },
+    "description_cartesgouvfr": {
+        "message": "官方法國地圖 (ex-Géoportail)"
+    },
+    "description_bingmaps": {
+        "message": "微軟地圖與空照影像"
+    },
+    "description_googlemaps": {
+        "message": "Google 地圖與衛星影像"
+    },
+    "description_waze": {
+        "message": "即時路況地圖"
+    },
+    "description_stravaglobal": {
+        "message": "人們在那裡跑步與騎單車"
+    },
+    "description_osmrelationanalyzer": {
+        "message": "檢查關聯的空隙"
+    },
+    "description_osmroutemanager": {
+        "message": "檢視路線關聯"
+    },
+    "description_osmose": {
+        "message": "這一區域的資料錯誤"
+    },
+    "description_osmosebyuser": {
+        "message": "圖客的資料錯誤"
+    },
+    "description_osminspector": {
+        "message": "GeoFabrik 的資料品質檢視"
+    },
+    "description_osmchangetiles": {
+        "message": "最近那裡有地圖變動"
+    },
+    "description_missingmaps": {
+        "message": "遺失地圖的貢獻"
+    },
+    "description_osmlanevisualizer": {
+        "message": "視覺化道路車道數"
+    },
+    "description_waymarkedtrailsHiking": {
+        "message": "登山路線"
+    },
+    "description_waymarkedtrailsCycling": {
+        "message": "單車路線"
+    },
+    "description_waymarkedtrailsMtb": {
+        "message": "登山自行車路線"
+    },
+    "description_waymarkedtrailsSkating": {
+        "message": "直排輪路線"
+    },
+    "description_waymarkedtrailsRiding": {
+        "message": "騎馬路線"
+    },
+    "description_waymarkedtrailsSlopes": {
+        "message": "滑雪坡與雪道"
+    },
+    "popup_detectedOn": {
+        "message": "在 $HOST$ 偵測到",
+        "placeholders": {
+            "HOST": {
+                "content": "$1"
+            }
+        }
+    },
+    "popup_searchPlaceholder": {
+        "message": "搜尋工具"
     }
 }
