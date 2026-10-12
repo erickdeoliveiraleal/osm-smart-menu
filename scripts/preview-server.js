@@ -1,7 +1,8 @@
 // Serves the built extension (addon/) plus a page that fakes the WebExtension APIs, to preview the popup and options in a normal browser.
 // Usage: npm run build, then: node scripts/preview-server.js addon 5199
 // Open http://localhost:5199/harness?page=popup&locale=en&tab=<url of the page to simulate> (or page=options).
-// Extra parameters: query=<text typed in the search>, fail=1 (the browser API fails), hang=1 (the page never answers).
+// Extra parameters: query=<text typed in the search>, fail=1 (the browser API fails), hang=1 (the page never answers),
+// store=<JSON of the stored settings, e.g. {"popup-group-by-category":false}>.
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -16,7 +17,7 @@ function fakeApis(locale, tabUrl, page) {
   return `<script>
   const messages = ${JSON.stringify(messages)};
   const fallback = ${JSON.stringify(fallback)};
-  const store = {};
+  const store = JSON.parse(new URLSearchParams(location.search).get("store") || "{}");
   const area = {
     get: async (k) => k === null ? { ...store } : (typeof k === "string" ? (k in store ? { [k]: store[k] } : {}) : {}),
     set: async (o) => { Object.assign(store, JSON.parse(JSON.stringify(o))); },

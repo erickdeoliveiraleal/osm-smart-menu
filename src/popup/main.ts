@@ -2,7 +2,7 @@ import browser from 'webextension-polyfill';
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 import { KnownError, CustomUserOption } from './utils';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites, SiteLink } from './sites-manipulation-helper';
-import { getSitesConfiguration, SiteConfiguration } from '../storage/config-handler';
+import { getSitesConfiguration, getGroupByCategory, SiteConfiguration } from '../storage/config-handler';
 import { mount } from "svelte";
 import App from './App.svelte';
 import { OsmAttribute } from "../sites-configuration";
@@ -10,6 +10,7 @@ import { OsmAttribute } from "../sites-configuration";
 export type EventualSitesOrError = Promise<
   | {
       config: SiteConfiguration[];
+      groupByCategory: boolean;
       currentSiteId: string | undefined;
       sourceHost: string;
       sitesList: SiteLink[];
@@ -18,6 +19,7 @@ export type EventualSitesOrError = Promise<
     }
   | {
       config: SiteConfiguration[];
+      groupByCategory: boolean;
       error: KnownError;
     }
 >;
@@ -33,12 +35,12 @@ mount(App, {
 });
 
 async function getSitesOrError(): EventualSitesOrError {
-  const config = await getSitesConfiguration();
+  const [config, groupByCategory] = await Promise.all([getSitesConfiguration(), getGroupByCategory()]);
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
   if (!currentTab || !currentTab.url || !currentTab.id) {
     const error = KnownError.NO_ACCESS;
-    return { config, error };
+    return { config, groupByCategory, error };
   }
 
   const candidateSiteIds = findSiteCandidates(config, currentTab.url);
@@ -49,7 +51,7 @@ async function getSitesOrError(): EventualSitesOrError {
       candidateSiteIds.length === 0
         ? KnownError.INCOMPATIBLE_WEBSITE
         : KnownError.NO_INFORMATION_EXTRACTED;
-    return { config, error };
+    return { config, groupByCategory, error };
   }
 
   let customUserOption: CustomUserOption | undefined;
@@ -69,6 +71,7 @@ async function getSitesOrError(): EventualSitesOrError {
   const sitesList = getRelevantSites(config, currentSite.siteId, attributes);
   return {
     config,
+    groupByCategory,
     currentSiteId: currentSite.siteId,
     sourceHost: new URL(currentTab.url).hostname,
     sitesList,

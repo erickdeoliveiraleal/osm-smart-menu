@@ -13,6 +13,7 @@ export type ConfigFile = {
 };
 
 const sitesOrderKey = "sites-order";
+export const groupByCategoryKey = "popup-group-by-category";
 const siteKeyPrefix = "site_";
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
@@ -35,7 +36,7 @@ function isValidSiteConfig(value: unknown): boolean {
 export function toConfigFile(storedData: StoredData): ConfigFile {
   const data: StoredData = {};
   for (const [key, value] of Object.entries(storedData)) {
-    if (key === sitesOrderKey || key.startsWith(siteKeyPrefix)) {
+    if (key === sitesOrderKey || key === groupByCategoryKey || key.startsWith(siteKeyPrefix)) {
       data[key] = value;
     }
   }
@@ -64,6 +65,10 @@ export function parseConfigFile(text: string): StoredData {
   for (const [key, value] of Object.entries(parsed.data)) {
     if (key === sitesOrderKey) {
       if (!Array.isArray(value) || !value.every((id) => typeof id === "string")) {
+        throw new Error(`Invalid value for "${key}"`);
+      }
+    } else if (key === groupByCategoryKey) {
+      if (typeof value !== "boolean") {
         throw new Error(`Invalid value for "${key}"`);
       }
     } else if (key.startsWith(siteKeyPrefix)) {

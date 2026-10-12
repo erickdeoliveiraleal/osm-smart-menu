@@ -42,7 +42,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 12px;
+    padding: 8px 12px;
     border-bottom: 1px solid var(--border);
   }
   .pin {
@@ -84,10 +84,9 @@
 <header>
   {#if title}
     <span class="pin"><Icon name="map-pin" size={20} /></span>
-    <div class="text">
+    <div class="text" title={sourceHost ? browser.i18n.getMessage("popup_detectedOn", sourceHost) : undefined}>
       <div class="title">{title}</div>
       {#if subtitle}<div class="detail">{subtitle}</div>{/if}
-      {#if sourceHost}<div class="detail">{browser.i18n.getMessage("popup_detectedOn", sourceHost)}</div>{/if}
     </div>
   {/if}
   <button type="button" title={settingsLabel} aria-label={settingsLabel} onclick={() => browser.runtime.openOptionsPage()}>

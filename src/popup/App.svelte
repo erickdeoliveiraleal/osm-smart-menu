@@ -83,7 +83,7 @@
       <input type="search" bind:value={query} placeholder={searchPlaceholder} aria-label={searchPlaceholder} autofocus />
     </div>
     <main>
-      <LinkList siteLinks={[...sitesListOrError.sitesList, ...otherLinks]} {query} />
+      <LinkList siteLinks={[...sitesListOrError.sitesList, ...otherLinks]} {query} grouped={sitesListOrError.groupByCategory} />
       <ShowEnabledLinksButton
         config={sitesListOrError.config}
         currentSiteId={sitesListOrError.currentSiteId}
@@ -96,7 +96,7 @@
     <ErrorMessage error={sitesListOrError.error} />
     {#if sitesListOrError.error === KnownError.INCOMPATIBLE_WEBSITE || sitesListOrError.error === KnownError.NO_INFORMATION_EXTRACTED}
       {#if otherLinks.length > 0}
-        <LinkList siteLinks={otherLinks} />
+        <LinkList siteLinks={otherLinks} grouped={sitesListOrError.groupByCategory} />
       {/if}
       <ShowEnabledLinksButton config={sitesListOrError.config} onshow={(links) => (otherLinks = links)} />
     {/if}

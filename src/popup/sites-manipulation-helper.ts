@@ -102,7 +102,7 @@ function withAdjustedZoom(config: SiteConfiguration | undefined, extractedAttrib
     const nZoom = Number(extractedAttributes.zoom);
     return {
       ...extractedAttributes,
-      zoom: (nZoom + config.defaultConfiguration.zoomAdjustment).toString(),
+      zoom: withoutFloatNoise(nZoom + config.defaultConfiguration.zoomAdjustment),
     }
   } else {
     return extractedAttributes;
@@ -440,8 +440,13 @@ function reviewZoom(site: DefaultSiteConfiguration, zoom: string): string {
     if (maxZoom) {
       nZoom = Math.min(nZoom, maxZoom);
     }
-    return nZoom.toString();
+    return withoutFloatNoise(nZoom);
   } else {
     return zoom;
   }
+}
+
+/** e.g. 15.13 + 1 gives 16.130000000000003 */
+function withoutFloatNoise(n: number): string {
+  return Number(n.toFixed(6)).toString();
 }
