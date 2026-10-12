@@ -25,7 +25,7 @@ Texts for the Chrome Web Store and addons.mozilla.org (AMO).
 > Open source (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Originally created by João Guilherme Packer.
 >
-> The OpenStreetMap logo is a trademark of the OpenStreetMap Foundation. This project is not endorsed by or affiliated with the OpenStreetMap Foundation.
+> OpenStreetMap is a trademark of the OpenStreetMap Foundation. This project is not endorsed by or affiliated with the OpenStreetMap Foundation.
 
 **Category:** Chrome Web Store: Tools · AMO: Search Tools, Other
 

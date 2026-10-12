@@ -29,7 +29,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > Software libre (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Creada originalmente por João Guilherme Packer.
 >
-> El logotipo de OpenStreetMap es una marca registrada de la OpenStreetMap Foundation. Este proyecto no está respaldado por la OpenStreetMap Foundation ni afiliado a ella.
+> OpenStreetMap es una marca registrada de la OpenStreetMap Foundation. Este proyecto no está respaldado por la OpenStreetMap Foundation ni afiliado a ella.
 
 ## Français (`fr`)
 
@@ -52,7 +52,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > Logiciel libre (GPL-3.0) : https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Créée à l’origine par João Guilherme Packer.
 >
-> Le logo OpenStreetMap est une marque déposée de la OpenStreetMap Foundation. Ce projet n’est ni approuvé par la OpenStreetMap Foundation ni affilié à celle-ci.
+> OpenStreetMap est une marque déposée de la OpenStreetMap Foundation. Ce projet n’est ni approuvé par la OpenStreetMap Foundation ni affilié à celle-ci.
 
 ## Deutsch (`de`)
 
@@ -75,7 +75,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > Freie Software (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Ursprünglich entwickelt von João Guilherme Packer.
 >
-> Das OpenStreetMap-Logo ist eine Marke der OpenStreetMap Foundation. Dieses Projekt wird von der OpenStreetMap Foundation weder unterstützt noch ist es mit ihr verbunden.
+> OpenStreetMap ist eine Marke der OpenStreetMap Foundation. Dieses Projekt wird von der OpenStreetMap Foundation weder unterstützt noch ist es mit ihr verbunden.
 
 ## Русский (`ru`)
 
@@ -98,7 +98,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > Свободное ПО (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Изначально создано Жуаном Гильерме Пакером (João Guilherme Packer).
 >
-> Логотип OpenStreetMap является товарным знаком OpenStreetMap Foundation. Проект не одобрен OpenStreetMap Foundation и не связан с ней.
+> OpenStreetMap является товарным знаком OpenStreetMap Foundation. Проект не одобрен OpenStreetMap Foundation и не связан с ней.
 
 ## 中文（简体） (`zh_CN`)
 
@@ -121,7 +121,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > 自由软件（GPL-3.0）：https://github.com/erickdeoliveiraleal/osm-smart-menu
 > 最初由 João Guilherme Packer 创建。
 >
-> OpenStreetMap 标志是 OpenStreetMap Foundation 的商标。本项目未获得 OpenStreetMap Foundation 的认可，也与其无关。
+> OpenStreetMap 是 OpenStreetMap Foundation 的商标。本项目未获得 OpenStreetMap Foundation 的认可，也与其无关。
 
 ## 中文（繁體） (`zh_TW`)
 
@@ -144,7 +144,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > 自由軟體（GPL-3.0）：https://github.com/erickdeoliveiraleal/osm-smart-menu
 > 最初由 João Guilherme Packer 建立。
 >
-> OpenStreetMap 標誌是 OpenStreetMap Foundation 的商標。本專案未經 OpenStreetMap Foundation 認可，也與其無關。
+> OpenStreetMap 是 OpenStreetMap Foundation 的商標。本專案未經 OpenStreetMap Foundation 認可，也與其無關。
 
 ## 日本語 (`ja`)
 
@@ -167,7 +167,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > フリーソフトウェア（GPL-3.0）：https://github.com/erickdeoliveiraleal/osm-smart-menu
 > João Guilherme Packer によって最初に作られました。
 >
-> OpenStreetMap のロゴは OpenStreetMap Foundation の商標です。このプロジェクトは OpenStreetMap Foundation の承認を受けておらず、提携もしていません。
+> OpenStreetMap は OpenStreetMap Foundation の商標です。このプロジェクトは OpenStreetMap Foundation の承認を受けておらず、提携もしていません。
 
 ## Bahasa Indonesia (`id`)
 
@@ -190,7 +190,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > Perangkat lunak bebas (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > Awalnya dibuat oleh João Guilherme Packer.
 >
-> Logo OpenStreetMap adalah merek dagang OpenStreetMap Foundation. Proyek ini tidak didukung oleh OpenStreetMap Foundation dan tidak berafiliasi dengannya.
+> OpenStreetMap adalah merek dagang OpenStreetMap Foundation. Proyek ini tidak didukung oleh OpenStreetMap Foundation dan tidak berafiliasi dengannya.
 
 ## العربية (`ar`)
 
@@ -213,7 +213,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > برنامج حر (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > أنشأها في الأصل João Guilherme Packer.
 >
-> شعار OpenStreetMap علامة تجارية لمؤسسة OpenStreetMap Foundation. هذا المشروع غير معتمد من OpenStreetMap Foundation ولا يرتبط بها.
+> OpenStreetMap علامة تجارية لمؤسسة OpenStreetMap Foundation. هذا المشروع غير معتمد من OpenStreetMap Foundation ولا يرتبط بها.
 
 ## हिन्दी (`hi`)
 
@@ -236,7 +236,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > मुक्त सॉफ़्टवेयर (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > मूल रूप से João Guilherme Packer द्वारा बनाया गया।
 >
-> OpenStreetMap का लोगो OpenStreetMap Foundation का ट्रेडमार्क है। यह प्रोजेक्ट OpenStreetMap Foundation द्वारा समर्थित नहीं है और न ही उससे जुड़ा है।
+> OpenStreetMap, OpenStreetMap Foundation का ट्रेडमार्क है। यह प्रोजेक्ट OpenStreetMap Foundation द्वारा समर्थित नहीं है और न ही उससे जुड़ा है।
 
 ## বাংলা (`bn`)
 
@@ -259,7 +259,7 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > মুক্ত সফটওয়্যার (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > মূলত João Guilherme Packer তৈরি করেছেন।
 >
-> OpenStreetMap লোগো OpenStreetMap Foundation-এর ট্রেডমার্ক। এই প্রকল্পটি OpenStreetMap Foundation দ্বারা অনুমোদিত নয় এবং এর সঙ্গে যুক্ত নয়।
+> OpenStreetMap, OpenStreetMap Foundation-এর ট্রেডমার্ক। এই প্রকল্পটি OpenStreetMap Foundation দ্বারা অনুমোদিত নয় এবং এর সঙ্গে যুক্ত নয়।
 
 ## اردو (`ur`)
 
@@ -282,4 +282,4 @@ Machine-assisted translations: corrections from native speakers are welcome (ope
 > آزاد سافٹ ویئر (GPL-3.0): https://github.com/erickdeoliveiraleal/osm-smart-menu
 > اصل میں João Guilherme Packer نے بنایا۔
 >
-> OpenStreetMap کا لوگو OpenStreetMap Foundation کا ٹریڈ مارک ہے۔ یہ منصوبہ OpenStreetMap Foundation کی طرف سے منظور شدہ نہیں ہے اور نہ ہی اس سے وابستہ ہے۔
+> OpenStreetMap، OpenStreetMap Foundation کا ٹریڈ مارک ہے۔ یہ منصوبہ OpenStreetMap Foundation کی طرف سے منظور شدہ نہیں ہے اور نہ ہی اس سے وابستہ ہے۔
