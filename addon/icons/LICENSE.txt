@@ -1,2 +1,5 @@
-The images in this folder are licensed under the Creative Commons Attribution-Share Alike 2.0 Generic license.
-Source: https://commons.wikimedia.org/wiki/File:Openstreetmap_logo.svg
+icon.svg, icon-small.svg and icon-*.png were made for OSM Smart Menu and are licensed, like the rest of
+the extension, under the GNU General Public License version 3 or later (see LICENSE.txt at the root).
+
+drag_indicator-black.svg: Material Icons by Google, Apache License 2.0.
+ui/: Tabler Icons, MIT License (see ui/LICENSE-tabler-icons.txt).

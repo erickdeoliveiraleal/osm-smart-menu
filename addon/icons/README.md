@@ -1,3 +1,4 @@
-To easily generate a PNG file from a SVG, install Inkscape and run (changing the resolution as needed):
+The extension icon is drawn in `icon.svg`, with a simplified version for small sizes in `icon-small.svg`
+(used up to 32 px). To render the PNG files after changing them, run from the repository root:
 
-    export RESOLUTION=96; inkscape -z -w "$RESOLUTION" -h "$RESOLUTION" osm.svg -e "osm${RESOLUTION}x${RESOLUTION}.png"
+    node scripts/render-icons.js

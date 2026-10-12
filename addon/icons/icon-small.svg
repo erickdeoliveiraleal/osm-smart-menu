@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="16" height="16">
+  <!-- icon.svg simplified for 16 and 32 px: no road, thicker lines, larger pin and badge -->
+  <polygon points="8,24 44,12 44,106 8,118" fill="#cfe8d5" stroke="#24323c" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="44,12 84,24 84,118 44,106" fill="#f4efe1" stroke="#24323c" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="84,24 120,12 120,106 84,118" fill="#cfe8d5" stroke="#24323c" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M52 82 C52 82 26 56 26 40 a26 26 0 0 1 52 0 c0 16 -26 42 -26 42z" fill="#e4572e" stroke="#24323c" stroke-width="6"/>
+  <circle cx="52" cy="40" r="9" fill="#fff"/>
+  <circle cx="92" cy="92" r="30" fill="#1f6f8b" stroke="#fff" stroke-width="6"/>
+  <path d="M77,84 h26 M95,76 l8,8 l-8,8 M107,100 h-26 M89,92 l-8,8 l8,8" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
