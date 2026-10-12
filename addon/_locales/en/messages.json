@@ -320,7 +320,7 @@
         "message": "The settings could not be saved."
     },
     "category_edit": {
-        "message": "Edit"
+        "message": "Editors"
     },
     "category_general": {
         "message": "General maps"
@@ -688,5 +688,29 @@
     },
     "description_josmview": {
         "message": "Moves JOSM to the visible area, without downloading"
+    },
+    "site_spyglass": {
+        "message": "Spyglass"
+    },
+    "description_spyglass": {
+        "message": "Inspect OpenStreetMap data: tags, geometry and history"
+    },
+    "site_osmapp": {
+        "message": "OsmAPP"
+    },
+    "description_osmapp": {
+        "message": "OpenStreetMap map with place details, search and edits"
+    },
+    "site_cartesapp": {
+        "message": "Cartes"
+    },
+    "description_cartesapp": {
+        "message": "Places, walking, cycling and public transport routes"
+    },
+    "config_groupByCategory": {
+        "message": "Group the links in the menu by category"
+    },
+    "config_groupByCategory_hint": {
+        "message": "Unchecked, the menu lists the links in the order below, which you can change by dragging them."
     }
 }

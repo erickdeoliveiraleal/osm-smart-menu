@@ -1,6 +1,7 @@
 import { configFileFormat, parseConfigFile, toConfigFile } from "./config-file";
 
 const storedData = {
+  "popup-group-by-category": false,
   "sites-order": ["1700000000000_https%3A%2F%2Fexample.com%2F%7Bzoom%7D", "openstreetmap", "ideditor"],
   "site_openstreetmap": { isEnabled: true },
   "site_ideditor": { isEnabled: false, customName: "iD" },
@@ -32,6 +33,7 @@ describe(parseConfigFile.name, () => {
     ['a newer version', JSON.stringify({ format: configFileFormat, version: 99, data: {} })],
     ['missing data', JSON.stringify({ format: configFileFormat, version: 1 })],
     ['an invalid order', JSON.stringify({ format: configFileFormat, version: 1, data: { "sites-order": "osm" } })],
+    ['an invalid grouping setting', JSON.stringify({ format: configFileFormat, version: 1, data: { "popup-group-by-category": "no" } })],
     ['an invalid site', JSON.stringify({ format: configFileFormat, version: 1, data: { "site_osm": { isEnabled: "yes" } } })],
     ['an invalid custom pattern', JSON.stringify({ format: configFileFormat, version: 1, data: { "site_x": { customPattern: { url: 1 } } } })],
   ])('rejects %s', (_description, text) => {

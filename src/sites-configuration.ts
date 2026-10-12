@@ -573,6 +573,36 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     zoomAdjustment: +1,
   },
 
+  spyglass: { // inspects OSM data (tags, geometry, history) from a live database
+    link: "spyglass.jochentopf.com",
+    category: "quality",
+    paramOpts: [
+      { ordered: "/#p={zoom}/{lat}/{lon}" },
+      { ordered: "p={zoom}/{lat}/{lon}" }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
+  osmapp: {
+    link: "osmapp.org",
+    category: "general",
+    paramOpts: [
+      { ordered: "/#{zoom}/{lat}/{lon}" },
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
+  cartesapp: {
+    link: "cartes.app",
+    category: "general",
+    paramOpts: [
+      { ordered: "/#{zoom}/{lat}/{lon}" },
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+
   cartesgouvfr: { // successor of the French Geoportail; it removes the parameters from the URL after loading
     link: "cartes.gouv.fr",
     category: "general",

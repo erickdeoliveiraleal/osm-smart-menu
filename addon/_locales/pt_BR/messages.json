@@ -252,7 +252,7 @@
         "message": "Não foi possível salvar as configurações."
     },
     "category_edit": {
-        "message": "Editar"
+        "message": "Editores"
     },
     "category_general": {
         "message": "Mapas gerais"
@@ -605,5 +605,29 @@
     },
     "description_josmview": {
         "message": "Leva o JOSM até a área visível, sem baixar dados"
+    },
+    "site_spyglass": {
+        "message": "Spyglass"
+    },
+    "description_spyglass": {
+        "message": "Inspecionar dados do OpenStreetMap: tags, geometria e histórico"
+    },
+    "site_osmapp": {
+        "message": "OsmAPP"
+    },
+    "description_osmapp": {
+        "message": "Mapa do OpenStreetMap com detalhes dos lugares, busca e edição"
+    },
+    "site_cartesapp": {
+        "message": "Cartes"
+    },
+    "description_cartesapp": {
+        "message": "Lugares e rotas a pé, de bicicleta e de transporte público"
+    },
+    "config_groupByCategory": {
+        "message": "Agrupar os links do menu por categoria"
+    },
+    "config_groupByCategory_hint": {
+        "message": "Desmarcado, o menu lista os links na ordem abaixo, que você pode mudar arrastando-os."
     }
 }

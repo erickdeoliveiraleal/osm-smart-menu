@@ -4,7 +4,8 @@
   import type { SiteCategory } from "../../sites-configuration";
 
   type Category = SiteCategory | "custom";
-  const categories: Category[] = [...siteCategories, "custom"];
+  // the user's own links first: they are usually the ones used most
+  const categories: Category[] = ["custom", ...siteCategories];
 
   export const categoryIcons: Record<Category, string> = {
     edit: "pencil",
@@ -33,9 +34,11 @@
   interface Props {
     siteLinks: SiteLink[];
     query?: string;
+    // false: one list in the order of the settings page, without category headings
+    grouped?: boolean;
   }
 
-  let { siteLinks, query = "" }: Props = $props();
+  let { siteLinks, query = "", grouped = true }: Props = $props();
 
   let unreachable: string | undefined = $state(); // id of the remote control link that got no answer
 
@@ -56,8 +59,9 @@
   const filtered = $derived(query.trim()
     ? items.filter((item) => item.searchText.includes(normalize(query.trim())))
     : items);
-  const groups = $derived(categories
-    .map((category) => ({ category, items: filtered.filter((item) => item.category === category) }))
+  const groups = $derived((grouped
+    ? categories.map((category) => ({ category: category as Category | undefined, items: filtered.filter((item) => item.category === category) }))
+    : [{ category: undefined, items: filtered }])
     .filter((group) => group.items.length > 0));
 </script>
 
@@ -116,16 +120,18 @@
   }
 </style>
 
-{#each groups as group (group.category)}
-  <section class="category-{group.category}">
-    <h2><Icon name={categoryIcons[group.category]} size={13} />{browser.i18n.getMessage(`category_${group.category}`)}</h2>
+{#each groups as group (group.category ?? "all")}
+  <section class="category-{group.category ?? 'all'}">
+    {#if group.category}
+      <h2><Icon name={categoryIcons[group.category]} size={13} />{browser.i18n.getMessage(`category_${group.category}`)}</h2>
+    {/if}
     {#each group.items as item (item.site.id)}
       <a id={item.site.id} href={item.site.url} title={item.site.url} onclick={(e) => {
           e.preventDefault();
           if (Sites[item.site.id]?.remoteControl) sendCommand(item.site.id, item.site.url);
           else openLink(item.site.url);
         }}>
-        <span class="badge"><Icon name={categoryIcons[group.category]} size={16} /></span>
+        <span class="badge"><Icon name={categoryIcons[item.category]} size={16} /></span>
         <span class="text">
           <span class="name">{item.name}</span>
           {#if item.description}<div class="description">{item.description}</div>{/if}

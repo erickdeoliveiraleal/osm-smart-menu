@@ -1,7 +1,7 @@
 import browser, { type Storage } from "webextension-polyfill";
 import { Sites, DefaultSiteConfiguration } from "../sites-configuration";
 import { UrlPattern } from "../popup/sites-manipulation-helper";
-import { toConfigFile, type ConfigFile, type StoredData } from "./config-file";
+import { toConfigFile, groupByCategoryKey, type ConfigFile, type StoredData } from "./config-file";
 
 export type StoredConfiguration = {
   isEnabled: boolean;
@@ -102,6 +102,15 @@ export async function setOrderedSiteIds(orderedSiteIds: string[]): Promise<void>
   await storage.set({
     [siteIdsOrderKey]: orderedSiteIds,
   });
+}
+
+/** Whether the popup groups the links by category (the default) or lists them in the order of the settings page. */
+export async function getGroupByCategory(): Promise<boolean> {
+  const stored = await storage.get(groupByCategoryKey);
+  return stored[groupByCategoryKey] !== false;
+}
+export async function setGroupByCategory(groupByCategory: boolean): Promise<void> {
+  await storage.set({ [groupByCategoryKey]: groupByCategory });
 }
 
 export type SiteConfiguration = StoredConfiguration & {

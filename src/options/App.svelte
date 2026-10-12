@@ -2,6 +2,7 @@
   import UrlTemplateForm from "./components/UrlTemplateForm.svelte";
   import ConfigurableLine from "./components/ConfigurableLine.svelte";
   import SettingsBackup from "./components/SettingsBackup.svelte";
+  import GroupByCategorySetting from "./components/GroupByCategorySetting.svelte";
   import type { SiteConfiguration } from "../storage/config-handler";
   import browser from "webextension-polyfill";
   import { matchesQuery } from "./utils";
@@ -35,6 +36,8 @@
     color: var(--text-secondary);
   }
 </style>
+
+<GroupByCategorySetting />
 
 <input type="search" bind:value={query} placeholder={searchPlaceholder} aria-label={searchPlaceholder} />
 
