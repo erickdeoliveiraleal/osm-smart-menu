@@ -14,6 +14,8 @@ export type ConfigFile = {
 
 const sitesOrderKey = "sites-order";
 export const groupByCategoryKey = "popup-group-by-category";
+export const openNextToCurrentTabKey = "popup-open-next-to-current-tab";
+const booleanKeys = [groupByCategoryKey, openNextToCurrentTabKey];
 const siteKeyPrefix = "site_";
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
@@ -22,8 +24,9 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
 
 function isValidSiteConfig(value: unknown): boolean {
   if (!isPlainObject(value)) return false;
-  const { isEnabled, customName, customPattern } = value;
+  const { isEnabled, customName, customPattern, remoteControl } = value;
   if (isEnabled !== undefined && typeof isEnabled !== "boolean") return false;
+  if (remoteControl !== undefined && typeof remoteControl !== "boolean") return false;
   if (customName !== undefined && typeof customName !== "string") return false;
   if (customPattern !== undefined) {
     if (!isPlainObject(customPattern)) return false;
@@ -36,7 +39,7 @@ function isValidSiteConfig(value: unknown): boolean {
 export function toConfigFile(storedData: StoredData): ConfigFile {
   const data: StoredData = {};
   for (const [key, value] of Object.entries(storedData)) {
-    if (key === sitesOrderKey || key === groupByCategoryKey || key.startsWith(siteKeyPrefix)) {
+    if (key === sitesOrderKey || booleanKeys.includes(key) || key.startsWith(siteKeyPrefix)) {
       data[key] = value;
     }
   }
@@ -67,7 +70,7 @@ export function parseConfigFile(text: string): StoredData {
       if (!Array.isArray(value) || !value.every((id) => typeof id === "string")) {
         throw new Error(`Invalid value for "${key}"`);
       }
-    } else if (key === groupByCategoryKey) {
+    } else if (booleanKeys.includes(key)) {
       if (typeof value !== "boolean") {
         throw new Error(`Invalid value for "${key}"`);
       }

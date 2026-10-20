@@ -15,7 +15,8 @@
       currentSiteId,
       someMapParameters
     );
-    const allParameters: Record<OsmAttribute, string> = {
+    // the visible area is computed from these
+    const allParameters: Record<Exclude<OsmAttribute, "left" | "right" | "top" | "bottom">, string> = {
       ...someMapParameters,
       nodeId: "1",
       wayId: "1",

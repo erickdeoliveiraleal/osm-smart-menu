@@ -1,18 +1,19 @@
 <script lang="ts">
   import browser from "webextension-polyfill";
-  import type { UrlPattern } from "../../popup/sites-manipulation-helper";
+  import { isLocalAddress, type UrlPattern } from "../../popup/sites-manipulation-helper";
   import { addNewUrlPattern } from "../../storage/config-handler";
 
   const urlTemplatePlaceholder =
     "https://www.openstreetmap.org/#map={zoom}/{latitude}/{longitude}";
-  const urlTemplatePattern: string = /([^{}]+\{(zoom|latitude|longitude|osm_(user_name|tag_key|tag_value|(changeset|node|way|relation)_id))\})+[^{}]*/
+  const urlTemplatePattern: string = /([^{}]+\{(zoom|latitude|longitude|left|right|top|bottom|osm_(user_name|tag_key|tag_value|(changeset|node|way|relation)_id))\})+[^{}]*/
     .source; // must contain curly braces; but only with known parameters
 
   const parametersHelpUrl = "https://wiki.openstreetmap.org/wiki/OSM_Smart_Menu#Advanced_method_to_add_new_links";
-  const parameters = ["zoom", "latitude", "longitude", "osm_user_name", "osm_changeset_id", "osm_node_id", "osm_way_id", "osm_relation_id", "osm_tag_key", "osm_tag_value"];
+  const parameters = ["zoom", "latitude", "longitude", "left", "right", "top", "bottom", "osm_user_name", "osm_changeset_id", "osm_node_id", "osm_way_id", "osm_relation_id", "osm_tag_key", "osm_tag_value"];
 
   let linkName = $state("");
   let linkUrlTemplate = $state("");
+  let remoteControl = $state(false);
   let errorMessage = $state("");
 
   // Firefox doesn't show the browser's validation messages inside the add-ons manager,
@@ -28,6 +29,9 @@
     if (!isUrl || !new RegExp(`^(?:${urlTemplatePattern})$`).test(linkUrlTemplate)) {
       return browser.i18n.getMessage("config_pattern_invalidTemplate");
     }
+    if (remoteControl && !isLocalAddress(linkUrlTemplate)) {
+      return browser.i18n.getMessage("config_pattern_remoteControlLocalOnly");
+    }
     return "";
   }
 
@@ -38,7 +42,7 @@
     if (errorMessage) return;
 
     const urlPattern: UrlPattern = { tag: "user-v1", url: linkUrlTemplate };
-    await addNewUrlPattern(linkName, urlPattern);
+    await addNewUrlPattern(linkName, urlPattern, true, remoteControl);
 
     window.location.reload();
   }
@@ -58,9 +62,26 @@
     color: #c00;
   }
 
-  .help {
+  .help,
+  .hint {
     font-size: 0.9em;
     margin: 0 0 8px;
+  }
+
+  .hint {
+    display: block;
+    color: var(--text-secondary);
+  }
+
+  label.checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  label.checkbox input {
+    display: inline;
+    margin: 0;
   }
 
   code {
@@ -96,6 +117,13 @@
       {#each parameters as parameter, i}<code>{"{" + parameter + "}"}</code>{i < parameters.length - 1 ? ", " : ". "}{/each}
       <a href={parametersHelpUrl} target="_blank" rel="noopener">{browser.i18n.getMessage("config_pattern_documentation")}</a>
     </p>
+    <label class="checkbox">
+      <input type="checkbox" bind:checked={remoteControl} oninput={() => (errorMessage = "")} />
+      <span>
+        {browser.i18n.getMessage("config_pattern_remoteControl")}
+        <span class="hint">{browser.i18n.getMessage("config_pattern_remoteControl_hint")}</span>
+      </span>
+    </label>
     {#if errorMessage}
       <p class="error" role="alert">{errorMessage}</p>
     {/if}

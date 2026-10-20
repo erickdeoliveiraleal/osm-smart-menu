@@ -1,12 +1,14 @@
 import browser, { type Storage } from "webextension-polyfill";
 import { Sites, DefaultSiteConfiguration } from "../sites-configuration";
 import { UrlPattern } from "../popup/sites-manipulation-helper";
-import { toConfigFile, groupByCategoryKey, type ConfigFile, type StoredData } from "./config-file";
+import { toConfigFile, groupByCategoryKey, openNextToCurrentTabKey, type ConfigFile, type StoredData } from "./config-file";
 
 export type StoredConfiguration = {
   isEnabled: boolean;
   customName?: string;
   customPattern?: UrlPattern;
+  // custom links only: send the link to a program on the user's computer without opening a tab
+  remoteControl?: boolean;
 }
 
 // needs fallback https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/sync#Browser_compatibility
@@ -33,6 +35,7 @@ async function getStoredConfig(siteId: string): Promise<StoredConfiguration> {
       isEnabled: typeof s.isEnabled !== "undefined"? s.isEnabled: getDefaultEnabledAttribute(siteId),
       customName: s.customName,
       customPattern: s.customPattern,
+      remoteControl: s.remoteControl,
     };
     return siteConfig
   } else {
@@ -57,7 +60,7 @@ export async function setStoredConfig(siteId: string, config: StoredConfiguratio
   await storage.set(newConfig);
 }
 
-export async function addNewUrlPattern(name: string, urlPattern: UrlPattern, isEnabled: boolean = true): Promise<void> {
+export async function addNewUrlPattern(name: string, urlPattern: UrlPattern, isEnabled: boolean = true, remoteControl?: boolean): Promise<void> {
   const timestamp = Date.now();
   const siteId = encodeURIComponent(`${timestamp}_${urlPattern.url}`);
 
@@ -65,6 +68,7 @@ export async function addNewUrlPattern(name: string, urlPattern: UrlPattern, isE
     isEnabled,
     customName: name,
     customPattern: urlPattern,
+    ...(remoteControl ? { remoteControl } : {}),
   });
 
   await setOrderedSiteIds(
@@ -111,6 +115,15 @@ export async function getGroupByCategory(): Promise<boolean> {
 }
 export async function setGroupByCategory(groupByCategory: boolean): Promise<void> {
   await storage.set({ [groupByCategoryKey]: groupByCategory });
+}
+
+/** Whether links open in a new tab next to the current one, instead of at the end of the tab bar (the default). */
+export async function getOpenNextToCurrentTab(): Promise<boolean> {
+  const stored = await storage.get(openNextToCurrentTabKey);
+  return stored[openNextToCurrentTabKey] === true;
+}
+export async function setOpenNextToCurrentTab(openNextToCurrentTab: boolean): Promise<void> {
+  await storage.set({ [openNextToCurrentTabKey]: openNextToCurrentTab });
 }
 
 export type SiteConfiguration = StoredConfiguration & {

@@ -289,7 +289,7 @@ describe(getRelevantSites.name, () => {
   siteLinksTests.forEach(({ id, attributes, url }) => {
     test(`builds link to '${id}'`, () => {
       const config: SiteConfiguration = { id, isEnabled: true, defaultConfiguration: Sites[id] };
-      expect(getRelevantSites([config], '', attributes)).toEqual([{ id, url }]);
+      expect(getRelevantSites([config], '', attributes)).toEqual([{ id, url, remoteControl: Sites[id].remoteControl }]);
     });
   });
   test('reads the user name from an osmcha filter', () => {
@@ -379,11 +379,11 @@ describe('JOSM with coordinates', () => {
   test('downloads the visible area when it is small', () => {
     const view = viewBounds(-15.7939, -47.8828, 18, '1280', '800');
     expect(getRelevantSites([josm], '', { ...brasilia, zoom: '18' }))
-      .toEqual([{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(view)}` }]);
+      .toEqual([{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(view)}`, remoteControl: true }]);
   });
   test('downloads at most 400 m to each side of the position', () => {
     const nearby = boxAround(-15.7939, -47.8828, 400);
-    const expected = [{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(nearby)}` }];
+    const expected = [{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(nearby)}`, remoteControl: true }];
     expect(getRelevantSites([josm], '', { ...brasilia, zoom: '8' })).toEqual(expected);
     expect(getRelevantSites([josm], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual(expected);
   });
@@ -393,16 +393,40 @@ describe('JOSM with coordinates', () => {
     const nearby = boxAround(-15.7939, -47.8828, 400);
     const expected = { left: nearby.left, right: nearby.right, top: view.top, bottom: view.bottom };
     expect(getRelevantSites([josm], '', { ...brasilia, zoom: '17', viewWidth: '2000', viewHeight: '400' }))
-      .toEqual([{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(expected)}` }]);
+      .toEqual([{ id: 'josm', url: `http://127.0.0.1:8111/load_and_zoom?${query(expected)}`, remoteControl: true }]);
   });
   test('moves the view to the visible area at any zoom, without downloading', () => {
     const view = viewBounds(-15.7939, -47.8828, 9, '1280', '800');
     expect(getRelevantSites([josmview], '', { ...brasilia, zoom: '9' }))
-      .toEqual([{ id: 'josmview', url: `http://127.0.0.1:8111/zoom?${query(view)}` }]);
+      .toEqual([{ id: 'josmview', url: `http://127.0.0.1:8111/zoom?${query(view)}`, remoteControl: true }]);
   });
   test('moving the view needs a zoom', () => {
     expect(getRelevantSites([josmview], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([]);
     expect(getRelevantSites([josmview], '', { nodeId: '123' })).toEqual([]);
+  });
+});
+
+describe('custom links', () => {
+  const brasilia = { lat: '-15.7939', lon: '-47.8828', zoom: '9', viewWidth: '1280', viewHeight: '800' };
+  const zoomTemplate = 'http://127.0.0.1:8111/zoom?left={left}&right={right}&top={top}&bottom={bottom}';
+  const custom = (url: string, remoteControl?: boolean): SiteConfiguration =>
+    ({ id: 'custom', isEnabled: true, customName: 'Custom', customPattern: { tag: 'user-v1', url }, remoteControl });
+
+  test('fill in the visible area, like the JOSM links', () => {
+    const view = viewBounds(-15.7939, -47.8828, 9, '1280', '800');
+    const [link] = getRelevantSites([custom(zoomTemplate)], '', brasilia);
+    expect(link.url).toBe(`http://127.0.0.1:8111/zoom?left=${view.left.toFixed(6)}&right=${view.right.toFixed(6)}` +
+      `&top=${view.top.toFixed(6)}&bottom=${view.bottom.toFixed(6)}`);
+    expect(link.remoteControl).toBeFalsy();
+  });
+  test('the visible area needs a zoom', () => {
+    expect(getRelevantSites([custom(zoomTemplate)], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([]);
+  });
+  test("are sent without opening a tab only to the user's computer", () => {
+    expect(getRelevantSites([custom(zoomTemplate, true)], '', brasilia)[0].remoteControl).toBe(true);
+    expect(getRelevantSites([custom('http://localhost:8111/zoom?lat={latitude}', true)], '', brasilia)[0].remoteControl).toBe(true);
+    expect(getRelevantSites([custom('http://[::1]:8111/zoom?lat={latitude}', true)], '', brasilia)[0].remoteControl).toBe(true);
+    expect(getRelevantSites([custom('https://example.com/?lat={latitude}', true)], '', brasilia)[0].remoteControl).toBe(false);
   });
 });
 
@@ -479,8 +503,10 @@ test('reads positions from Wikipedia and Wikidata pages but never offers them as
   expect(getRelevantSites([wikimedia], '', attributes)).toEqual([]);
 });
 
-test('opens the Historic Objects map in the browser language', () => {
+test('opens the Historic Objects map, whose MapLibre zoom is one level below OpenStreetMap', () => {
   const historicmap: SiteConfiguration = { id: 'historicmap', isEnabled: true, defaultConfiguration: Sites['historicmap'] };
-  const [link] = getRelevantSites([historicmap], '', { zoom: '5', lat: '6', lon: '7' });
-  expect(link.url).toMatch(/^https:\/\/gk\.historic\.place\/historische_objekte\/l\/(de|en|fr|nl|pt-br|cs|es|gl|ro|tr|ru|da|pl|ja|hu|ko|uk)\/\?zoom=5&lat=6&lon=7$/);
+  const [link] = getRelevantSites([historicmap], '', { zoom: '15', lat: '51.25', lon: '9.5' });
+  expect(link.url).toBe('https://gk.historic.place/?lon=9.5&lat=51.25&z=14');
+  expect(pickWinningCandidate([historicmap], [{ siteId: 'historicmap' }], 'https://gk.historic.place/?lon=9.500000&lat=51.250000&z=8.00&lang=de')!.attributes)
+    .toEqual({ lon: '9.500000', lat: '51.250000', zoom: '9' });
 });

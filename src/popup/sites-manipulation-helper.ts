@@ -1,4 +1,4 @@
-import { DefaultSiteConfiguration, ParamOpt, OsmAttribute } from "../sites-configuration";
+import { DefaultSiteConfiguration, ParamOpt, OsmAttribute, viewBounds } from "../sites-configuration";
 import { ContentScriptOutputMessage } from "../injectable-content-script";
 import { SiteConfiguration } from "../storage/config-handler";
 
@@ -20,6 +20,10 @@ const InfoRegExp: Record<string, string> = {
   lon: decimalNumberRegExp,
   key: "[^#?\/=]+",
   value: "[^#?\/]+",
+  left: decimalNumberRegExp,
+  right: decimalNumberRegExp,
+  top: decimalNumberRegExp,
+  bottom: decimalNumberRegExp,
 };
 //TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)
 
@@ -113,6 +117,31 @@ export type SiteLink = {
   id: string;
   url: string;
   customName: string | undefined;
+  // sent to a program on the user's computer without opening a tab (e.g. JOSM remote control)
+  remoteControl?: boolean;
+}
+
+/** Remote control commands are only sent to the user's own computer, so a link can't silently send requests to a website. */
+export function isLocalAddress(url: string): boolean {
+  try {
+    return ["127.0.0.1", "localhost", "[::1]"].includes(new URL(url).hostname);
+  } catch {
+    return false;
+  }
+}
+
+/** Adds the visible area ({left}, {right}, {top}, {bottom}), computed like the JOSM links do, when the zoom is known. */
+function withViewBounds(attributes: Record<string, string>): Record<string, string> {
+  const { lat, lon, zoom, viewWidth, viewHeight } = attributes;
+  if (!lat || !lon || !zoom) return attributes;
+  const bounds = viewBounds(Number(lat), Number(lon), Number(zoom), viewWidth, viewHeight);
+  return {
+    ...attributes,
+    left: bounds.left.toFixed(6),
+    right: bounds.right.toFixed(6),
+    top: bounds.top.toFixed(6),
+    bottom: bounds.bottom.toFixed(6),
+  };
 }
 
 export function getRelevantSites(
@@ -150,13 +179,14 @@ export function getRelevantSites(
           id,
           customName,
           url: `${protocol}://${site.defaultConfiguration.link}${path}`,
+          remoteControl: site.defaultConfiguration.remoteControl,
         };
       }
     } else {
       if (site.customPattern) {
-        const url = applyParametersToUrlPattern(site.customPattern, retrievedAttributes);
+        const url = applyParametersToUrlPattern(site.customPattern, withViewBounds(retrievedAttributes));
         if (url) {
-          return { id, customName, url };
+          return { id, customName, url, remoteControl: site.remoteControl && isLocalAddress(url) };
         }
       }
     }
@@ -167,6 +197,7 @@ export function getRelevantSites(
 const userUrlParametersMap: Record<string, OsmAttribute> = {
   zoom: 'zoom', latitude: 'lat',  longitude: 'lon', osm_changeset_id: 'changesetId', osm_user_name: 'userName',
   osm_tag_key: 'key', osm_tag_value: 'value', osm_node_id: 'nodeId', osm_way_id: 'wayId', osm_relation_id: 'relationId',
+  left: 'left', right: 'right', top: 'top', bottom: 'bottom',
 };
 
 function applyParametersToUrlPattern(urlPattern: UrlPattern, retrievedAttributes: Record<string, string>): string | undefined {

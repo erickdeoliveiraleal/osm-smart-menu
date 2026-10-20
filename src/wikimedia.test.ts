@@ -53,6 +53,16 @@ describe(wikimediaCoordinates.name, () => {
       </span>`;
     expect(wikimediaCoordinates(document)).toEqual({ lat: "-15.79389", lon: "-47.88278", zoom: "13" });
   });
+  test("reads where a Wikimedia Commons photo was taken", () => {
+    // as on https://commons.wikimedia.org/wiki/File:Tour_Eiffel_Wikimedia_Commons.jpg
+    document.body.innerHTML = `
+      <table class="toccolours layouttemplate commons-file-information-table"><tbody><tr>
+        <th class="type fileinfo-paramfield">Camera location</th>
+        <td><a class="external text" href="https://geohack.toolforge.org/geohack.php?pagename=File:Tour_Eiffel_Wikimedia_Commons.jpg&amp;params=048.856360_N_0002.297430_E_globe:Earth_type:camera_heading:315.00&amp;language=en">48° 51′ 22.9″ N, 2° 17′ 50.75″ E</a>
+        <a class="mw-kartographer-maplink no-icon" href="/wiki/Special:Map/13/48.85636/2.29743/en" data-zoom="13" data-lat="48.85636" data-lon="2.29743"></a></td>
+      </tr></tbody></table>`;
+    expect(wikimediaCoordinates(document)).toEqual({ lat: "48.856360", lon: "2.297430", zoom: "17" });
+  });
   test("returns nothing on pages without coordinates", () => {
     document.body.innerHTML = `<p>No coordinates here</p>`;
     expect(wikimediaCoordinates(document)).toBeUndefined();

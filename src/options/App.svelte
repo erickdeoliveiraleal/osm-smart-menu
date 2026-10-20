@@ -2,7 +2,8 @@
   import UrlTemplateForm from "./components/UrlTemplateForm.svelte";
   import ConfigurableLine from "./components/ConfigurableLine.svelte";
   import SettingsBackup from "./components/SettingsBackup.svelte";
-  import GroupByCategorySetting from "./components/GroupByCategorySetting.svelte";
+  import CheckboxSetting from "./components/CheckboxSetting.svelte";
+  import { getGroupByCategory, setGroupByCategory, getOpenNextToCurrentTab, setOpenNextToCurrentTab } from "../storage/config-handler";
   import type { SiteConfiguration } from "../storage/config-handler";
   import browser from "webextension-polyfill";
   import { matchesQuery } from "./utils";
@@ -37,7 +38,8 @@
   }
 </style>
 
-<GroupByCategorySetting />
+<CheckboxSetting message="config_groupByCategory" load={getGroupByCategory} save={setGroupByCategory} />
+<CheckboxSetting message="config_openNextToCurrentTab" load={getOpenNextToCurrentTab} save={setOpenNextToCurrentTab} />
 
 <input type="search" bind:value={query} placeholder={searchPlaceholder} aria-label={searchPlaceholder} />
 

@@ -51,7 +51,8 @@
     await addNewUrlPattern(
       getSiteTitle(siteConfig),
       siteConfig.customPattern!,
-      siteConfig.isEnabled
+      siteConfig.isEnabled,
+      siteConfig.remoteControl
     );
     // deleted = false; the restored website is added at the top of the list and the site ID changes...
     window.location.reload();

@@ -39,6 +39,7 @@ export type OsmAttribute =
   | "userName" | "changesetId" | "key" | "value"
   | "zoom" | "lat" | "lon" | "tracesId"
   | "viewWidth" | "viewHeight" // size of the browser tab, in pixels; not read from the page
+  | "left" | "right" | "top" | "bottom" // visible area, computed for custom links from the position, zoom and tab size
   ;
 
 const urlPattern1: ParamOpt = { ordered: "/", unordered: { zoom: "zoom", lat: "lat", lon: "lon" } };
@@ -291,9 +292,9 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 
-  wikimedia: { // reads coordinates from Wikipedia articles and Wikidata items
+  wikimedia: { // reads coordinates from Wikipedia articles, Wikidata items and geotagged Wikimedia Commons files
     link: "www.wikipedia.org",
-    domainRegexp: /(^|\.)(wikipedia|wikidata|wikivoyage)\.org$/,
+    domainRegexp: /(^|\.)(wikipedia|wikidata|wikivoyage|commons\.wikimedia)\.org$/,
     category: "tools",
     sourceOnly: true,
     paramOpts: [],
@@ -495,14 +496,13 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 
-  historicmap: {
-    link: `gk.historic.place/historische_objekte/l/${historicMapLanguage()}`,
+  historicmap: { // MapLibre map; it picks the browser's language and doesn't keep the position in the address bar
+    link: "gk.historic.place",
     category: "thematic",
-    paramOpts: [urlPattern1],
-    maxZoom: 19,
-    extractors: {
-      getPermalink: getPermalinkBySelector("a#permalink")
-    },
+    paramOpts: [
+      { ordered: "/", unordered: { lon: "lon", lat: "lat", zoom: "z" } },
+    ],
+    zoomAdjustment: +1,
   },
 
   openrailwaymap: {
@@ -959,16 +959,6 @@ export function zoomFromGoogleMeters(meters: number, lat: number, windowHeight: 
   return Math.min(Math.max(Math.round(zoom), 0), 22);
 }
 
-/** Language of the Historic Objects map, from the browser's language. */
-function historicMapLanguage(): string {
-  const supported = ["de", "en", "fr", "nl", "pt-br", "cs", "es", "gl", "ro", "tr", "ru", "da", "pl", "ja", "hu", "ko", "uk"];
-  const language = (globalThis.navigator?.language ?? "en").toLowerCase();
-  if (supported.includes(language)) return language;
-  const base = language.split("-")[0];
-  if (base === "pt") return "pt-br";
-  return supported.includes(base) ? base : "en";
-}
-
 /**
  * Parses GeoHack "params", used by Wikipedia coordinate links, e.g. "48.8566;2.3522",
  * "48_51_24_N_2_21_03_E_type:city" or "-15.79_-47.88_region:BR".
@@ -1001,9 +991,10 @@ export function parseGeohackParams(params: string): { lat: number; lon: number; 
 const zoomByGeohackType: Record<string, number> = {
   country: 5, state: 7, adm1st: 7, adm2nd: 9, adm3rd: 11, isle: 11, city: 12, mountain: 13, waterbody: 12, river: 12,
   airport: 14, railwaystation: 16, landmark: 17, edu: 17,
+  camera: 17, // where a Wikimedia Commons photo was taken
 };
 
-/** Coordinates of the current Wikidata item (property P625) or Wikipedia article. */
+/** Coordinates of the current Wikidata item (property P625), Wikipedia article or Wikimedia Commons file. */
 export function wikimediaCoordinates(document: Document): Partial<Record<OsmAttribute, string>> | undefined {
   // Wikidata: each P625 statement links to Special:Map/{zoom}/{lat}/{lon}; skip deprecated statements
   const statements = [...document.querySelectorAll("#P625 .wikibase-statementview")];
@@ -1013,7 +1004,8 @@ export function wikimediaCoordinates(document: Document): Partial<Record<OsmAttr
   if (map) return { zoom: map[1], lat: map[2], lon: map[3] };
 
   // Wikipedia: the article's coordinates (shown next to the title) are either an interactive map link
-  // with the position in data attributes (e.g. Portuguese Wikipedia) or a link to GeoHack (e.g. English Wikipedia)
+  // with the position in data attributes (e.g. Portuguese Wikipedia) or a link to GeoHack (e.g. English Wikipedia).
+  // Wikimedia Commons: the "Camera location" and "Object location" boxes of a file link to GeoHack, the camera first
   const mapLinkOfArticle = document.querySelector<HTMLElement>("#coordinates .mw-kartographer-maplink[data-lat][data-lon]");
   if (mapLinkOfArticle) {
     const { lat, lon, zoom } = mapLinkOfArticle.dataset;

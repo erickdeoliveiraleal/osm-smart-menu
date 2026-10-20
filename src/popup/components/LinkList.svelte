@@ -133,7 +133,7 @@
           title={[item.description, item.site.url].filter(Boolean).join("\n")}
           onclick={(e) => {
             e.preventDefault();
-            if (Sites[item.site.id]?.remoteControl) sendCommand(item.site.id, item.site.url);
+            if (item.site.remoteControl) sendCommand(item.site.id, item.site.url);
             else openLink(item.site.url);
           }}>{item.name}</a>
         {#if unreachable === item.site.id}

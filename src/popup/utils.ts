@@ -1,5 +1,6 @@
 import browser from "webextension-polyfill";
 import { UrlPattern } from "./sites-manipulation-helper";
+import { getOpenNextToCurrentTab } from "../storage/config-handler";
 
 export type CustomUserOption = {
   defaultName: string;
@@ -12,8 +13,19 @@ export enum KnownError {
   NO_INFORMATION_EXTRACTED = 'noInformationExtracted',
 }
 
-export function openLink(url: string): void {
-  browser.tabs.create({ url });
+export async function openLink(url: string): Promise<void> {
+  if (await getOpenNextToCurrentTab()) {
+    const [currentTab] = await browser.tabs.query({ active: true, currentWindow: true });
+    if (currentTab) {
+      try {
+        await browser.tabs.create({ url, index: currentTab.index + 1, openerTabId: currentTab.id });
+        return;
+      } catch {
+        // e.g. a browser that doesn't support these options: open it at the end instead
+      }
+    }
+  }
+  await browser.tabs.create({ url });
 }
 
 /**

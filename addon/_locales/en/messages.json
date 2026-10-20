@@ -632,6 +632,15 @@
     "config_pattern_documentation": {
         "message": "Documentation and examples"
     },
+    "config_pattern_remoteControl": {
+        "message": "Send without opening a tab"
+    },
+    "config_pattern_remoteControl_hint": {
+        "message": "For programs on your computer with a remote control, like JOSM. The link must start with http://127.0.0.1, http://localhost or http://[::1]."
+    },
+    "config_pattern_remoteControlLocalOnly": {
+        "message": "Links sent without opening a tab must point to your computer: 127.0.0.1, localhost or [::1]."
+    },
     "config_help": {
         "message": "Help"
     },
@@ -648,10 +657,10 @@
         "message": "Photos from Wikimedia Commons nearby"
     },
     "site_wikimedia": {
-        "message": "Wikipedia and Wikidata"
+        "message": "Wikipedia, Wikidata and Wikimedia Commons"
     },
     "description_wikimedia": {
-        "message": "Reads coordinates from articles and items"
+        "message": "Reads coordinates from articles, items and geotagged files"
     },
     "site_openskimap": {
         "message": "OpenSkiMap"
@@ -712,5 +721,11 @@
     },
     "config_groupByCategory_hint": {
         "message": "Unchecked, the menu lists the links in the order below, which you can change by dragging them."
+    },
+    "config_openNextToCurrentTab": {
+        "message": "Open links next to the current tab"
+    },
+    "config_openNextToCurrentTab_hint": {
+        "message": "Unchecked, they open at the end of the tab bar."
     }
 }
