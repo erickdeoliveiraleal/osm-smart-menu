@@ -383,6 +383,12 @@
     "description_soaratlas": {
         "message": "Mapas e imagens de satélite compartilhados pelos usuários"
     },
+    "site_nasaworldview": {
+        "message": "NASA Worldview"
+    },
+    "description_nasaworldview": {
+        "message": "Imagens de satélite diárias da NASA"
+    },
     "description_opentopomap": {
         "message": "Mapa topográfico"
     },

@@ -486,6 +486,25 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 
+  nasaworldview: { // daily satellite images (MODIS, VIIRS…); the address has the visible area: ?v=west,south,east,north
+    link: "worldview.earthdata.nasa.gov",
+    category: "imagery",
+    paramOpts: [],
+    buildPath: ({ lat, lon, zoom, viewWidth, viewHeight }) => {
+      if (!lat || !lon || !zoom) return undefined;
+      const { left, bottom, right, top } = viewBounds(Number(lat), Number(lon), Number(zoom), viewWidth, viewHeight);
+      return `/?v=${[left, bottom, right, top].map((n) => n.toFixed(6)).join(",")}`;
+    },
+    // today's images are only complete late in the day, so it opens on yesterday's
+    getDynamicQueryParameters: (now: Date) => ({
+      t: new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
+    }),
+    extractors: {
+      getAttributesFromPage: (window: Window) =>
+        positionFromBounds(new URL(window.location.href).searchParams.get("v"), window.innerWidth) ?? {},
+    },
+  },
+
   soaratlas: { // maps and satellite images uploaded by its users, over an OpenStreetMap base map (Leaflet)
     link: "soaratlas.com",
     category: "imagery",
@@ -957,6 +976,21 @@ function intersection(a: Bounds, b: Bounds): Bounds {
 function boundsQuery({ left, right, top, bottom }: Bounds): string {
   const round = (n: number) => n.toFixed(6);
   return `left=${round(left)}&right=${round(right)}&top=${round(top)}&bottom=${round(bottom)}`;
+}
+
+/**
+ * Center and zoom of a "west,south,east,north" area shown in a map `width` pixels wide, as NASA Worldview writes it.
+ * Worldview uses latitude and longitude as plane coordinates, so the zoom comes from the degrees of longitude per pixel.
+ */
+export function positionFromBounds(bounds: string | null, width: number): Partial<Record<OsmAttribute, string>> | undefined {
+  const [west, south, east, north] = (bounds ?? "").split(",").map(Number);
+  if (![west, south, east, north].every(Number.isFinite) || !(east > west) || !(width > 0)) return undefined;
+  const zoom = Math.log2(360 * width / (256 * (east - west)));
+  return {
+    lat: ((south + north) / 2).toFixed(6),
+    lon: ((west + east) / 2).toFixed(6),
+    zoom: Math.min(Math.max(Math.round(zoom), 0), 22).toString(),
+  };
 }
 
 /**

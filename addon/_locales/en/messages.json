@@ -451,6 +451,12 @@
     "description_soaratlas": {
         "message": "Maps and satellite images shared by users"
     },
+    "site_nasaworldview": {
+        "message": "NASA Worldview"
+    },
+    "description_nasaworldview": {
+        "message": "Daily satellite images from NASA"
+    },
     "description_opentopomap": {
         "message": "Topographic map"
     },

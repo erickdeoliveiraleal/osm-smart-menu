@@ -1,6 +1,6 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
 import { SiteConfiguration } from "../storage/config-handler";
-import { Sites, OsmAttribute, zoomFromGoogleMeters, boxAround, viewBounds, Bounds } from "../sites-configuration";
+import { Sites, OsmAttribute, zoomFromGoogleMeters, boxAround, viewBounds, Bounds, positionFromBounds } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {
   id: 'test1',
@@ -406,6 +406,32 @@ describe('JOSM with coordinates', () => {
   test('moving the view needs a zoom', () => {
     expect(getRelevantSites([josmview], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([]);
     expect(getRelevantSites([josmview], '', { nodeId: '123' })).toEqual([]);
+  });
+});
+
+describe('NASA Worldview', () => {
+  const worldview: SiteConfiguration = { id: 'nasaworldview', isEnabled: true, defaultConfiguration: Sites['nasaworldview'] };
+
+  test("opens the visible area on yesterday's images", () => {
+    jest.useFakeTimers({ now: new Date('2026-10-22T12:00:00Z') });
+    const view = viewBounds(-15.7939, -47.8828, 11, '1024', '768');
+    expect(getRelevantSites([worldview], '', { lat: '-15.7939', lon: '-47.8828', zoom: '11', viewWidth: '1024', viewHeight: '768' }))
+      .toEqual([{ id: 'nasaworldview', url: `https://worldview.earthdata.nasa.gov/?v=${view.left.toFixed(6)},${view.bottom.toFixed(6)},${view.right.toFixed(6)},${view.top.toFixed(6)}&t=2026-10-21` }]);
+    jest.useRealTimers();
+  });
+  test('needs a zoom', () => {
+    expect(getRelevantSites([worldview], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([]);
+  });
+  test('reads the center and zoom of its visible area', () => {
+    // as written by Worldview in a 1024 px wide window
+    const v = '-48.06666666666666,-16,-47.53333333333333,-15.600000000000001';
+    expect(positionFromBounds(v, 1024)).toEqual({ lat: '-15.800000', lon: '-47.800000', zoom: '11' });
+    expect(positionFromBounds('-58.15,-31.67,-48.32,-26.14', 1280)).toEqual({ lat: '-28.905000', lon: '-53.235000', zoom: '8' });
+  });
+  test('ignores an address without a visible area', () => {
+    expect(positionFromBounds(null, 1024)).toBeUndefined();
+    expect(positionFromBounds('1,2,3', 1024)).toBeUndefined();
+    expect(positionFromBounds('5,0,1,1', 1024)).toBeUndefined();
   });
 });
 
