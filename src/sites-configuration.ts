@@ -486,6 +486,16 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 
+  soaratlas: { // maps and satellite images uploaded by its users, over an OpenStreetMap base map (Leaflet)
+    link: "soaratlas.com",
+    category: "imagery",
+    paramOpts: [
+      { ordered: "/maps?pos={lat}%2C{lon}%2C{zoom}" },
+      { ordered: "pos={lat}%2C{lon}%2C{zoom}" }, // input-only
+      { ordered: "pos={lat},{lon},{zoom}" }, // input-only
+    ],
+  },
+
   opentopomap: {
     link: "www.opentopomap.org",
     category: "thematic",

@@ -181,6 +181,8 @@ describe(pickWinningCandidate.name, () => {
     { id: 'cartesgouvfr', url: 'https://cartes.gouv.fr/explorer-les-cartes/?c=-47.8828%2C-15.7939&z=14', zoom: '14' },
     { id: 'whodidit', url: 'https://simon04.dev.openstreetmap.org/whodidit/?zoom=14&lat=-15.7939&lon=-47.8828&layers=BTT', zoom: '14' },
     { id: 'esriwayback', url: 'https://livingatlas.arcgis.com/wayback/#mapCenter=-47.8828%2C-15.7939%2C14&mode=explore&active=26334', zoom: '14' },
+    { id: 'soaratlas', url: 'https://soaratlas.com/maps?pos=-15.7939%2C-47.8828%2C14', zoom: '14' },
+    { id: 'soaratlas', url: 'https://soaratlas.com/maps?pos=-15.7939,-47.8828,14', zoom: '14' },
     { id: 'sentinelhub', url: 'https://browser.dataspace.copernicus.eu/?zoom=14&lat=-15.7939&lng=-47.8828&themeId=DEFAULT-THEME&datasetId=S2_L2A_CDAS&cloudCoverage=30', zoom: '14' },
     { id: 'sentinelhub', url: 'https://dataspace.copernicus.eu/browser/?zoom=14&lat=-15.7939&lng=-47.8828&datasetId=S2_L2A_CDAS', zoom: '14' },
   ];
@@ -269,6 +271,7 @@ describe(getRelevantSites.name, () => {
     { id: 'cartesgouvfr', attributes: zll567_attributes, url: 'https://cartes.gouv.fr/explorer-les-cartes/?c=7,6&z=5' },
     { id: 'whodidit', attributes: zll567_attributes, url: 'https://simon04.dev.openstreetmap.org/whodidit/?zoom=5&lat=6&lon=7' },
     { id: 'esriwayback', attributes: zll567_attributes, url: 'https://livingatlas.arcgis.com/wayback/#mapCenter=7,6,5' },
+    { id: 'soaratlas', attributes: zll567_attributes, url: 'https://soaratlas.com/maps?pos=6%2C7%2C5' },
     { id: 'overpassturbo', attributes: zll567_attributes, url: 'https://overpass-turbo.eu/?C=6;7;5' },
     { id: 'geohack', attributes: zll567_attributes, url: 'https://geohack.toolforge.org/geohack.php?params=6;7' },
     { id: 'googlestreetview', attributes: zll567_attributes, url: 'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=6,7' },

@@ -445,6 +445,12 @@
     "description_esriwayback": {
         "message": "Historical satellite imagery"
     },
+    "site_soaratlas": {
+        "message": "Soar Atlas"
+    },
+    "description_soaratlas": {
+        "message": "Maps and satellite images shared by users"
+    },
     "description_opentopomap": {
         "message": "Topographic map"
     },
