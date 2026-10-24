@@ -1,6 +1,6 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
 import { SiteConfiguration } from "../storage/config-handler";
-import { Sites, OsmAttribute, zoomFromGoogleMeters, boxAround, viewBounds, Bounds, positionFromBounds } from "../sites-configuration";
+import { Sites, OsmAttribute, zoomFromGoogleMeters, boxAround, viewBounds, Bounds, positionFromBounds, googleEarthDistance, zoomFromGoogleEarthDistance } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {
   id: 'test1',
@@ -432,6 +432,31 @@ describe('NASA Worldview', () => {
     expect(positionFromBounds(null, 1024)).toBeUndefined();
     expect(positionFromBounds('1,2,3', 1024)).toBeUndefined();
     expect(positionFromBounds('5,0,1,1', 1024)).toBeUndefined();
+  });
+});
+
+describe('Google Earth', () => {
+  const earth: SiteConfiguration = { id: 'googleearth', isEnabled: true, defaultConfiguration: Sites['googleearth'] };
+  const maps: SiteConfiguration = { id: 'googlemaps', isEnabled: true, defaultConfiguration: Sites['googlemaps'] };
+
+  test('opens the camera at the distance that shows the same area', () => {
+    const distance = Math.round(googleEarthDistance(15, -15.7939, 768));
+    expect(getRelevantSites([earth], '', { lat: '-15.7939', lon: '-47.8828', zoom: '15', viewHeight: '768' }))
+      .toEqual([{ id: 'googleearth', url: `https://earth.google.com/web/@-15.7939,-47.8828,0a,${distance}d,35y,0h,0t,0r` }]);
+  });
+  test('needs a zoom', () => {
+    expect(getRelevantSites([earth], '', { lat: '-15.7939', lon: '-47.8828' })).toEqual([]);
+  });
+  test('converts the camera distance back to the zoom', () => {
+    for (const zoom of [3, 10, 15, 19]) {
+      expect(zoomFromGoogleEarthDistance(googleEarthDistance(zoom, -15.7939, 768), 35, -15.7939, 768)).toBe(zoom);
+    }
+    // measured in Google Earth: 1879 m above the ground of Brasília shows 1193 m in a window 768 px high
+    expect(zoomFromGoogleEarthDistance(1879, 35, -15.7939, 768)).toBe(Math.round(Math.log2(156543.03392 * Math.cos(-15.7939 * Math.PI / 180) * 768 / 1193)));
+  });
+  test('is recognized apart from Google Maps', () => {
+    expect(findSiteCandidates([maps, earth], 'https://earth.google.com/web/@-15.79,-47.88,1100a,1879d,35y,0h,0t,0r')).toEqual(['googleearth']);
+    expect(findSiteCandidates([maps, earth], 'https://www.google.com/maps/@-15.79,-47.88,15z')).toEqual(['googlemaps']);
   });
 });
 

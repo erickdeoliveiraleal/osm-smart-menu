@@ -457,6 +457,12 @@
     "description_nasaworldview": {
         "message": "Daily satellite images from NASA"
     },
+    "site_googleearth": {
+        "message": "Google Earth"
+    },
+    "description_googleearth": {
+        "message": "Satellite images and 3D buildings"
+    },
     "description_opentopomap": {
         "message": "Topographic map"
     },

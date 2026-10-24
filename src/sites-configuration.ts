@@ -684,7 +684,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   googlemaps: {
     link: "www.google.com", //redirected from maps.google.com
     category: "general",
-    domainRegexp: /\.google\.(com?|cat|xxx|(com?\.)?[a-z]{2})$/,
+    domainRegexp: /^(?!earth\.).*\.google\.(com?|cat|xxx|(com?\.)?[a-z]{2})$/, // Google Earth is a separate entry
     paramOpts: [
       { ordered: "/maps/@{lat},{lon},{zoom}z" },
       { ordered: "@{lat},{lon},{zoom}z" }, // input-only
@@ -698,6 +698,27 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
         if (!match) return {};
         const zoom = zoomFromGoogleMeters(Number(match[3]), Number(match[1]), window.innerHeight);
         return zoom === undefined ? {} : { zoom: zoom.toString() };
+      },
+    },
+  },
+
+  googleearth: { // the address has a camera distance instead of a zoom: @lat,lon,{altitude}a,{distance}d,{field of view}y,…
+    link: "earth.google.com",
+    category: "imagery",
+    paramOpts: [],
+    // the ground altitude isn't known here, so the distance is counted from sea level: a bit closer on high ground
+    buildPath: ({ lat, lon, zoom, viewHeight }) => {
+      if (!lat || !lon || !zoom) return undefined;
+      const distance = googleEarthDistance(Number(zoom), Number(lat), Number(viewHeight ?? 800));
+      return `/web/@${lat},${lon},0a,${Math.round(distance)}d,${googleEarthFieldOfView}y,0h,0t,0r`;
+    },
+    extractors: {
+      getAttributesFromPage: (window: Window) => {
+        const match = window.location.href.match(/@(-?[0-9.]+),(-?[0-9.]+),-?[0-9.]+a,([0-9.]+)d,([0-9.]+)y/);
+        if (!match) return {};
+        const [, lat, lon, distance, fieldOfView] = match;
+        const zoom = zoomFromGoogleEarthDistance(Number(distance), Number(fieldOfView), Number(lat), window.innerHeight);
+        return zoom === undefined ? { lat, lon } : { lat, lon, zoom: zoom.toString() };
       },
     },
   },
@@ -991,6 +1012,20 @@ export function positionFromBounds(bounds: string | null, width: number): Partia
     lon: ((west + east) / 2).toFixed(6),
     zoom: Math.min(Math.max(Math.round(zoom), 0), 22).toString(),
   };
+}
+
+/** Vertical field of view of the Google Earth camera, in degrees ("35y" in its addresses). */
+const googleEarthFieldOfView = 35;
+
+/** Distance from which the Google Earth camera, looking straight down, shows the same height as osm.org at `zoom`. */
+export function googleEarthDistance(zoom: number, lat: number, windowHeight: number): number {
+  const visibleHeight = 156543.03392 * Math.cos(lat * Math.PI / 180) * windowHeight / 2 ** zoom;
+  return visibleHeight / (2 * Math.tan(googleEarthFieldOfView / 2 * Math.PI / 180));
+}
+
+/** Zoom of osm.org that shows what the Google Earth camera shows from `distance` meters with a `fieldOfView` (degrees). */
+export function zoomFromGoogleEarthDistance(distance: number, fieldOfView: number, lat: number, windowHeight: number): number | undefined {
+  return zoomFromGoogleMeters(2 * distance * Math.tan(fieldOfView / 2 * Math.PI / 180), lat, windowHeight);
 }
 
 /**
