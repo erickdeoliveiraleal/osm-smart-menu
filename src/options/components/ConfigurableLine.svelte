@@ -8,7 +8,8 @@
   import type { SiteConfiguration } from "../../storage/config-handler";
   import { untrack } from "svelte";
   import browser from "webextension-polyfill";
-  import { dragHandleClass, getSiteTitle, getSiteDetails, matchesQuery } from "../utils";
+  import { dragHandleClass, getSiteTitle, getSiteDetails, matchesQuery, isValidUrlTemplate } from "../utils";
+  import { isLocalAddress } from "../../popup/sites-manipulation-helper";
   interface Props {
     siteConfig: SiteConfiguration;
     currentEditableLinkById: string | undefined;
@@ -23,11 +24,27 @@
   let deleted = $state(false);
   let siteTitle = $state(untrack(() => getSiteTitle(siteConfig))); // initial value of an editable field
 
+  // only links created with a URL template can be edited
+  const urlEditable = $derived(siteConfig.customPattern?.tag === "user-v1");
+  let siteUrl = $state(untrack(() => siteConfig.customPattern?.url ?? ""));
+  let errorMessage = $state("");
+
   const dragHandleSrc = "/icons/drag_indicator-black.svg"; // from https://fonts.gstatic.com/s/i/materialicons/drag_indicator/v5/24px.svg?download=true
   async function updateTitle() {
-    await updateStoredConfig(siteConfig.id, {
-      customName: siteTitle,
-    });
+    const changes: Partial<SiteConfiguration> = { customName: siteTitle };
+    if (urlEditable && siteConfig.customPattern) {
+      if (!isValidUrlTemplate(siteUrl)) {
+        errorMessage = browser.i18n.getMessage("config_pattern_invalidTemplate");
+        return;
+      }
+      if (siteConfig.remoteControl && !isLocalAddress(siteUrl)) {
+        errorMessage = browser.i18n.getMessage("config_pattern_remoteControlLocalOnly");
+        return;
+      }
+      changes.customPattern = { ...siteConfig.customPattern, url: siteUrl };
+    }
+    errorMessage = "";
+    await updateStoredConfig(siteConfig.id, changes);
     const newConfig: SiteConfiguration = await getSiteConfiguration(
       siteConfig.id
     );
@@ -89,9 +106,27 @@
   input[type="checkbox"] {
     margin-left: 0;
   }
-  input[type="text"] {
+  .fields {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+  input[type="text"],
+  input[type="url"] {
     width: 100%;
+    box-sizing: border-box;
     margin-right: 2px;
+  }
+  .error {
+    color: #c00;
+    font-size: 0.85em;
+  }
+  @media (prefers-color-scheme: dark) {
+    .error {
+      color: #ff8a8a;
+    }
   }
   button.save,
   button.edit {
@@ -130,7 +165,15 @@
           {browser.i18n.getMessage('config_editButton')}
         </button>
       {:else}
-        <input type="text" bind:value={siteTitle} />
+        <span class="fields">
+          <input type="text" bind:value={siteTitle} />
+          {#if urlEditable}
+            <input type="url" bind:value={siteUrl} oninput={() => (errorMessage = "")} />
+          {/if}
+          {#if errorMessage}
+            <span class="error" role="alert">{errorMessage}</span>
+          {/if}
+        </span>
         <button class="save" onclick={updateTitle}>
           {browser.i18n.getMessage('config_saveButton')}
         </button>
