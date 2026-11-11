@@ -745,5 +745,11 @@
     },
     "config_openNextToCurrentTab_hint": {
         "message": "Unchecked, they open at the end of the tab bar."
+    },
+    "config_categories": {
+        "message": "Categories in the menu"
+    },
+    "config_categories_hint": {
+        "message": "Unchecked categories are hidden from the menu. Their links keep their settings."
     }
 }

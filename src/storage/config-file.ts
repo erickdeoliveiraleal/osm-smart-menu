@@ -16,6 +16,7 @@ const sitesOrderKey = "sites-order";
 export const groupByCategoryKey = "popup-group-by-category";
 export const openNextToCurrentTabKey = "popup-open-next-to-current-tab";
 const booleanKeys = [groupByCategoryKey, openNextToCurrentTabKey];
+export const hiddenCategoriesKey = "popup-hidden-categories";
 const siteKeyPrefix = "site_";
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
@@ -39,7 +40,7 @@ function isValidSiteConfig(value: unknown): boolean {
 export function toConfigFile(storedData: StoredData): ConfigFile {
   const data: StoredData = {};
   for (const [key, value] of Object.entries(storedData)) {
-    if (key === sitesOrderKey || booleanKeys.includes(key) || key.startsWith(siteKeyPrefix)) {
+    if (key === sitesOrderKey || key === hiddenCategoriesKey || booleanKeys.includes(key) || key.startsWith(siteKeyPrefix)) {
       data[key] = value;
     }
   }
@@ -66,7 +67,7 @@ export function parseConfigFile(text: string): StoredData {
 
   const data: StoredData = {};
   for (const [key, value] of Object.entries(parsed.data)) {
-    if (key === sitesOrderKey) {
+    if (key === sitesOrderKey || key === hiddenCategoriesKey) {
       if (!Array.isArray(value) || !value.every((id) => typeof id === "string")) {
         throw new Error(`Invalid value for "${key}"`);
       }

@@ -2,6 +2,7 @@ import { configFileFormat, parseConfigFile, toConfigFile } from "./config-file";
 
 const storedData = {
   "popup-group-by-category": false,
+  "popup-hidden-categories": ["edit", "custom"],
   "popup-open-next-to-current-tab": true,
   "sites-order": ["1700000000000_https%3A%2F%2Fexample.com%2F%7Bzoom%7D", "openstreetmap", "ideditor"],
   "site_openstreetmap": { isEnabled: true },
@@ -40,6 +41,7 @@ describe(parseConfigFile.name, () => {
     ['a newer version', JSON.stringify({ format: configFileFormat, version: 99, data: {} })],
     ['missing data', JSON.stringify({ format: configFileFormat, version: 1 })],
     ['an invalid order', JSON.stringify({ format: configFileFormat, version: 1, data: { "sites-order": "osm" } })],
+    ['invalid hidden categories', JSON.stringify({ format: configFileFormat, version: 1, data: { "popup-hidden-categories": "edit" } })],
     ['an invalid grouping setting', JSON.stringify({ format: configFileFormat, version: 1, data: { "popup-group-by-category": "no" } })],
     ['an invalid tab placement setting', JSON.stringify({ format: configFileFormat, version: 1, data: { "popup-open-next-to-current-tab": 1 } })],
     ['an invalid site', JSON.stringify({ format: configFileFormat, version: 1, data: { "site_osm": { isEnabled: "yes" } } })],
