@@ -43,3 +43,15 @@ export function matchesQuery(siteConfig: SiteConfiguration, query: string): bool
   const q = normalize(query.trim());
   return !q || normalize(`${getSiteTitle(siteConfig)} ${getSiteDetails(siteConfig)}`).includes(q);
 }
+
+export const urlTemplatePattern: string = /([^{}]+\{(zoom|latitude|longitude|left|right|top|bottom|osm_(user_name|tag_key|tag_value|(changeset|node|way|relation)_id))\})+[^{}]*/
+  .source; // must contain curly braces; but only with known parameters
+
+export function isValidUrlTemplate(urlTemplate: string): boolean {
+  try {
+    if (!["http:", "https:"].includes(new URL(urlTemplate).protocol)) return false;
+  } catch {
+    return false;
+  }
+  return new RegExp(`^(?:${urlTemplatePattern})$`).test(urlTemplate);
+}

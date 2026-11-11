@@ -2,12 +2,10 @@
   import browser from "webextension-polyfill";
   import { isLocalAddress, type UrlPattern } from "../../popup/sites-manipulation-helper";
   import { addNewUrlPattern } from "../../storage/config-handler";
+  import { isValidUrlTemplate, urlTemplatePattern } from "../utils";
 
   const urlTemplatePlaceholder =
     "https://www.openstreetmap.org/#map={zoom}/{latitude}/{longitude}";
-  const urlTemplatePattern: string = /([^{}]+\{(zoom|latitude|longitude|left|right|top|bottom|osm_(user_name|tag_key|tag_value|(changeset|node|way|relation)_id))\})+[^{}]*/
-    .source; // must contain curly braces; but only with known parameters
-
   const parametersHelpUrl = "https://wiki.openstreetmap.org/wiki/OSM_Smart_Menu#Advanced_method_to_add_new_links";
   const parameters = ["zoom", "latitude", "longitude", "left", "right", "top", "bottom", "osm_user_name", "osm_changeset_id", "osm_node_id", "osm_way_id", "osm_relation_id", "osm_tag_key", "osm_tag_value"];
 
@@ -20,13 +18,7 @@
   // so the form is validated here and the error is shown in the page
   function validate(): string {
     if (!linkName.trim()) return browser.i18n.getMessage("config_pattern_nameRequired");
-    let isUrl = false;
-    try {
-      isUrl = ["http:", "https:"].includes(new URL(linkUrlTemplate).protocol);
-    } catch {
-      isUrl = false;
-    }
-    if (!isUrl || !new RegExp(`^(?:${urlTemplatePattern})$`).test(linkUrlTemplate)) {
+    if (!isValidUrlTemplate(linkUrlTemplate)) {
       return browser.i18n.getMessage("config_pattern_invalidTemplate");
     }
     if (remoteControl && !isLocalAddress(linkUrlTemplate)) {
