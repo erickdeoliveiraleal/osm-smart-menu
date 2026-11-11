@@ -3,9 +3,9 @@
   import { normalize } from "../../text";
   import type { SiteCategory } from "../../sites-configuration";
 
-  type Category = SiteCategory | "custom";
+  export type Category = SiteCategory | "custom";
   // the user's own links first: they are usually the ones used most
-  const categories: Category[] = ["custom", ...siteCategories];
+  export const categories: Category[] = ["custom", ...siteCategories];
 
   export const categoryIcons: Record<Category, string> = {
     edit: "pencil",

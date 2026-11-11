@@ -61,7 +61,9 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/user/{userName}/traces/{tracesId}" },
       { ordered: "/user/someone/traces/{tracesId}" }, //when there is no {userName} data, but there is {tracesId}, because the userName doesn't really matter here when going to this page
       { ordered: "/user/{userName}" },
-      { ordered: "/#map={zoom}/{lat}/{lon}" },
+      // with a marker on the position, like the "Share" panel of osm.org (#31)
+      { ordered: "/?mlat={lat}&mlon={lon}#map={zoom}/{lat}/{lon}" },
+      { ordered: "/#map={zoom}/{lat}/{lon}" }, // input-only
       { ordered: "/", unordered: { lat: "mlat", lon: "mlon" } }
     ],
     extractors: {

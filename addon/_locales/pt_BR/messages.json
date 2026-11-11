@@ -647,5 +647,11 @@
     },
     "config_groupByCategory_hint": {
         "message": "Desmarcado, o menu lista os links na ordem abaixo, que você pode mudar arrastando-os."
+    },
+    "config_categories": {
+        "message": "Categorias no menu"
+    },
+    "config_categories_hint": {
+        "message": "As categorias desmarcadas ficam escondidas no menu. Os links delas mantêm suas configurações."
     }
 }

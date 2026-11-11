@@ -1,7 +1,7 @@
 import browser, { type Storage } from "webextension-polyfill";
 import { Sites, DefaultSiteConfiguration } from "../sites-configuration";
 import { UrlPattern } from "../popup/sites-manipulation-helper";
-import { toConfigFile, groupByCategoryKey, openNextToCurrentTabKey, type ConfigFile, type StoredData } from "./config-file";
+import { toConfigFile, groupByCategoryKey, openNextToCurrentTabKey, hiddenCategoriesKey, type ConfigFile, type StoredData } from "./config-file";
 
 export type StoredConfiguration = {
   isEnabled: boolean;
@@ -145,6 +145,16 @@ export async function getSiteConfiguration(siteId: string): Promise<SiteConfigur
     ...storedConfig,
     defaultConfiguration: Sites[siteId],
   };
+}
+
+/** Categories whose links aren't shown in the menu (the links keep their own settings). */
+export async function getHiddenCategories(): Promise<string[]> {
+  const stored = await storage.get(hiddenCategoriesKey);
+  const value = stored[hiddenCategoriesKey];
+  return Array.isArray(value) ? value.filter((c): c is string => typeof c === "string") : [];
+}
+export async function setHiddenCategories(hiddenCategories: string[]): Promise<void> {
+  await storage.set({ [hiddenCategoriesKey]: hiddenCategories });
 }
 
 export async function exportSettings(): Promise<ConfigFile> {

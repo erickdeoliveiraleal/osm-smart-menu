@@ -2,10 +2,10 @@ import browser from 'webextension-polyfill';
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 import { KnownError, CustomUserOption } from './utils';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites, SiteLink } from './sites-manipulation-helper';
-import { getSitesConfiguration, getGroupByCategory, SiteConfiguration } from '../storage/config-handler';
+import { getSitesConfiguration, getGroupByCategory, getHiddenCategories, SiteConfiguration } from '../storage/config-handler';
 import { mount } from "svelte";
 import App from './App.svelte';
-import { OsmAttribute } from "../sites-configuration";
+import { OsmAttribute, Sites } from "../sites-configuration";
 
 export type EventualSitesOrError = Promise<
   | {
@@ -35,12 +35,15 @@ mount(App, {
 });
 
 async function getSitesOrError(): EventualSitesOrError {
-  const [config, groupByCategory] = await Promise.all([getSitesConfiguration(), getGroupByCategory()]);
+  const [config, groupByCategory, hiddenCategories] = await Promise.all([getSitesConfiguration(), getGroupByCategory(), getHiddenCategories()]);
+  // links of hidden categories are left out of the menu, but their sites are still recognized
+  const linksConfig = config.map((site) =>
+    hiddenCategories.includes(Sites[site.id]?.category ?? "custom") ? { ...site, isEnabled: false } : site);
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
   if (!currentTab || !currentTab.url || !currentTab.id) {
     const error = KnownError.NO_ACCESS;
-    return { config, groupByCategory, error };
+    return { config: linksConfig, groupByCategory, error };
   }
 
   const candidateSiteIds = findSiteCandidates(config, currentTab.url);
@@ -51,7 +54,7 @@ async function getSitesOrError(): EventualSitesOrError {
       candidateSiteIds.length === 0
         ? KnownError.INCOMPATIBLE_WEBSITE
         : KnownError.NO_INFORMATION_EXTRACTED;
-    return { config, groupByCategory, error };
+    return { config: linksConfig, groupByCategory, error };
   }
 
   let customUserOption: CustomUserOption | undefined;
@@ -68,9 +71,9 @@ async function getSitesOrError(): EventualSitesOrError {
     attributes.viewWidth = String(currentTab.width);
     attributes.viewHeight = String(currentTab.height);
   }
-  const sitesList = getRelevantSites(config, currentSite.siteId, attributes);
+  const sitesList = getRelevantSites(linksConfig, currentSite.siteId, attributes);
   return {
-    config,
+    config: linksConfig,
     groupByCategory,
     currentSiteId: currentSite.siteId,
     sourceHost: new URL(currentTab.url).hostname,
